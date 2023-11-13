@@ -3,6 +3,9 @@ using service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<Repository>();
+builder.Services.AddSingleton<Service>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
