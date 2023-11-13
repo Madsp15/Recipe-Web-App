@@ -7,4 +7,9 @@
         <RootNamespace>Recipe_Web_App</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\infrastructure\infrastructure.csproj" />
+      <ProjectReference Include="..\service\service.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -10,4 +10,9 @@ public class Service
     {
         _repository = repository;
     }
+
+    public User CreateUser(User user)
+    {
+        return _repository.CreateUser(user);
+    }
 }
