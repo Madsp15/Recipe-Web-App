@@ -3,8 +3,8 @@ using service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<Repository>();
-builder.Services.AddSingleton<Service>();
+builder.Services.AddSingleton<UserRepository>();
+builder.Services.AddSingleton<UserService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
