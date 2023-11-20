@@ -6,7 +6,7 @@ public class Repository
 {
     public User CreateUser(User user)
     {
-        var sql = $@"INSERT INTO tables.users(User_Name, Type, Email, Password, Salt, More_Info)
+        var sql = $@"INSERT INTO users(User_Name, Type, Email, Password, Salt, More_Info)
                         VALUES(@username, @type, @email, @password, @salt, @moreinfo)
                         RETURNING
                         User_ID as {nameof(User.Id)},
