@@ -3,8 +3,14 @@ using service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddSingleton<UserRepository>();
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<Repository>();
+builder.Services.AddSingleton<Service>();
+builder.Services.AddSingleton<RecipeRepository>();
+builder.Services.AddSingleton<RecipeService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
