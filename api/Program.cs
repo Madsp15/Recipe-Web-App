@@ -9,6 +9,8 @@ builder.Services.AddSingleton<ReviewRepository>();
 builder.Services.AddSingleton<ReviewService>();
 builder.Services.AddSingleton<RecipeRepository>();
 builder.Services.AddSingleton<RecipeService>();
+builder.Services.AddSingleton<TagsRepository>();
+builder.Services.AddSingleton<TagsService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
