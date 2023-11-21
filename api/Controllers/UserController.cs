@@ -1,6 +1,7 @@
 using service;
 using infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Recipe_Web_App.TransferModels;
 
 [ApiController]
 public class UserController : ControllerBase
@@ -16,7 +17,6 @@ public class UserController : ControllerBase
     [HttpPost]
     public User CreateUser([FromBody] User user)
     {
-
         return _userService.CreateUser(user);
     }
 
@@ -40,5 +40,12 @@ public class UserController : ControllerBase
     public IEnumerable<User> GetAllUsers()
     {
         return _userService.GetAllUsers();
+    }
+    
+    [HttpPost]
+    [Route("/api/users/login")]
+    public bool Login([FromBody] LoginDto dto)
+    {
+        return _userService.VerifyUser(dto.Email, dto.Password);
     }
 }
