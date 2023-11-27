@@ -17,7 +17,7 @@ public class TagsController: ControllerBase
     [HttpPost]
     public Tag CreateTag([FromBody] Tag tag)
     {
-        return _tagsService.CreateTag(tag);
+        return _tagsService.CheckTag(tag);
     }
     
     [Route("api/tags/{id}")]
