@@ -4,8 +4,10 @@ namespace infrastructure;
 
 public class ReviewRepository
 {
+    String date = DateHelper.GetDate();
     public Review CreateReview(Review review)
     {
+        review.DateRated = date;
         var sql = $@"INSERT INTO reviews(recipeId, userId, rating, comment, dateRated)
                         VALUES(@recipeId, @userId, @rating, @comment, @dateRated)
                         RETURNING
@@ -14,7 +16,7 @@ public class ReviewRepository
                         userId as {nameof(Review.UserId)},
                         rating as {nameof(Review.Rating)},
                         comment as {nameof(Review.Comment)},
-                        dateRated as {nameof(Review.Date)};";
+                        dateRated as {nameof(Review.DateRated)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
@@ -24,7 +26,7 @@ public class ReviewRepository
                 userId = review.UserId,
                 rating = review.Rating,
                 comment = review.Comment,
-                dateRated = review.Date
+                dateRated = review.DateRated
 
             });
         }
@@ -32,6 +34,7 @@ public class ReviewRepository
     
     public Review UpdateReview(Review review)
     {
+        review.DateRated = date;
         var sql = $@"UPDATE reviews
                  SET rating = @rating,
                      comment = @comment,
@@ -43,7 +46,7 @@ public class ReviewRepository
                     userId as {nameof(Review.UserId)},
                     rating as {nameof(Review.Rating)},
                     comment as {nameof(Review.Comment)},
-                    dateRated as {nameof(Review.Date)};";
+                    dateRated as {nameof(Review.DateRated)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
@@ -52,7 +55,7 @@ public class ReviewRepository
                 reviewId = review.ReviewId,
                 rating = review.Rating,
                 comment = review.Comment,
-                dateRated = review.Date
+                dateRated = review.DateRated
             });
         }
     }
@@ -76,6 +79,15 @@ public class ReviewRepository
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<double>(sql, new { recipeId });
+        }
+    }
+    public Review GetReviewById(int reviewId)
+    {
+        var sql = $@"SELECT * FROM reviews WHERE reviewId = @id;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Review>(sql, new { id = reviewId });
         }
     }
 }

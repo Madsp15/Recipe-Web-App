@@ -5,15 +5,13 @@ public class UserRepository
 {
     public User CreateUser(User user)
     {
-        var sql = $@"INSERT INTO users(username, type, email, password, salt, moreinfo)
-                        VALUES(@username, @type, @email, @password, @salt, @moreinfo)
+        var sql = $@"INSERT INTO users(username, type, moreinfo, email)
+                        VALUES(@username, @type, @moreinfo, @email)
                         RETURNING
                         userId as {nameof(User.UserId)},
                         username as {nameof(User.UserName)},
                         type as {nameof(User.Type)},
                         email as {nameof(User.Email)},
-                        password as {nameof(User.Password)},
-                        salt as {nameof(User.Salt)},
                         moreInfo as {nameof(User.MoreInfo)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
@@ -23,8 +21,6 @@ public class UserRepository
                 username = user.UserName,
                 type = user.Type,
                 email = user.Email,
-                password = user.Password,
-                salt = user.Salt,
                 moreinfo = user.MoreInfo
 
             });
@@ -58,8 +54,6 @@ public class UserRepository
                     username = @username,
                     Type = @type,
                     Email = @email,
-                    Password = @password,
-                    Salt = @salt,
                     MoreInfo = @moreinfo
                  WHERE
                     userid = @id
@@ -68,8 +62,6 @@ public class UserRepository
                     username as {nameof(User.UserName)},
                     type as {nameof(User.Type)},
                     email as {nameof(User.Email)},
-                    password as {nameof(User.Password)},
-                    salt as {nameof(User.Salt)},
                     moreinfo as {nameof(User.MoreInfo)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
@@ -80,8 +72,6 @@ public class UserRepository
                 username = user.UserName,
                 type = user.Type,
                 email = user.Email,
-                password = user.Password,
-                salt = user.Salt,
                 moreinfo = user.MoreInfo
             });
         }
