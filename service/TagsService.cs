@@ -10,6 +10,19 @@ public class TagsService
     {
         _repository = repository;
     }
+    public Tag CheckTag(Tag tag)
+    {
+        if (CheckIfTagExists(tag.tagName))
+        {
+            return GetTagByName(tag.tagName);
+        }
+        else
+        {
+            CreateTag(tag);
+        }
+        ;
+        throw new InvalidOperationException();
+    }
     public Tag CreateTag(Tag tag)
     {
         return _repository.CreateTag(tag);
@@ -36,12 +49,22 @@ public class TagsService
         return _repository.GetTagsByRecipeId(recipeId);
     }
     
-    public bool addTagToRecipe(int recipeId, int tagId)
+    public bool AddTagToRecipe(int recipeId, int tagId)
     {
-        return _repository.addTagToRecipe(recipeId, tagId);
+        return _repository.AddTagToRecipe(recipeId, tagId);
     }
     public Tag GetTagById(int id)
     {
         return _repository.GetTagById(id);
+    }
+    
+    public bool DeleteTagFromRecipe(int recipeId, int tagId)
+    {
+        return _repository.DeleteTagFromRecipe(recipeId, tagId);
+    }
+    
+    public bool CheckIfTagExists(string name)
+    {
+        return _repository.CheckIfTagExists(name);
     }
 }
