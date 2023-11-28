@@ -1,4 +1,4 @@
-namespace infrastructure;
+namespace infrastructure.Models;
 
 public class Tag
 {

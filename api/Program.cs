@@ -1,8 +1,10 @@
 using infrastructure;
+using infrastructure.Repositories;
 using service;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSingleton<IngredientRepository>();
+builder.Services.AddSingleton<IngredientService>();
 builder.Services.AddSingleton<UserRepository>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<ReviewRepository>();

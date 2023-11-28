@@ -1,4 +1,6 @@
 using infrastructure;
+using infrastructure.Models;
+using infrastructure.Repositories;
 
 namespace service;
 

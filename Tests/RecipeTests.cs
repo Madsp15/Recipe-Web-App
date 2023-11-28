@@ -1,9 +1,10 @@
 ﻿using FluentAssertions;
 using infrastructure;
+using infrastructure.Repositories;
 
 namespace PlaywrightTests;
 
-public class CRUDRecipeTest
+public class RecipeTests
 {
     private RecipeRepository _repository;
     
@@ -33,4 +34,25 @@ public class CRUDRecipeTest
         _repository.DeleteRecipe(retrievedRecipe.RecipeId);
         Assert.Pass("We did it!");
     }
+    [Test]
+    public async Task ShouldSuccessfullyUpdateRecipe()
+    {
+        Recipe recipeToAdd = new Recipe
+        {
+            Title = "Test Recipe",
+            Description = "Test Description",
+            UserId = 2,
+            Instuctions = "Test Instructions",
+            Notes = "Test Notes",
+            RecipeURL = "Test Recipe URL",
+                
+        };
+        Recipe addedRecipe = _repository.CreateRecipe(recipeToAdd);
+        addedRecipe.Title = "Updated Test Recipe";
+        Recipe updatedRecipe = _repository.updateRecipe(addedRecipe);
+        updatedRecipe.Should().BeEquivalentTo(addedRecipe, "it should be the same");
+        _repository.DeleteRecipe(updatedRecipe.RecipeId);
+        Assert.Pass("We did it!");
+    }
+    
 }

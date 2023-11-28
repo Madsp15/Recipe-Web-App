@@ -1,9 +1,11 @@
 using FluentAssertions;
 using infrastructure;
+using infrastructure.Models;
+using infrastructure.Repositories;
 
 namespace PlaywrightTests;
 
-public class CRUDReviewTest
+public class ReviewTests
 {
     private ReviewRepository _repository;
     
@@ -74,5 +76,26 @@ public class CRUDReviewTest
         _repository.DeleteReview(reviewToAdd.ReviewId);
         _repository.DeleteReview(reviewToAdd2.ReviewId);
         _repository.DeleteReview(reviewToAdd3.ReviewId);
+    }
+    
+    [Test]
+    public async Task ShouldSuccessfullyUpdateReview()
+    {
+        Review reviewToAdd = new Review
+        {
+            RecipeId = 15,
+            UserId = 2,
+            Rating = 5,
+            Comment = "Test Comment",
+            DateRated = "Test Date"
+            
+        };
+        Review addedReview = _repository.CreateReview(reviewToAdd);
+        addedReview.Comment = "Updated Test Comment";
+        Review updatedReview = _repository.UpdateReview(addedReview);
+        updatedReview.Should().BeEquivalentTo(addedReview, "it should be the same");
+        _repository.DeleteReview(updatedReview.ReviewId);
+        Assert.Pass("We did it!");
+        
     }
 }

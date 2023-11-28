@@ -1,4 +1,5 @@
 using Dapper;
+using infrastructure.Models;
 
 namespace infrastructure;
 

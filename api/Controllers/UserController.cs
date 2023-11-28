@@ -1,5 +1,6 @@
 using service;
 using infrastructure;
+using infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]

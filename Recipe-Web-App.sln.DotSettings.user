@@ -1,6 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ACreateRecipeTest_002Ecs_002Fl_003ATests_003FCreateRecipeTest_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8cef295d_002Def6c_002D4611_002D9f86_002Dcb74da4b3630/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateUserTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8cef295d_002Def6c_002D4611_002D9f86_002Dcb74da4b3630/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateUserTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.TagsTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.CRUDReviewTest&lt;/TestId&gt;&#xD;
@@ -8,10 +8,13 @@
     &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.CRUDUserTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9030741d_002De1bc_002D4a71_002Da39a_002D3b57273e44d9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldSuccessfullyCreateUser" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9030741d_002De1bc_002D4a71_002Da39a_002D3b57273e44d9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldSuccessfullyCreateUser" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.CreateUserTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.CreateRecipeTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.IngredientTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.UserTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.TagsTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.ReviewTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::CE58D2BC-041B-4AAF-B9FB-79A394702A8C::net8.0::PlaywrightTests.RecipeTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=pgconn/@EntryIndexedValue">postgres://hysxpwhy:dXtFCPog9lDxctGLX3v9R2OeYGn5Gf0u@cornelius.db.elephantsql.com/hysxpwhy</s:String>

@@ -1,6 +1,6 @@
 using Dapper;
 
-namespace infrastructure;
+namespace infrastructure.Repositories;
 
 public class RecipeRepository
 {

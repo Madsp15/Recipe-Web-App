@@ -1,5 +1,7 @@
 using Dapper;
-namespace infrastructure;
+using infrastructure.Models;
+
+namespace infrastructure.Repositories;
 
 public class UserRepository
 {

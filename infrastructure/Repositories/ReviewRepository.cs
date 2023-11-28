@@ -1,6 +1,7 @@
 using Dapper;
+using infrastructure.Models;
 
-namespace infrastructure;
+namespace infrastructure.Repositories;
 
 public class ReviewRepository
 {
