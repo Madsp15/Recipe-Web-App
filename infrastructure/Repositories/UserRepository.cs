@@ -80,12 +80,76 @@ public class UserRepository
     }
     
     public IEnumerable<User> GetAllUsers()
-        {
+    {
             var sql = $@"SELECT * FROM users";
     
             using (var conn = DataConnection.DataSource.OpenConnection())
             {
                 return conn.Query<User>(sql);
             }
+    }
+    
+    public bool FollowUser(int userId, int followerId)
+    {
+        
+        if (IsFollowing(userId, followerId))
+        {
+            return true;
+        }else
+        {
+            var sql = $@"INSERT INTO followers(userid, followerid)
+                        VALUES(@userid, @followerid);";
+
+            using (var conn = DataConnection.DataSource.OpenConnection())
+            {
+                return conn.Execute(sql, new { userid = userId, followerid = followerId }) == 1;
+            }
         }
+        
+    }
+    public bool UnfollowUser(int userId, int followerId)
+    {
+        var sql = $@"DELETE FROM followers WHERE userid = @userid AND followerid = @followerid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { userid = userId, followerid = followerId }) == 1;
+        }
+    }
+    
+    public IEnumerable<User> GetFollowers(int userId)
+    {
+        var sql = $@"SELECT * FROM followers
+                        INNER JOIN users ON followers.followerid = users.userid
+                        WHERE followers.userid = @userid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<User>(sql, new { userid = userId });
+        }
+    }
+    
+    public IEnumerable<User> GetFollowing(int userId)
+    {
+        var sql = $@"SELECT * FROM users
+                        INNER JOIN followers ON users.userid = followers.userid
+                        WHERE followers.followerid = @userid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<User>(sql, new { userid = userId });
+        }
+    }
+    
+    
+    public bool IsFollowing(int userId, int followerId)
+    {
+        var sql = $@"SELECT * FROM followers
+                        WHERE userid = @userid AND followerid = @followerid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.QueryFirstOrDefault(sql, new { userid = userId, followerid = followerId }) != null;
+        }
+    }
 }

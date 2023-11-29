@@ -38,4 +38,25 @@ public class UserService
     {
         return _userRepository.GetAllUsers();
     }
+    
+    public bool FollowUser(int userId, int userIdToFollow)
+    {
+        return _userRepository.FollowUser(userId, userIdToFollow);
+    }
+    
+    public bool UnfollowUser(int userId, int userIdToUnfollow)
+    {
+        return _userRepository.UnfollowUser(userId, userIdToUnfollow);
+    }
+    
+    public IEnumerable<User> GetFollowers(int userId)
+    {
+        return _userRepository.GetFollowers(userId);
+    }
+    
+    public IEnumerable<User> GetFollowing(int userId)
+    {
+        return _userRepository.GetFollowing(userId);
+    }
+    
 }
