@@ -1,4 +1,5 @@
 using infrastructure;
+using infrastructure.Models;
 
 namespace service;
 
