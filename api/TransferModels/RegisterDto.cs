@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using infrastructure;
+using infrastructure.Models;
 
 namespace Recipe_Web_App.TransferModels;
 

@@ -1,0 +1,48 @@
+ion-toolbar {
+  --background: #DAEAEF;
+}
+.custom-toolbar ion-buttons[slot="start"] {
+  margin-right: 100px;
+  margin-left: 10px;
+}
+
+.custom-toolbar ion-buttons[slot="end"] {
+  margin-right: 500px;
+  display: flex;
+  align-items: center;
+}
+
+ion-button::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0.5px;
+  background-color: black;
+  transition: width 0.3s;
+}
+
+ion-button:hover::after {
+  width: 100%;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.menu-icon:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.custom-toolbar ion-buttons[slot="end"] ion-button {
+  margin-right: 50px;
+}
+
+.custom-toolbar ion-button {
+  margin-left: 10px;
+}
+
+
+
+

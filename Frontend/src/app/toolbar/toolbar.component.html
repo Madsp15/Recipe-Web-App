@@ -1,0 +1,21 @@
+<ion-toolbar class="custom-toolbar">
+  <ion-buttons slot="start">
+    <ion-menu-button><img
+      src="https://static.thenounproject.com/png/4572821-200.png"
+      alt="Menu Icon"
+      class="small-image menu-icon"
+      aria-label="menu-icon"
+      (click)="clickMenu()"
+    /></ion-menu-button>
+    <ion-title>My App</ion-title>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button (click)="clickHome()">HOME</ion-button>
+    <ion-button (click)="clickRecipes()">RECIPES</ion-button>
+    <ion-button (click)="clickProfile()">PROFILE</ion-button>
+    <ion-button (click)="clickSearch()">SEARCH</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+
+

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Recipe Creator
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Upload Image:</ion-label>
+        <input type="file" (change)="handleImageChange($event)">
+        <ion-img></ion-img>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Recipe Name:</ion-label>
+        <ion-input placeholder="Enter recipe name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Description:</ion-label>
+        <ion-textarea placeholder="Enter description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ingredients:</ion-label>
+        <ion-button (click)="addIngredient()">Add Ingredient</ion-button>
+      </ion-item>
+      <ion-list>
+        <ion-item>
+          <ion-label> </ion-label>
+          <ion-input placeholder="Enter ingredient"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-label>Steps:</ion-label>
+        <ion-button (click)="addStep()">Add Step</ion-button>
+      </ion-item>
+      <ion-list>
+        <ion-item>
+          <ion-label> </ion-label>
+          <ion-input placeholder="Enter step"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button (click)="saveRecipe()">Save Recipe</ion-button>
+      <ion-button color="danger" (click)="clickCancel()">Cancel</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
