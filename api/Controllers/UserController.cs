@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 public class UserController : ControllerBase
 {
     private readonly UserService _userService;
+    private readonly BlobService _BlobService;
 
-    public UserController(UserService userService)
+    public UserController(UserService userService, BlobService blobService)
     {
         _userService = userService;
+        _BlobService = blobService;
     }
+    
 
     [Route("/api/users")]
     [HttpPost]
@@ -76,5 +79,25 @@ public class UserController : ControllerBase
     public IEnumerable<User> GetFollowing([FromRoute] int userId)
     {
         return _userService.GetFollowing(userId);
+    }
+    
+    [HttpPut]
+    [Route("/api/users/{userId}/avatar")]
+    public IActionResult UploadAvatar([FromRoute] int userId, IFormFile? avatar)
+    {
+        if (avatar == null)
+        {
+            return BadRequest("No file was uploaded");
+        }
+        var user = _userService.GetUser(userId);
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+        //var url = _BlobService.Save("avatars", avatar.OpenReadStream(), user.);
+        //user.Avatar = url;
+        _userService.UpdateUser(user);
+        return Ok();
+        
     }
 }

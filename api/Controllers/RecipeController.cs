@@ -1,4 +1,5 @@
 ﻿using infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
 using service;
 using Microsoft.AspNetCore.Mvc;
 namespace Recipe_Web_App.Controllers;
@@ -6,10 +7,11 @@ namespace Recipe_Web_App.Controllers;
 public class RecipeController
 {
     private readonly RecipeService _service;
-
-    public RecipeController(RecipeService service)
+    private readonly BlobService _BlobService;
+    public RecipeController(RecipeService service, BlobService blobService)
     {
         _service = service;
+        _BlobService = blobService;
     }
 
     [Route("api/recipes")]
@@ -50,6 +52,18 @@ public class RecipeController
     public Recipe GetRecipeById([FromRoute]int id)
     {
         return _service.GetRecipeById(id);
+    }
+    
+    [Route("api/recipes/picture/{id}")]
+    [HttpGet]
+    public IActionResult UploadRecipePicture([FromRoute] int id, IFormFile? picture)
+    {
+       String blobURL = _BlobService.Save(picture.OpenReadStream(), id);
+
+       Recipe recipe = _service.GetRecipeById(id);
+       recipe.RecipeURL = blobURL;
+       _service.UpdateRecipe(recipe);
+       return new OkResult();
     }
     
     

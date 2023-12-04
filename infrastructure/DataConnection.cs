@@ -1,5 +1,7 @@
-﻿using Npgsql;
-
+﻿using Azure.Storage.Blobs;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 namespace infrastructure;
 
 public static class DataConnection
@@ -43,4 +45,5 @@ public static class DataConnection
         }
         
     }
+    
 }
