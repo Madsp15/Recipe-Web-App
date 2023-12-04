@@ -18,6 +18,7 @@ builder.Services.AddSingleton<RecipeService>();
 
 builder.Services.AddSingleton<TagsRepository>();
 builder.Services.AddSingleton<TagsService>();
+builder.Services.AddSingleton<BlobService>();
 
 builder.Services.AddSingleton<PasswordHashAlgorithm, Argon2IdPasswordHashAlgorithm>();
 builder.Services.AddSingleton<PasswordRepository>();
