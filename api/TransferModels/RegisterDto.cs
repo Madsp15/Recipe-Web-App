@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using infrastructure.Models;
+using Recipe_Web_App.ValidationModels;
 
-namespace Recipe_Web_App.TransferModels;
 
 public class RegisterDto
 {
-    public User User { get; set; }
+    [Required] [MinLength(4)] [MaxLength(20)] [ValidationUsernameExist] public string UserName { get; set; }
+    
+    [Required] [ValidationEmail] [ValidationEmailExist] public string Email { get; set; }
 
     [Required] [MinLength(8)] public required string Password { get; set; }
     
