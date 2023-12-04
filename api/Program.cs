@@ -3,16 +3,25 @@ using infrastructure.Repositories;
 using service;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddSingleton<IngredientRepository>();
 builder.Services.AddSingleton<IngredientService>();
+
 builder.Services.AddSingleton<UserRepository>();
 builder.Services.AddSingleton<UserService>();
+
 builder.Services.AddSingleton<ReviewRepository>();
 builder.Services.AddSingleton<ReviewService>();
+
 builder.Services.AddSingleton<RecipeRepository>();
 builder.Services.AddSingleton<RecipeService>();
+
 builder.Services.AddSingleton<TagsRepository>();
 builder.Services.AddSingleton<TagsService>();
+
+builder.Services.AddSingleton<PasswordHashAlgorithm, Argon2IdPasswordHashAlgorithm>();
+builder.Services.AddSingleton<PasswordRepository>();
+builder.Services.AddSingleton<PasswordService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

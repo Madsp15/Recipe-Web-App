@@ -8,10 +8,12 @@ namespace service;
 public class UserService
 {
     private readonly UserRepository _userRepository;
+    private readonly PasswordHashAlgorithm _passwordHashAlgorithm;
 
-    public UserService(UserRepository userRepository)
+    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm)
     {
         _userRepository = userRepository;
+        _passwordHashAlgorithm = passwordHashAlgorithm;
     }
 
     public User CreateUser(User user)
@@ -38,6 +40,7 @@ public class UserService
     {
         return _userRepository.GetAllUsers();
     }
+
     
     public bool FollowUser(int userId, int userIdToFollow)
     {
