@@ -7,18 +7,24 @@ using Recipe_Web_App.TransferModels;
 public class UserController : ControllerBase
 {
     private readonly UserService _userService;
+    private readonly PasswordService _passwordService;
 
-    public UserController(UserService userService)
+    public UserController(UserService userService, PasswordService passwordService)
     {
         _userService = userService;
+        _passwordService = passwordService;
     }
 
     [Route("/api/users")]
     [HttpPost]
-    public User CreateUser([FromBody] User user)
+    public User CreateUser([FromBody] RegisterDto dto)
     {
-        return _userService.CreateUser(user);
+        User createdUser = _userService.CreateUser(dto.User);
+        _passwordService.Register(createdUser, dto.Password);
+
+        return createdUser; 
     }
+
 
     [Route("/api/users/{userId}")]
     [HttpPut]
@@ -44,8 +50,12 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [Route("/api/users/login")]
-    public bool Login([FromBody] LoginDto dto)
+    public ResponseDto Login([FromBody] LoginDto dto)
     {
-        return _userService.VerifyUser(dto.Email, dto.Password);
+        var user = _passwordService.Authenticate(dto.Email, dto.Password);
+        return new ResponseDto
+        {
+            MessageToClient = "Successfully authenticated"
+        };
     }
 }

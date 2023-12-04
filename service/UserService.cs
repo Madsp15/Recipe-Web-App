@@ -15,12 +15,6 @@ public class UserService
 
     public User CreateUser(User user)
     {
-        string salt = _passwordHashAlgorithm.GenerateSalt();
-        string hashedPassword = _passwordHashAlgorithm.HashPassword(user.Password, salt);
-        user.Salt = salt;
-        user.Password = hashedPassword;
-        Console.WriteLine("Salt: "+salt);
-        Console.WriteLine("Password: "+hashedPassword);
         return _userRepository.CreateUser(user);
     }
 
@@ -44,7 +38,7 @@ public class UserService
         return _userRepository.GetAllUsers();
     }
 
-    public bool VerifyUser(string email, string password)
+    /*public bool VerifyUser(string email, string password)
     {
         User user = _userRepository.GetUserByEmail(email);
         
@@ -66,5 +60,5 @@ public class UserService
         }
 
         return true;
-    }
+    }*/
 }

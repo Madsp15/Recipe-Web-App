@@ -10,6 +10,8 @@ builder.Services.AddSingleton<ReviewService>();
 builder.Services.AddSingleton<RecipeRepository>();
 builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<PasswordHashAlgorithm, Argon2IdPasswordHashAlgorithm>();
+builder.Services.AddSingleton<PasswordRepository>();
+builder.Services.AddSingleton<PasswordService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

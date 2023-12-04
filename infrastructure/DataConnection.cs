@@ -14,6 +14,7 @@ public static class DataConnection
         string envVarKeyName = "pgconn";
 
         rawConnectionString = Environment.GetEnvironmentVariable(envVarKeyName);
+        Console.WriteLine($"Raw Connection String: {rawConnectionString}");
         if (rawConnectionString == null)
         {
             throw new Exception("Looks like you need to add an environment variable to connect to the database!");
