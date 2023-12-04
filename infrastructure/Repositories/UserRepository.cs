@@ -152,4 +152,26 @@ public class UserRepository
             return conn.QueryFirstOrDefault(sql, new { userid = userId, followerid = followerId }) != null;
         }
     }
+    
+    public bool DoesUsernameExist(string? username)
+    {
+        var sql = "IF EXISTS (SELECT 1 FROM Users WHERE username = @Username) SELECT 1 ELSE SELECT 0";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            var parameters = new { Username = username };
+            return (int)conn.ExecuteScalar(sql, parameters)! == 1;
+        }
+    }
+    
+    public bool DoesEmailExist(string? email)
+    {
+        var sql = "SELECT count(*) from users where email = @Email;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            var parameters = new { Email = email };
+            return conn.ExecuteScalar<int>(sql, parameters) > 0;
+        }
+    }
 }

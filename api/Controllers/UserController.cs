@@ -20,10 +20,16 @@ public class UserController : ControllerBase
     [HttpPost]
     public User CreateUser([FromBody] RegisterDto dto)
     {
-        User createdUser = _userService.CreateUser(dto.User);
-        _passwordService.Register(createdUser, dto.Password);
+        User createdUser = new User
+        {
+            UserName = dto.UserName,
+            Email = dto.Email,
+        };
+        
+        var user = _userService.CreateUser(createdUser);
+        _passwordService.Register(user, dto.Password);
 
-        return createdUser;
+        return user;
     }
 
 
