@@ -5,12 +5,10 @@ namespace service;
 public class PasswordService
 {
     private readonly PasswordHashAlgorithm _passwordHashAlgorithm;
-    private readonly UserRepository _userRepository;
     private readonly PasswordRepository _passwordRepository;
     
-    public PasswordService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository)
+    public PasswordService(PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository)
     {
-        _userRepository = userRepository;
         _passwordHashAlgorithm = passwordHashAlgorithm;
         _passwordRepository = passwordRepository;
     }
