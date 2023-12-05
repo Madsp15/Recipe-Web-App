@@ -7,7 +7,7 @@ public class UserRepository
 {
     public User CreateUser(User user)
     {
-        user.UserAvatarUrl = "";
+        user.UserAvatarUrl = "http://placekitten.com/200/200";
         var sql = $@"INSERT INTO users(username, isadmin, moreinfo, email, useravatarurl)
                         VALUES(@username, @isadmin, @moreinfo, @email, @useravatarurl)
                         RETURNING
