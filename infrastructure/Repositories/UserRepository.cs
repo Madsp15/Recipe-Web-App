@@ -155,12 +155,12 @@ public class UserRepository
     
     public bool DoesUsernameExist(string? username)
     {
-        var sql = "IF EXISTS (SELECT 1 FROM Users WHERE username = @Username) SELECT 1 ELSE SELECT 0";
+        var sql = "SELECT count(*) from users where username = @Username;";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             var parameters = new { Username = username };
-            return (int)conn.ExecuteScalar(sql, parameters)! == 1;
+            return conn.ExecuteScalar<int>(sql, parameters) > 0;
         }
     }
     

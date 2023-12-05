@@ -22,7 +22,7 @@ export class LoginPageComponent  implements OnInit {
   }
 
   clickLogin() {
-
+    
   }
 
   clickSignUp() {
