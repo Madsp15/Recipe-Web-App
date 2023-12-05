@@ -1,5 +1,4 @@
 using service;
-using infrastructure;
 using infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Recipe_Web_App.TransferModels;
@@ -9,12 +8,15 @@ public class UserController : ControllerBase
 {
     private readonly UserService _userService;
     private readonly PasswordService _passwordService;
-
-    public UserController(UserService userService, PasswordService passwordService)
+	
+	private readonly BlobService _BlobService;
+    public UserController(UserService userService, PasswordService passwordService, BlobService blobService)
     {
         _userService = userService;
         _passwordService = passwordService;
-    }
+		_BlobService = blobService;
+	}
+    
 
     [Route("/api/users")]
     [HttpPost]
@@ -90,6 +92,7 @@ public class UserController : ControllerBase
         return _userService.GetFollowing(userId);
     }
 
+
     [HttpPost]
         [Route("/api/users/login")]
         public ResponseDto Login([FromBody] LoginDto dto)
@@ -100,4 +103,28 @@ public class UserController : ControllerBase
                 MessageToClient = "Successfully authenticated"
             };
         }
+	
+    
+    [HttpPut]
+    [Route("/api/users/{userId}/avatar")]
+    public IActionResult UploadAvatar([FromRoute] int userId, IFormFile? avatar)
+    {
+        if (avatar == null)
+        {
+            return BadRequest("No file was uploaded, when you needed the avatar the most he disappeared");
+        }
+        var user = _userService.GetUser(userId);
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+        
+        string? blobURL = _BlobService.SaveWithSecretURL(avatar.OpenReadStream(), userId);
+        
+        user.UserAvatarUrl = blobURL;
+        _userService.UpdateUser(user);
+        return Ok();
+        
+    }
+
 }

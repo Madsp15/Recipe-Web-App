@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using infrastructure;
 using infrastructure.Repositories;
 using service;
@@ -19,6 +20,18 @@ builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<TagsRepository>();
 builder.Services.AddSingleton<TagsService>();
 
+
+
+    builder.Services.AddSingleton<BlobService>(provider =>
+        {
+            var connectionString = provider.GetService<IConfiguration>()!
+                .GetConnectionString("AvatarStorage");
+            var client = new BlobServiceClient(connectionString);
+            return new BlobService(client);
+        }
+    );
+
+
 builder.Services.AddSingleton<PasswordHashAlgorithm, Argon2IdPasswordHashAlgorithm>();
 builder.Services.AddSingleton<PasswordRepository>();
 builder.Services.AddSingleton<PasswordService>();
@@ -27,6 +40,8 @@ builder.Services.AddSingleton<PasswordService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

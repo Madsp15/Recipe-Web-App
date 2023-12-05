@@ -1,15 +1,18 @@
 ﻿using infrastructure;
-using service;
 using Microsoft.AspNetCore.Mvc;
+using service;
+
+
 namespace Recipe_Web_App.Controllers;
 
-public class RecipeController
+public class RecipeController : ControllerBase
 {
     private readonly RecipeService _service;
-
-    public RecipeController(RecipeService service)
+    private readonly BlobService _BlobService;
+    public RecipeController(RecipeService service, BlobService blobService)
     {
         _service = service;
+        _BlobService = blobService;
     }
 
     [Route("api/recipes")]
@@ -50,6 +53,27 @@ public class RecipeController
     public Recipe GetRecipeById([FromRoute]int id)
     {
         return _service.GetRecipeById(id);
+    }
+    
+    [Route("api/recipes/picture/{id}")]
+    [HttpPut]
+    public IActionResult UploadRecipePicture([FromRoute] int id, IFormFile? picture)
+    {
+        if (picture == null)
+        {
+            return BadRequest("No file was uploaded, when you needed the avatar the most he disappeared");
+        }
+        Recipe recipe = _service.GetRecipeById(id);
+        
+        if (recipe == null)
+        {
+            return NotFound("User not found");
+        }
+       String blobURL = _BlobService.Save(picture.OpenReadStream(), id);
+       recipe.RecipeURL = blobURL;
+       _service.UpdateRecipe(recipe);
+
+       return Ok();
     }
     
     
