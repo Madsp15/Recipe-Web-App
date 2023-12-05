@@ -1,10 +1,11 @@
 ﻿using infrastructure;
-using Microsoft.AspNetCore.Http.HttpResults;
-using service;
 using Microsoft.AspNetCore.Mvc;
+using service;
+
+
 namespace Recipe_Web_App.Controllers;
 
-public class RecipeController
+public class RecipeController : ControllerBase
 {
     private readonly RecipeService _service;
     private readonly BlobService _BlobService;
@@ -55,15 +56,24 @@ public class RecipeController
     }
     
     [Route("api/recipes/picture/{id}")]
-    [HttpGet]
+    [HttpPut]
     public IActionResult UploadRecipePicture([FromRoute] int id, IFormFile? picture)
     {
+        if (picture == null)
+        {
+            return BadRequest("No file was uploaded, when you needed the avatar the most he disappeared");
+        }
+        Recipe recipe = _service.GetRecipeById(id);
+        
+        if (recipe == null)
+        {
+            return NotFound("User not found");
+        }
        String blobURL = _BlobService.Save(picture.OpenReadStream(), id);
-
-       Recipe recipe = _service.GetRecipeById(id);
        recipe.RecipeURL = blobURL;
        _service.UpdateRecipe(recipe);
-       return new OkResult();
+
+       return Ok();
     }
     
     

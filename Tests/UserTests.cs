@@ -24,7 +24,7 @@ public class UserTests
     {
         User userToAdd = new User
         {
-            UserName = "TestUser", Type = "Normal", Email = "test@Email.com", MoreInfo = "nothing"
+            UserName = "TestUser", Isadmin = "Normal", Email = "test@Email.com", MoreInfo = "nothing"
         };
         User addedUser = _repository.CreateUser(userToAdd);
 
@@ -39,7 +39,7 @@ public class UserTests
     {
         User userToAdd = new User
         {
-            UserName = "TestUser", Type = "Normal", Email = "test@Email.com", MoreInfo = "nothing"
+            UserName = "TestUser", Isadmin = "Normal", Email = "test@Email.com", MoreInfo = "nothing"
         };
         User addedUser = _repository.CreateUser(userToAdd);
         addedUser.UserName = "Updated Test User";

@@ -1,5 +1,4 @@
 using service;
-using infrastructure;
 using infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Recipe_Web_App.TransferModels;
@@ -106,15 +105,17 @@ public class UserController : ControllerBase
     {
         if (avatar == null)
         {
-            return BadRequest("No file was uploaded");
+            return BadRequest("No file was uploaded, when you needed the avatar the most he disappeared");
         }
         var user = _userService.GetUser(userId);
         if (user == null)
         {
             return NotFound("User not found");
         }
-        //var url = _BlobService.Save("avatars", avatar.OpenReadStream(), user.);
-        //user.Avatar = url;
+        
+        string? blobURL = _BlobService.SaveWithSecretURL(avatar.OpenReadStream(), userId);
+        
+        user.UserAvatarUrl = blobURL;
         _userService.UpdateUser(user);
         return Ok();
         

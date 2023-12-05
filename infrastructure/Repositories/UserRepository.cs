@@ -7,23 +7,26 @@ public class UserRepository
 {
     public User CreateUser(User user)
     {
-        var sql = $@"INSERT INTO users(username, type, moreinfo, email)
-                        VALUES(@username, @type, @moreinfo, @email)
+        user.UserAvatarUrl = "";
+        var sql = $@"INSERT INTO users(username, isadmin, moreinfo, email, useravatarurl)
+                        VALUES(@username, @isadmin, @moreinfo, @email, @useravatarurl)
                         RETURNING
                         userId as {nameof(User.UserId)},
                         username as {nameof(User.UserName)},
-                        type as {nameof(User.Type)},
+                        isadmin as {nameof(User.Isadmin)},
                         email as {nameof(User.Email)},
-                        moreInfo as {nameof(User.MoreInfo)};";
+                        moreInfo as {nameof(User.MoreInfo)},
+                        useravatarurl as {nameof(User.UserAvatarUrl)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<User>(sql, new
             {
                 username = user.UserName,
-                type = user.Type,
+                isadmin = user.Isadmin,
                 email = user.Email,
-                moreinfo = user.MoreInfo
+                moreinfo = user.MoreInfo,
+                useravatarurl = user.UserAvatarUrl
 
             });
         }
@@ -54,17 +57,20 @@ public class UserRepository
         var sql = $@"UPDATE users
                  SET
                     username = @username,
-                    Type = @type,
+                    isadmin = @isadmin,
                     Email = @email,
-                    MoreInfo = @moreinfo
+                    MoreInfo = @moreinfo,
+                    useravatarurl = @useravatarurl
                  WHERE
                     userid = @id
                  RETURNING
                     userId as {nameof(User.UserId)},
                     username as {nameof(User.UserName)},
-                    type as {nameof(User.Type)},
+                    isadmin as {nameof(User.Isadmin)},
                     email as {nameof(User.Email)},
-                    moreinfo as {nameof(User.MoreInfo)};";
+                    moreinfo as {nameof(User.MoreInfo)},
+                    useravatarurl as {nameof(User.UserAvatarUrl)};";
+        
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
@@ -72,9 +78,10 @@ public class UserRepository
             {
                 id = user.UserId,
                 username = user.UserName,
-                type = user.Type,
+                isadmin = user.Isadmin,
                 email = user.Email,
-                moreinfo = user.MoreInfo
+                moreinfo = user.MoreInfo,
+                useravatarurl = user.UserAvatarUrl
             });
         }
     }
