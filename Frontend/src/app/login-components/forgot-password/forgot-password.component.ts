@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   standalone: true,
   imports: [CommonModule, IonicModule],
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.css'
+  styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {
 

@@ -31,9 +31,13 @@ public class ReviewController: ControllerBase
 
     [Route("/api/{reviewId}")]
     [HttpDelete]
-    public bool DeleteReview([FromRoute] int reviewId)
+    public IActionResult DeleteReview([FromRoute] int reviewId)
     {
-        return _reviewService.DeleteReview(reviewId);
+        if(_reviewService.DeleteReview(reviewId) == null)
+        {
+            return NotFound("Review not found");
+        }
+        return _reviewService.DeleteReview(reviewId) ? Ok() : Problem();
     }
 
     [Route("api/recipes/{recipeId}/averagerating")]

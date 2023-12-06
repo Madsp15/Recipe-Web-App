@@ -125,7 +125,21 @@ public class TagsRepository
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.QueryFirst<Tag>(sql, new { name }) != null;
+            try
+            {
+                if (conn.QueryFirst<Tag>(sql, new { name })==null)
+                {
+                    return false;
+                }
+                return conn.QueryFirst<Tag>(sql, new { name }) != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+            
+            
         }
     }
     

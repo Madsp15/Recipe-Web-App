@@ -67,15 +67,16 @@ public class ReviewTests
             
         };
         
-         _repository.CreateReview(reviewToAdd);
-         _repository.CreateReview(reviewToAdd2);
-         _repository.CreateReview(reviewToAdd3);
+         Review review1 = _repository.CreateReview(reviewToAdd);
+         Review review2 = _repository.CreateReview(reviewToAdd2);
+         Review review3 =  _repository.CreateReview(reviewToAdd3);
          
         _repository.GetAverageRatingForRecipe(15).Should().Be(6);
+        
+        _repository.DeleteReview(review1.ReviewId);
+        _repository.DeleteReview(review2.ReviewId);
+        _repository.DeleteReview(review3.ReviewId);
         Assert.Pass("We did it!");
-        _repository.DeleteReview(reviewToAdd.ReviewId);
-        _repository.DeleteReview(reviewToAdd2.ReviewId);
-        _repository.DeleteReview(reviewToAdd3.ReviewId);
     }
     
     [Test]

@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   standalone: true,
     imports: [CommonModule, IonicModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   showPassword: boolean = false;

@@ -23,9 +23,16 @@ public class TagsController: ControllerBase
     
     [Route("api/tags/{id}")]
     [HttpDelete]
-    public bool DeleteTag([FromRoute] int id)
+    public IActionResult DeleteTag([FromRoute] int id)
     {
-        return _tagsService.DeleteTag(id);
+        if (GetTagById(id) == null)
+            return NotFound("Tag not found");
+            
+        if (_tagsService.DeleteTag(id))
+            return Ok("Tag deleted");
+       
+        return BadRequest("Tag not deleted");
+       
     }
     
     [Route("api/tags")]

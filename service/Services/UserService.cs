@@ -9,11 +9,13 @@ public class UserService
 {
     private readonly UserRepository _userRepository;
     private readonly PasswordHashAlgorithm _passwordHashAlgorithm;
+    private readonly PasswordRepository _passwordRepository;
 
-    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm)
+    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository)
     {
         _userRepository = userRepository;
         _passwordHashAlgorithm = passwordHashAlgorithm;
+        _passwordRepository = passwordRepository;
     }
 
     public User CreateUser(User user)
@@ -28,7 +30,11 @@ public class UserService
 
     public bool DeleteUser(int userId)
     {
-        return _userRepository.DeleteUserById(userId);
+        if (_passwordRepository.Deletepassword(userId))
+        {
+            return _userRepository.DeleteUserById(userId);
+        }
+        return false;
     }
 
     public User GetUser(int userId)

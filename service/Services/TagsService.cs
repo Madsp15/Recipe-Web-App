@@ -17,12 +17,8 @@ public class TagsService
         {
             return GetTagByName(tag.tagName);
         }
-        else
-        {
-            CreateTag(tag);
-        }
-        ;
-        throw new InvalidOperationException();
+        return CreateTag(tag);
+        
     }
     public Tag CreateTag(Tag tag)
     {

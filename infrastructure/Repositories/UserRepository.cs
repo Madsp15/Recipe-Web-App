@@ -7,13 +7,14 @@ public class UserRepository
 {
     public User CreateUser(User user)
     {
+        user.IsAdmin = false;
         user.UserAvatarUrl = "http://placekitten.com/200/200";
         var sql = $@"INSERT INTO users(username, isadmin, moreinfo, email, useravatarurl)
                         VALUES(@username, @isadmin, @moreinfo, @email, @useravatarurl)
                         RETURNING
                         userId as {nameof(User.UserId)},
                         username as {nameof(User.UserName)},
-                        isadmin as {nameof(User.Isadmin)},
+                        isadmin as {nameof(User.IsAdmin)},
                         email as {nameof(User.Email)},
                         moreInfo as {nameof(User.MoreInfo)},
                         useravatarurl as {nameof(User.UserAvatarUrl)};";
@@ -23,7 +24,7 @@ public class UserRepository
             return conn.QueryFirst<User>(sql, new
             {
                 username = user.UserName,
-                isadmin = user.Isadmin,
+                isadmin = user.IsAdmin,
                 email = user.Email,
                 moreinfo = user.MoreInfo,
                 useravatarurl = user.UserAvatarUrl
@@ -66,7 +67,7 @@ public class UserRepository
                  RETURNING
                     userId as {nameof(User.UserId)},
                     username as {nameof(User.UserName)},
-                    isadmin as {nameof(User.Isadmin)},
+                    isadmin as {nameof(User.IsAdmin)},
                     email as {nameof(User.Email)},
                     moreinfo as {nameof(User.MoreInfo)},
                     useravatarurl as {nameof(User.UserAvatarUrl)};";
@@ -78,7 +79,7 @@ public class UserRepository
             {
                 id = user.UserId,
                 username = user.UserName,
-                isadmin = user.Isadmin,
+                isadmin = user.IsAdmin,
                 email = user.Email,
                 moreinfo = user.MoreInfo,
                 useravatarurl = user.UserAvatarUrl

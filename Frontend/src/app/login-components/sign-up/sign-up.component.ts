@@ -11,7 +11,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
   standalone: true,
   imports: [CommonModule, IonicModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
   usernameInput = new FormControl('', Validators.required);

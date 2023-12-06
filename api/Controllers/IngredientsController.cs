@@ -4,7 +4,7 @@ using service;
 
 namespace Recipe_Web_App.Controllers;
 
-public class IngredientsController
+public class IngredientsController : ControllerBase
 { 
     private readonly IngredientService _service;
     
@@ -22,9 +22,14 @@ public class IngredientsController
     
     [Route("api/ingredients/{id}")]
     [HttpDelete]
-    public bool DeleteIngredient([FromRoute] int id)
+    public IActionResult DeleteIngredient([FromRoute] int id)
     {
-        return _service.DeleteIngredient(id);
+        if(_service.DeleteIngredient(id) == null)
+        {
+            return NotFound("Ingredient not found");
+        }
+        return _service.DeleteIngredient(id) ? Ok() : Problem();
+        
     }
     
     [Route("api/ingredients")]
@@ -50,9 +55,13 @@ public class IngredientsController
     
     [Route("api/recipeingredients/{id}")]
     [HttpDelete]
-    public bool DeleteRecipeIngredient([FromRoute] int id)
+    public IActionResult DeleteRecipeIngredient([FromRoute] int id)
     {
-        return _service.DeleteRecipeIngredient(id);
+        if(_service.DeleteRecipeIngredient(id) == null)
+        {
+            return NotFound("RecipeIngredient not found");
+        }
+        return _service.DeleteRecipeIngredient(id) ? Ok() : Problem();
     }
     
     [Route("api/recipeingredients")]

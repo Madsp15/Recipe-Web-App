@@ -12,13 +12,21 @@ public class PasswordRepository
         using var connection = DataConnection.DataSource.OpenConnection();
         connection.Execute(sql, new { userId, password, salt});
     }
+    public bool Deletepassword(int userId)
+    {
+        const string sql = $@"
+        DELETE FROM security
+        WHERE userid = @userId";
+        using var connection = DataConnection.DataSource.OpenConnection();
+        return connection.Execute(sql, new { userId }) > 0;
+    }
     
     public void Update(int userId, string password, string salt)
     {
         const string sql = $@"
         UPDATE security
         SET password = @password, salt = @salt
-        WHERE user_id = @userId";
+        WHERE userid = @userId";
         using var connection = DataConnection.DataSource.OpenConnection();
         connection.Execute(sql, new { userId, password, salt});
     }

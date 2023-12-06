@@ -45,9 +45,17 @@ public class UserController : ControllerBase
 
     [Route("/api/users/{userId}")]
     [HttpDelete]
-    public bool DeleteUser([FromRoute] int userId)
+    public IActionResult DeleteUser([FromRoute] int userId)
     {
-        return _userService.DeleteUser(userId);
+        if (_userService.GetUser(userId) == null)
+        {
+            return NotFound("User not found");
+        }
+        if (_userService.DeleteUser(userId))
+        {
+            return Ok();
+        } 
+        return BadRequest("User could not be deleted");
     }
 
     [Route("/api/users")]
@@ -66,16 +74,34 @@ public class UserController : ControllerBase
 
     [Route("/api/users/{userId}/follow/{userIdToFollow}")]
     [HttpPost]
-    public bool FollowUser([FromRoute] int userId, [FromRoute] int userIdToFollow)
+    public IActionResult FollowUser([FromRoute] int userId, [FromRoute] int userIdToFollow)
     {
-        return _userService.FollowUser(userId, userIdToFollow);
+        if (_userService.GetUser(userId) == null || _userService.GetUser(userIdToFollow) == null)
+        {
+            return NotFound("User not found");
+        }
+        if (_userService.FollowUser(userId, userIdToFollow))
+        {
+            return Ok();
+        }
+        return BadRequest("User could not be followed");
     }
 
     [Route("/api/users/{userId}/unfollow/{userIdToUnfollow}")]
     [HttpDelete]
-    public bool UnfollowUser([FromRoute] int userId, [FromRoute] int userIdToUnfollow)
+    public IActionResult UnfollowUser([FromRoute] int userId, [FromRoute] int userIdToUnfollow)
     {
-        return _userService.UnfollowUser(userId, userIdToUnfollow);
+        User user = _userService.GetUser(userId);
+        User userToUnfollow = _userService.GetUser(userIdToUnfollow);
+        if (user == null || userToUnfollow == null)
+        {
+            return NotFound("User not found");
+        }
+        if (_userService.UnfollowUser(userId, userIdToUnfollow))
+        {
+            return Ok();
+        }
+        return BadRequest("User could not be followed");
     }
 
     [Route("/api/users/{userId}/followers")]
@@ -94,15 +120,15 @@ public class UserController : ControllerBase
 
 
     [HttpPost]
-        [Route("/api/users/login")]
-        public ResponseDto Login([FromBody] LoginDto dto)
+    [Route("/api/users/login")]
+    public ResponseDto Login([FromBody] LoginDto dto)
+    {
+        var user = _passwordService.Authenticate(dto.Email, dto.Password);
+        return new ResponseDto
         {
-            var user = _passwordService.Authenticate(dto.Email, dto.Password);
-            return new ResponseDto
-            {
                 MessageToClient = "Successfully authenticated"
-            };
-        }
+        };
+    }
 	
     
     [HttpPut]
