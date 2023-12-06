@@ -6,17 +6,17 @@
   <ion-card>
     <ion-card-content>
       <ion-item class="input-field">
-        <ion-label class="custom-label" position="floating">Username</ion-label>
+        <ion-label class="custom-label" id="username" [formControl]="usernameInput" position="floating">Username</ion-label>
         <ion-input class="custom-input"></ion-input>
       </ion-item>
 
       <ion-item class="input-field">
-        <ion-label class="custom-label" position="floating">Email</ion-label>
+        <ion-label class="custom-label" id="email" [formControl]="emailInput" position="floating">Email</ion-label>
         <ion-input class="custom-input"></ion-input>
       </ion-item>
 
       <ion-item class="input-field">
-        <ion-label class="custom-label" position="floating">Password</ion-label>
+        <ion-label class="custom-label" id="password" [formControl]="passwordInput" position="floating">Password</ion-label>
         <ion-input class="custom-input" type="{{showPassword ? 'text' : 'password'}}" formControlName="password"></ion-input>
         <ion-icon name="{{showPassword ? 'eye-off' : 'eye'}}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>

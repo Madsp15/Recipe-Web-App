@@ -4,25 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="a0773c2d-e48b-4da0-aec7-caecc25113ad" name="Changes" comment="Initial commit"/>
+    <list default="true" id="a0773c2d-e48b-4da0-aec7-caecc25113ad" name="Changes" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/side-menu/side-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/toolbar/toolbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/toolbar/toolbar.component.scss" afterDir="false" />
-
-    <list default="true" id="6b9fdba1-5ae4-41e7-8617-c6348e245d9e" name="Changes" comment="login and recipe-menu added">
-      <change beforePath="$PROJECT_DIR$/service/PasswordService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/service/PasswordService.cs" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/TransferModels/RegisterDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/TransferModels/RegisterDto.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -31,48 +24,32 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="da7852514d04edb3cecef357802162f391900163" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2YpMcLE1syFObb5lv7TWXo2Z8OJ" />
-
-  <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2YwNaIEltN2ryn4qPcub5xSHFnh" />
-
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/nhi_t/OneDrive/Dokumenter/GitHub/Recipe-Web-App&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\nhi_t\\OneDrive\\Dokumenter\\GitHub\\Recipe-Web-App\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "login-frontend",
+    "last_opened_file_path": "C:/Users/nhi_t/OneDrive/Dokumenter/GitHub/Recipe-Web-App",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\nhi_t\\Documents\\GitHub\\Recipe-Web-App\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="side-menu.component.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Recipe-Web-App/frontend/src/app/side-menu/side-menu.component.html" useBuiltInWebServerPort="true">
       <method v="2" />
@@ -86,39 +63,6 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a0773c2d-e48b-4da0-aec7-caecc25113ad" name="Changes" comment="" />
-      <created>1701218146898</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1701218146898</updated>
-      <workItem from="1701218147812" duration="9181000" />
-      <workItem from="1701173224554" duration="5337000" />
-      <workItem from="1701178945553" duration="24184000" />
-      <workItem from="1701343798387" duration="7758000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial commit">
-      <option name="closed" value="true" />
-      <created>1701267163092</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1701267163092</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
-
-    &quot;git-widget-placeholder&quot;: &quot;encryption__passwords&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/nhi_t/Documents/GitHub/Recipe-Web-App&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\nhi_t\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
       <changelist id="6b9fdba1-5ae4-41e7-8617-c6348e245d9e" name="Changes" comment="login and recipe-menu added" />
       <created>1701432744743</created>
       <option name="number" value="Default" />
@@ -126,13 +70,11 @@
       <updated>1701432744743</updated>
       <workItem from="1701432745593" duration="746000" />
     </task>
-
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -144,7 +86,6 @@
       </map>
     </option>
   </component>
-
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
