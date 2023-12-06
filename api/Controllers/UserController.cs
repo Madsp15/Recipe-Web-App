@@ -24,7 +24,7 @@ public class UserController : ControllerBase
     {
         User createdUser = new User
         {
-            UserName = dto.UserName,
+            UserName = dto.Username,
             Email = dto.Email,
         };
         
