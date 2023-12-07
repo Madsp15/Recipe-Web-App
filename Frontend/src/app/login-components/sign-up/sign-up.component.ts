@@ -31,16 +31,18 @@ export class SignUpComponent {
 
   async clickJoin() {
     try {
-      const result = this.http.post('http://localhost:5280/api/users', this.formGroup.value);
+      const result = this.http.post('http://localhost:5280/api/users', this.formGroup.getRawValue());
       const promise = await firstValueFrom(result);
     } catch (e) {
       if (e instanceof HttpErrorResponse) {
         const errorResponse = e.error;
         const allErrorMessages = Object.values(errorResponse.errors).flat();
         console.log(e.message);
+        console.log(allErrorMessages);
         const toast = await this.toastController.create({
-          message: e.message
+          message: allErrorMessages[0]!.toString()
         });
+        toast.duration = 5000;
         toast.present();
       }
     }

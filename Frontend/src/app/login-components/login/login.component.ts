@@ -2,16 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {IonicModule} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-    imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   showPassword: boolean = false;
+  password = new FormControl('', Validators.required);
 
   constructor(private router: Router) {
   }

@@ -12,7 +12,7 @@
 
       <ion-item class="input-field">
         <ion-label class="custom-label" position="floating">Password</ion-label>
-        <ion-input class="custom-input" type="{{showPassword ? 'text' : 'password'}}" formControlName="password"></ion-input>
+        <ion-input class="custom-input" type="{{showPassword ? 'text' : 'password'}}" [formControl]="password"></ion-input>
         <ion-icon name="{{showPassword ? 'eye-off' : 'eye'}}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
 
