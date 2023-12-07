@@ -68,5 +68,15 @@ public class UserService
         return _userRepository.GetFollowing(userId);
     }
     
+    public bool SaveRecipe(int userId, int recipeId)
+    {
+        return _userRepository.saveRecipe(userId, recipeId);
+    }
+    
+    public bool UnsaveRecipe(int userId, int recipeId)
+    {
+        return _userRepository.unsaveRecipe(userId, recipeId);
+    }   
+    
    
 }

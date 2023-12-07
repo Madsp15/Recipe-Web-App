@@ -150,7 +150,37 @@ public class UserController : ControllerBase
         user.UserAvatarUrl = blobURL;
         _userService.UpdateUser(user);
         return Ok();
-        
     }
+    
+    [HttpPost]
+    [Route("/api/users/save/{userId}/{recipeId}")]
+    public IActionResult SaveRecipe([FromRoute] int userId, [FromRoute] int recipeId)
+    {
+        if (_userService.GetUser(userId) == null)
+        {
+            return NotFound("User not found");
+        }
+        if (_userService.SaveRecipe(userId, recipeId))
+        {
+            return Ok();
+        }
+        return BadRequest("Recipe could not be saved");
+    }
+    
+    [HttpDelete]
+    [Route("/api/users/unsave/{userId}/{recipeId}")]
+    public IActionResult UnsaveRecipe([FromRoute] int userId, [FromRoute] int recipeId)
+    {
+        if (_userService.GetUser(userId) == null)
+        {
+            return NotFound("User not found");
+        }
+        if (_userService.UnsaveRecipe(userId, recipeId))
+        {
+            return Ok();
+        }
+        return BadRequest("Recipe could not be unsaved");
+    }
+    
 
 }
