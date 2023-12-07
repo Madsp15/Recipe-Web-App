@@ -20,7 +20,7 @@ export class SideMenuComponent  implements OnInit {
   }
 
   clickCreateRecipe() {
-    this.router.navigate(['home/create-recipe']);
+    this.router.navigate(['home/create-recipe'], {replaceUrl:true});
   }
 
   clickMyRecipes() {

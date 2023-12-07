@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule, MenuController} from "@ionic/angular";
+import {IonicModule} from "@ionic/angular";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-toolbar',
@@ -12,28 +13,26 @@ import {IonicModule, MenuController} from "@ionic/angular";
 })
 export class ToolbarComponent  implements OnInit {
 
-  constructor() {}
+  constructor(private router : Router) {}
 
   clickMenu() {
-
-    console.log("clickMenu() method clicked")
   }
 
   ngOnInit() {}
 
   clickHome() {
-
+    this.router.navigate([''], {replaceUrl:true})
   }
 
   clickRecipes() {
-
+    this.router.navigate(['/home/recipes'], {replaceUrl:true})
   }
 
   clickProfile() {
-
+    this.router.navigate(['/home/profile'], {replaceUrl:true})
   }
 
   clickSearch() {
-
+    this.router.navigate(['/home/search'], {replaceUrl:true})
   }
 }

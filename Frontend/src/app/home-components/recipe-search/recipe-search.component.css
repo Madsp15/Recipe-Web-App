@@ -1,0 +1,25 @@
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  height: 80px;
+  background-color: #FCDCCE;
+}
+
+.choice-box {
+  width: 10%;
+  color: black;
+}
+
+.search-bar {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.search-button {
+  --background: transparent;
+  --color: black;
+  border: 1px solid black;
+  color: black;
+}
+

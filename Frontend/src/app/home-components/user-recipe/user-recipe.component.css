@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+
+ion-card {
+  max-width: 500px;
+  margin: 10px;
+  border: 5px solid #FCDCCE;
+  border-radius: 8px;
+  color: black;
+}
+
+ion-card-content {
+  text-align: center;
+}
+
+ion-card-header ion-item {
+  flex: 1;
+}
