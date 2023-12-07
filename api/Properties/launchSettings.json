@@ -16,7 +16,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5280",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "pgconn": "postgres://utnerslo:sW4nBNZ54-6oh4Q6DQs_ExChLTX_Hp7H@cornelius.db.elephantsql.com/utnerslo"
       }
     },
     "https": {

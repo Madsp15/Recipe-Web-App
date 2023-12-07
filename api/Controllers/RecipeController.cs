@@ -68,12 +68,8 @@ public class RecipeController : ControllerBase
         if (recipe == null)
         {
             return NotFound("User not found");
-        }
-       String blobURL = _BlobService.Save(picture.OpenReadStream(), id);
-       recipe.RecipeURL = blobURL;
-       _service.UpdateRecipe(recipe);
-
-       return Ok();
+        } String blobUrl = _BlobService.Save(picture.OpenReadStream(), id); recipe.RecipeURL = blobUrl; _service.UpdateRecipe(recipe);
+        return Ok();
     }
     
     

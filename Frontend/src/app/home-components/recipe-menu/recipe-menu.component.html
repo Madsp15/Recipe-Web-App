@@ -3,8 +3,8 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="stacked">Upload Image:</ion-label>
-        <input type="file" (change)="handleImageChange($event)">
-        <ion-img></ion-img>
+        <input type="file" accept="image/png, image/jpeg" (change)="handleImageChange($event)">
+        <ion-img>[src]="foodPicture"</ion-img>
       </ion-item>
 
       <ion-item>
@@ -13,7 +13,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Description:</ion-label>
+        <ion-label position="stacked">Write a short description of your recipe in 255 characters of less!</ion-label>
         <ion-textarea placeholder="Enter description"></ion-textarea>
       </ion-item>
 
