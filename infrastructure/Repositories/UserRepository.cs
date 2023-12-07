@@ -182,4 +182,26 @@ public class UserRepository
             return conn.ExecuteScalar<int>(sql, parameters) > 0;
         }
     }
+    
+    public bool saveRecipe(int userId, int recipeId)
+    {
+        var sql = $@"INSERT INTO savedposts(userid, recipeid)
+                        VALUES(@userid, @recipeid);";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { userid = userId, recipeid = recipeId }) == 1;
+        }
+    }
+    
+    public bool unsaveRecipe(int userId, int recipeId)
+    {
+        var sql = $@"DELETE FROM savedposts WHERE userid = @userid AND recipeid = @recipeid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { userid = userId, recipeid = recipeId }) == 1;
+        }
+    }
+    
 }
