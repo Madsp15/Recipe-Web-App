@@ -12,7 +12,8 @@
 
             <div *ngFor="let instruction of instructions; let i = index">
               <p class="custom-text">{{ i + 1 }}. {{ instruction }}
-                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="deleteInstruction(i)" class="delete-icon" />
+                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditInstruction(i)" class="edit-icon" />
+                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteInstruction(i)" class="delete-icon" />
               </p>
             </div>
           </ion-card-content>
@@ -28,7 +29,8 @@
 
             <div *ngFor="let ingredient of ingredients; let i = index">
               <p class="custom-text">{{ i + 1 }}. {{ ingredient }}
-                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="deleteIngredient(i)" class="delete-icon" />
+                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditIngredient(i)" class="edit-icon" />
+                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteIngredient(i)" class="delete-icon" />
               </p>
             </div>
           </ion-card-content>
@@ -68,11 +70,10 @@
         </ion-card>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 
   <div class="button-container">
-    <ion-button (click)="clickSave()">Save Recipe</ion-button>
+    <ion-button (click)="clickNext()">Save Recipe</ion-button>
     <ion-button (click)="clickCancel()">Cancel</ion-button>
   </div>
 

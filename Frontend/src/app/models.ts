@@ -9,7 +9,9 @@ export interface User {
 export interface Recipe {
   recipeid?: number;
   title?: string;
+  recipeurl?: string;
   description?: string;
   intructions?: string;
   duration?: string;
+  servings?: number;
 }

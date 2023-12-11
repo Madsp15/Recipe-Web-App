@@ -34,8 +34,4 @@ export class SideMenuComponent  implements OnInit {
   clickLogOut() {
 
   }
-
-  clickDraft() {
-
-  }
 }

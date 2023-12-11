@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
-import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {firstValueFrom} from "rxjs";
 import {Recipe} from "../../../models";
 import {RecipeService} from "../../../recipe.service";
+import {
+  RecipeMenuStepsIngredientsComponent
+} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
 
 
 @Component({
@@ -14,7 +17,7 @@ import {RecipeService} from "../../../recipe.service";
   standalone: true,
   imports: [
     IonicModule,
-    FormsModule, HttpClientModule, CommonModule
+    FormsModule, HttpClientModule, CommonModule, ReactiveFormsModule, RecipeMenuStepsIngredientsComponent
   ],
   templateUrl: './recipe-menu.component.html',
   styleUrls: ['./recipe-menu.component.scss'],
@@ -28,7 +31,9 @@ export class RecipeMenuComponent  implements OnInit {
   descriptionInput = new FormControl('', Validators.required);
   instructionsInput = new FormControl('', Validators.required);
   recipeURLInput = new FormControl('', Validators.required);
-  notesInput = new FormControl('', Validators.required);
+  servingsInput = new FormControl('', Validators.required);
+  durationInput = new FormControl('', Validators.required);
+
 
   formGroup = new FormGroup({
     userId: this.userIdInput,
@@ -36,7 +41,8 @@ export class RecipeMenuComponent  implements OnInit {
     description: this.descriptionInput,
     instructions: this.instructionsInput,
     recipeURL: this.recipeURLInput,
-    notes: this.notesInput,
+    servings: this.servingsInput,
+    duration: this.durationInput
   });
 
   optionalTags: string[] = [];
@@ -49,6 +55,7 @@ export class RecipeMenuComponent  implements OnInit {
 
   readonly storedIFormFiles: File[] = [];
   foodPicture: string = 'https://www.drsearswellnessinstitute.org/wp-content/uploads/2023/06/Nutrition4StagesPregnancy.jpg';
+  durationUnit: string = 'minutes';
 
   handleImageChange($event: Event) {
     const file = (event?.target as HTMLInputElement)?.files?.[0];
@@ -78,7 +85,7 @@ export class RecipeMenuComponent  implements OnInit {
       return;
     }
     try {
-      const call = this.http.post<Recipe>('https://localhost:5280/api/recipes', this.formGroup.value);
+      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', this.formGroup.value);
       const result = await firstValueFrom<Recipe>(call)
       this.recipeService.recipes.push(result);
       const toast = await this.toastController.create({
@@ -91,7 +98,7 @@ export class RecipeMenuComponent  implements OnInit {
       console.log(error);
     }
 
-    //this.router.navigate(['/home/instructions-ingredients'], {replaceUrl: true})
+    this.router.navigate(['/home/instructions-ingredients'], {replaceUrl: true})
   }
 
   toggleTag(tag: string): void {

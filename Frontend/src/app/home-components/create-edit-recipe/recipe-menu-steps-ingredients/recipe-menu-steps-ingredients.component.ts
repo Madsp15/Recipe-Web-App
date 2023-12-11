@@ -25,6 +25,7 @@ export class RecipeMenuStepsIngredientsComponent {
       this.instructions = [...this.instructions, this.newInstruction.trim()];
       this.newInstruction = '';
     }
+    console.log(this.instructions)
   }
 
   addIngredient() {
@@ -32,21 +33,30 @@ export class RecipeMenuStepsIngredientsComponent {
       this.ingredients = [...this.ingredients, this.newIngredient.trim()];
       this.newIngredient = '';
     }
-  }
-
-  deleteInstruction(index: number) {
-    this.instructions.splice(index, 1);
-  }
-
-  deleteIngredient(index: number) {
-    this.ingredients.splice(index, 1);
-  }
-
-  clickSave() {
-
+    console.log(this.ingredients)
   }
 
   clickCancel() {
 
+  }
+
+  clickNext() {
+
+  }
+
+  clickEditInstruction(i: number) {
+
+  }
+
+  clickEditIngredient(i: number) {
+
+  }
+
+  clickDeleteInstruction(index: number) {
+    this.instructions.splice(index, 1);
+  }
+
+  clickDeleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
   }
 }
