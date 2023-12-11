@@ -1,0 +1,16 @@
+.ion-text-top{
+  font-size: 30px;
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
+.ion-text-center{
+  font-size: 20px;
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
+ion-content {
+  height: 100%;
+  overflow: auto;
+}

@@ -1,0 +1,38 @@
+.custom-title {
+  color: black;
+  font-size: 1.5em;
+}
+
+.custom-text {
+  color: black;
+  font-size: 1.2em;
+}
+
+.delete-icon {
+  width: 15px;
+  height: 15px;
+}
+
+ion-button{
+  --background: #CCD5AE;
+  margin-top: 30px;
+  border: 1px solid black;
+  color: black;
+}
+
+ion-card{
+  background-color: #CCD5AE;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+ion-button{
+  --background: #FEFAE0;
+  --color: black;
+  border: 1px solid black;
+  color: black;
+}
