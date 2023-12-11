@@ -7,6 +7,7 @@ public class RecipeRepository
     String date = DateHelper.GetDate();
     public Recipe CreateRecipe(Recipe recipe)
     {
+        //instructions needs to formatted correctly with line breaks
     recipe.DateCreated = date;
         var sql = $@"INSERT INTO recipes(userid, title, description, instructions, recipeurl, datecreated, notes)
                         VALUES(@userId, @title, @description, @instructions, @recipeURL, @dateCreated, @notes)

@@ -1,6 +1,8 @@
 using service;
 using infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
+using Recipe_Web_App;
+using Recipe_Web_App.Filters;
 using Recipe_Web_App.TransferModels;
 
 [ApiController]
@@ -8,13 +10,15 @@ public class UserController : ControllerBase
 {
     private readonly UserService _userService;
     private readonly PasswordService _passwordService;
+    private readonly TokenService _tokenService;
 	
 	private readonly BlobService _BlobService;
-    public UserController(UserService userService, PasswordService passwordService, BlobService blobService)
+    public UserController(UserService userService, PasswordService passwordService, BlobService blobService, TokenService tokenService)
     {
         _userService = userService;
         _passwordService = passwordService;
 		_BlobService = blobService;
+        tokenService = _tokenService;
 	}
     
 
@@ -121,13 +125,12 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("/api/users/login")]
-    public ResponseDto Login([FromBody] LoginDto dto)
+    public IActionResult Login([FromBody] LoginDto dto)
     {
         var user = _passwordService.Authenticate(dto.Email, dto.Password);
-        return new ResponseDto
-        {
-                MessageToClient = "Successfully authenticated"
-        };
+        if (user == null) return Unauthorized("Invalid credentials");
+        var token = _tokenService.IssueToken(SessionData.FromUser(user!));
+        return Ok(new { token });
     }
 	
     
@@ -180,6 +183,18 @@ public class UserController : ControllerBase
             return Ok();
         }
         return BadRequest("Recipe could not be unsaved");
+    }
+    [RequireAuthentication]
+    [HttpGet]
+    [Route("/api/users/whoami")]
+    public ResponseDto WhoAmI()
+    {
+        var data = HttpContext.GetSessionData();
+        var user = _userService.GetUser(data.UserId);
+        return new ResponseDto
+        {
+            ResponseData = user
+        };
     }
     
 

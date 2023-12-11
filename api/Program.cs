@@ -20,6 +20,8 @@ builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<TagsRepository>();
 builder.Services.AddSingleton<TagsService>();
 
+builder.Services.AddSingleton<TokenService>();
+
 
 
     builder.Services.AddSingleton<BlobService>(provider =>

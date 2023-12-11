@@ -204,4 +204,15 @@ public class UserRepository
         }
     }
     
+    public bool IsAdmin(int userId)
+    {
+        var sql = $@"SELECT * FROM users
+                        WHERE userid = @userid AND isadmin = true;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.QueryFirstOrDefault(sql, new { userid = userId }) != null;
+        }
+    }
+    
 }
