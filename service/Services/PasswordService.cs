@@ -21,7 +21,7 @@ public class PasswordService
     }
     
     
-    public User? Authenticate(string email, string password)
+    public User Authenticate(string email, string password)
     {
 
         try
@@ -30,7 +30,7 @@ public class PasswordService
 
             if (_passwordHashAlgorithm.VerifyHashedPassword(email, password, passwordHash.Hash, passwordHash.Salt))
             {
-                _userRepository.GetUserById(passwordHash.UserId);
+                return _userRepository.GetUserById(passwordHash.UserId);
             }
 
         }

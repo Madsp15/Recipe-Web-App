@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
+import {IonicModule, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {TokenService} from "../../../services/token.service";
 
 @Component({
   selector: 'app-side-menu',
@@ -14,7 +15,8 @@ import {Router} from "@angular/router";
 export class SideMenuComponent  implements OnInit {
 
 
-  constructor(private router : Router) {}
+  constructor(private router : Router, private token: TokenService,
+              private toast: ToastController) {}
 
   ngOnInit() {
   }
@@ -31,9 +33,15 @@ export class SideMenuComponent  implements OnInit {
 
   }
 
-  clickLogOut() {
-
-  }
+  async clickLogOut() {
+      this.token.clearToken();
+      this.router.navigate(['/login'], {replaceUrl:true});
+      (await this.toast.create({
+        message: 'Successfully logged out',
+        duration: 5000,
+        color: 'success',
+      })).present()
+    }
 
   clickDraft() {
 

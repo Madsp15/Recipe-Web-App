@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+
 namespace service;
 
 public class TokenOptions
@@ -9,11 +10,11 @@ public class TokenOptions
     public string? Address { get; set; }
 }
 
-public class TokenService
+public class JWTTokenService
 {
     private readonly TokenOptions _options;
 
-    public TokenService(TokenOptions options)
+    public JWTTokenService(TokenOptions options)
     {
         _options = options;
     }

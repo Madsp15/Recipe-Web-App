@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
+import {IonicModule, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {TokenService} from "../../../services/token.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,8 @@ import {Router} from "@angular/router";
 })
 export class ToolbarComponent  implements OnInit {
 
-  constructor(private router : Router) {}
+  constructor(
+    private router : Router) {}
 
   clickMenu() {
   }
@@ -35,4 +37,5 @@ export class ToolbarComponent  implements OnInit {
   clickSearch() {
     this.router.navigate(['/home/search'], {replaceUrl:true})
   }
+
 }

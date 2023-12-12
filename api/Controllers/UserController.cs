@@ -10,15 +10,16 @@ public class UserController : ControllerBase
 {
     private readonly UserService _userService;
     private readonly PasswordService _passwordService;
-    private readonly TokenService _tokenService;
+    private readonly JWTTokenService _jwtTokenService;
 	
 	private readonly BlobService _BlobService;
-    public UserController(UserService userService, PasswordService passwordService, BlobService blobService, TokenService tokenService)
+    public UserController(UserService userService, PasswordService passwordService, BlobService blobService, JWTTokenService jwtTokenService)
     {
         _userService = userService;
         _passwordService = passwordService;
 		_BlobService = blobService;
-        tokenService = _tokenService;
+        _jwtTokenService = jwtTokenService;
+       
 	}
     
 
@@ -129,7 +130,7 @@ public class UserController : ControllerBase
     {
         var user = _passwordService.Authenticate(dto.Email, dto.Password);
         if (user == null) return Unauthorized("Invalid credentials");
-        var token = _tokenService.IssueToken(SessionData.FromUser(user!));
+        var token = _jwtTokenService.IssueToken(SessionData.FromUser(user!));
         return Ok(new { token });
     }
 	
@@ -196,6 +197,8 @@ public class UserController : ControllerBase
             ResponseData = user
         };
     }
+    
+    
     
 
 }
