@@ -20,15 +20,29 @@
         </ion-card>
       </ion-col>
 
+
       <ion-col size-md="6">
         <ion-card>
           <ion-card-header>
             <ion-card-title class="custom-title">Ingredients</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-
             <div *ngFor="let ingredient of ingredients; let i = index">
-              <p class="custom-text">{{ i + 1 }}. {{ ingredient }}
+              <ion-item>
+                <ion-label position="stacked">Quantity:</ion-label>
+                <ion-input [(ngModel)]="ingredient.quantity" placeholder="Enter quantity"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Unit:</ion-label>
+                <ion-select [(ngModel)]="ingredient.unit" placeholder="Select unit">
+                  <ion-select-option value="ml">ml</ion-select-option>
+                  <ion-select-option value="l">l</ion-select-option>
+                  <ion-select-option value="g">g</ion-select-option>
+                  <ion-select-option value="kg">kg</ion-select-option>
+                  <!-- Add more units as needed -->
+                </ion-select>
+              </ion-item>
+              <p class="custom-text">{{ i + 1 }}. {{ ingredient.name }}
                 <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditIngredient(i)" class="edit-icon" />
                 <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteIngredient(i)" class="delete-icon" />
               </p>
@@ -38,34 +52,45 @@
       </ion-col>
     </ion-row>
 
-
     <ion-row>
+      <!-- Add instruction input and button column (similar to the existing one) -->
+
       <ion-col size="12" size-md="6">
         <ion-card style="border-radius: 10px;">
           <ion-card-content>
-
-
             <ion-item>
               <ion-label position="stacked">Add Instruction:</ion-label>
               <ion-input [(ngModel)]="newInstruction" placeholder="Enter instruction" (keyup.enter)="addInstruction()"></ion-input>
             </ion-item>
             <ion-button (click)="addInstruction()" expand="full">Add Instruction</ion-button>
-
           </ion-card-content>
         </ion-card>
       </ion-col>
 
+      <!-- Add ingredient input, quantity, unit fields, and button column -->
+
       <ion-col size="12" size-md="6">
         <ion-card style="border-radius: 10px;">
           <ion-card-content>
-
-
             <ion-item>
               <ion-label position="stacked">Add Ingredient:</ion-label>
-              <ion-input [(ngModel)]="newIngredient" placeholder="Enter ingredient" (keyup.enter)="addIngredient()"></ion-input>
+              <ion-input [(ngModel)]="newIngredient.name" placeholder="Enter ingredient"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Quantity:</ion-label>
+              <ion-input [(ngModel)]="newIngredient.quantity" placeholder="Enter quantity"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Unit:</ion-label>
+              <ion-select [(ngModel)]="newIngredient.unit" placeholder="Select unit">
+                <ion-select-option value="ml">ml</ion-select-option>
+                <ion-select-option value="l">l</ion-select-option>
+                <ion-select-option value="g">g</ion-select-option>
+                <ion-select-option value="kg">kg</ion-select-option>
+                <!-- Add more units as needed -->
+              </ion-select>
             </ion-item>
             <ion-button (click)="addIngredient()" expand="full">Add Ingredient</ion-button>
-
           </ion-card-content>
         </ion-card>
       </ion-col>

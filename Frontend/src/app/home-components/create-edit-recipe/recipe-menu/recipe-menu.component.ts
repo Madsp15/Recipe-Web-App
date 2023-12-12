@@ -4,8 +4,6 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import {firstValueFrom} from "rxjs";
-import {Recipe} from "../../../models";
 import {RecipeService} from "../../../recipe.service";
 import {
   RecipeMenuStepsIngredientsComponent
@@ -35,6 +33,7 @@ export class RecipeMenuComponent  implements OnInit {
   durationInput = new FormControl('', Validators.required);
 
 
+
   formGroup = new FormGroup({
     userId: this.userIdInput,
     title: this.titleInput,
@@ -42,7 +41,8 @@ export class RecipeMenuComponent  implements OnInit {
     instructions: this.instructionsInput,
     recipeURL: this.recipeURLInput,
     servings: this.servingsInput,
-    duration: this.durationInput
+    duration: this.durationInput,
+    selectedTags: new FormControl<string[]>([])
   });
 
   optionalTags: string[] = [];
@@ -50,6 +50,7 @@ export class RecipeMenuComponent  implements OnInit {
   recipeTags: string = '';
 
   ngOnInit() {
+    this.recipeService.setFormGroup(this.formGroup);
   }
 
 
@@ -84,21 +85,6 @@ export class RecipeMenuComponent  implements OnInit {
       "No file selected"
       return;
     }
-    try {
-      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', this.formGroup.value);
-      const result = await firstValueFrom<Recipe>(call)
-      this.recipeService.recipes.push(result);
-      const toast = await this.toastController.create({
-        color: 'success',
-        duration: 2000,
-        message: "Success"
-      })
-      toast.present();
-    } catch (error: any) {
-      console.log(error);
-    }
-
-    this.router.navigate(['/home/instructions-ingredients'], {replaceUrl: true})
   }
 
   toggleTag(tag: string): void {
@@ -119,6 +105,7 @@ export class RecipeMenuComponent  implements OnInit {
       this.selectedTags.push(newTag);
       this.recipeTags = '';
       console.log('Tags after addition:', this.selectedTags);
+      this.formGroup.get('selectedTags')?.setValue(this.selectedTags);
     }
   }
 
@@ -128,5 +115,13 @@ export class RecipeMenuComponent  implements OnInit {
 
       this.selectedTags.splice(index, 1);
     }
+    this.formGroup.get('selectedTags')?.setValue(this.selectedTags);
   }
-}
+
+  updateDuration() {
+      const inputValue = this.durationInput.value;
+      if (inputValue && inputValue.trim() !== '') {
+        this.durationInput.setValue(`${inputValue} ${this.durationUnit}`);
+      }
+    }
+  }

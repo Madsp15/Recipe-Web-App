@@ -39,10 +39,10 @@
 
             <ion-item>
               <ion-label position="stacked">Duration:</ion-label>
-              <ion-input type="text" [formControl]="durationInput" placeholder="Enter duration"></ion-input>
+              <ion-input type="text" [formControl]="durationInput" [placeholder]="'Enter duration in ' + durationUnit"></ion-input>
 
-              <!-- Place the select outside the ion-item to display them horizontally -->
-              <ion-select [(ngModel)]="durationUnit" placeholder="Select Unit">
+
+              <ion-select [(ngModel)]="durationUnit" (ionChange)="updateDuration()">
                 <ion-select-option value="minutes">Minutes</ion-select-option>
                 <ion-select-option value="hours">Hours</ion-select-option>
               </ion-select>

@@ -13,13 +13,35 @@ public class TagsService
     }
     public Tag CheckTag(Tag tag)
     {
-        if (CheckIfTagExists(tag.tagName))
+        if (CheckIfTagExists(tag.TagName))
         {
-            return GetTagByName(tag.tagName);
+            return GetTagByName(tag.TagName);
         }
-        return CreateTag(tag);
-        
+        else return CreateTag(tag);
     }
+
+    public List<int> GetTagIds(List<string> tags)
+    {
+        List<int> tagIds = new List<int>();
+
+        foreach (string tag in tags)
+        {
+            Tag existingTag = GetTagByName(tag);
+            if (existingTag != null)
+            {
+                tagIds.Add(existingTag.TagId);
+            }
+
+            else
+            {
+                Tag newTag = CreateTag(new Tag { TagName = tag });
+                tagIds.Add(newTag.TagId);
+            }
+        }
+
+        return tagIds;
+    }
+
     public Tag CreateTag(Tag tag)
     {
         return _repository.CreateTag(tag);
@@ -46,9 +68,9 @@ public class TagsService
         return _repository.GetTagsByRecipeId(recipeId);
     }
     
-    public bool AddTagToRecipe(int recipeId, int tagId)
+    public bool AddTagsToRecipe(int recipeId, List<int> tagIds)
     {
-        return _repository.AddTagToRecipe(recipeId, tagId);
+        return _repository.AddTagsToRecipe(recipeId, tagIds);
     }
     public Tag GetTagById(int id)
     {

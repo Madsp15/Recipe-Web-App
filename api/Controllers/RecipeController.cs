@@ -1,5 +1,6 @@
 ﻿using infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Recipe_Web_App.TransferModels;
 using service;
 
 
@@ -9,18 +10,33 @@ public class RecipeController : ControllerBase
 {
     private readonly RecipeService _service;
     private readonly BlobService _BlobService;
-    public RecipeController(RecipeService service, BlobService blobService)
+    private readonly TagsService _tagService;
+    public RecipeController(RecipeService service, BlobService blobService, TagsService tagsService)
     {
         _service = service;
         _BlobService = blobService;
+        _tagService = tagsService;
     }
 
     [Route("api/recipes")]
     [HttpPost]
-    public Recipe CreateRecipe([FromBody] Recipe recipe)
+    public Recipe CreateRecipe([FromBody] RecipeDto recipeDto)
     {
-        return _service.CreateRecipe(recipe);
+        Recipe createdRecipe = new Recipe
+        {
+            Title = recipeDto.Title,
+            UserId = recipeDto.UserId,
+            Description = recipeDto.Description,
+            Servings = recipeDto.Servings,
+            Duration = recipeDto.Duration
+        };
+        var recipe = _service.CreateRecipe(createdRecipe);
+        
+        _tagService.AddTagsToRecipe(recipe.RecipeId, _tagService.GetTagIds(recipeDto.SelectedTags));
+
+        return recipe;
     }
+    
     [Route("api/recipes/{id}")]
     [HttpDelete]
     public bool DeleteRecipe(int id)
