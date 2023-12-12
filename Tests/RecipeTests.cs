@@ -23,7 +23,8 @@ public class RecipeTests
             Description = "Test Description",
             UserId = 2,
             Instuctions = "Test Instructions",
-            Notes = "Test Notes",
+            Duration = "Test Duration",
+            Servings = 2,
             RecipeURL = "Test Recipe URL",
                 
         };
@@ -43,7 +44,8 @@ public class RecipeTests
             Description = "Test Description",
             UserId = 2,
             Instuctions = "Test Instructions",
-            Notes = "Test Notes",
+            Duration = "Test Duration",
+            Servings = 2,
             RecipeURL = "Test Recipe URL",
                 
         };

@@ -1,0 +1,15 @@
+.user-recipe{
+  width: 70%;
+}
+
+.ion-text-top{
+  font-size: 20px;
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
+:host ::ng-deep app-user-recipe {
+  width: 70%; /* Adjust the width as needed */
+  /* Add any other styles as needed */
+}
+

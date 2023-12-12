@@ -1,16 +1,18 @@
 <ion-header>
-  <!-- Profile Header -->
   <ion-toolbar full>
     <ion-avatar slot="start">
       <ion-img src="https://jooinn.com/images/dog-67.jpg"></ion-img>
     </ion-avatar>
     <ion-title>
-      <!-- Username and info -->
-      <h3>John Smith</h3>
-      <p>Hi, I'm John and my favorite food is lasagna. Follow for follow!</p>
+      <h3>
+        John Smith
+        <!-- Use an img tag for the custom pen icon -->
+        <img src="https://icons.iconarchive.com/icons/designcontest/vintage/256/Ink-Pen-2-icon.png" (click)="clickEdit()" style="width: 20px; height: 20px; cursor: pointer; margin-left: 5px;" />
+      </h3>
+      <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" placeholder="Edit description" (keyup.enter)="saveChanges()"></ion-input>
+      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ description }}</p>
     </ion-title>
     <ion-buttons slot="end">
-      <!-- Display the number of recipes, followers, and following -->
       <ion-button>
         <ion-label>Recipes</ion-label>
         <ion-badge>10</ion-badge>
@@ -30,4 +32,5 @@
 <ion-content>
   <app-user-recipe></app-user-recipe>
 </ion-content>
+
 

@@ -1,10 +1,18 @@
+:host {
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .recipe-card {
   display: flex;
   align-items: center;
-  background-color: #FCDCCE;
+  background-color: #ccd5ae;
   width: 100%;
   max-width: 1400px;
   transition: background-color 0.3s ease;
+  margin-top: 50px;
+  margin-left: 30px;
 }
 
 .recipe-image {
@@ -36,6 +44,7 @@
   font-size: 50px;
   font-weight: bold;
   text-align: center;
+  color: #432818;
 }
 
 .recipe-title:hover {
@@ -46,7 +55,7 @@
 .subtitle-line {
   margin-bottom: 8px;
   text-align: center;
-  color: black;
+  color: #432818;
 }
 
 .description {
@@ -55,5 +64,5 @@
 }
 
 ion-card-subtitle{
-  color: black;
+  color: #432818;
 }

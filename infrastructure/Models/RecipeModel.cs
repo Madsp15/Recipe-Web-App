@@ -9,6 +9,7 @@ public class Recipe
     public string Instuctions { get; set; }
     public string? RecipeURL { get; set; }
     public string DateCreated { get; set; }
-    public string? Notes { get; set; }
+    public string? Duration { get; set; }
+    public int Servings { get; set; }
 
 }

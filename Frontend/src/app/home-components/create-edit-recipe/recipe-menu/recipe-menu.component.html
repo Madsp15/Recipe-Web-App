@@ -1,0 +1,99 @@
+<ion-content>
+
+  <div class="ion-text-top">
+    <h1>Create new Recipe</h1>
+  </div>
+
+    <ion-row>
+      <ion-col size-md="6">
+        <ion-card>
+          <ion-card-content>
+            <ion-img [src]="foodPicture"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col size-md="6">
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="stacked">Upload Image:</ion-label>
+              <input type="file" accept="image/png, image/jpeg" (change)="handleImageChange($event)">
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Recipe Name:</ion-label>
+              <ion-input id="title" [formControl]="titleInput" placeholder="Enter recipe name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Write a short description of your recipe:</ion-label>
+              <ion-textarea id="description" [formControl]="descriptionInput" placeholder="Enter description" rows="5"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Servings:</ion-label>
+              <ion-input type="number" [formControl]="servingsInput" placeholder="Enter servings"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Duration:</ion-label>
+              <ion-input type="text" [formControl]="durationInput" [placeholder]="'Enter duration in ' + durationUnit"></ion-input>
+
+
+              <ion-select [(ngModel)]="durationUnit" (ionChange)="updateDuration()">
+                <ion-select-option value="minutes">Minutes</ion-select-option>
+                <ion-select-option value="hours">Hours</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  <div class="ion-text-top">
+    <h1>Add tags</h1>
+  </div>
+
+    <ion-row>
+      <ion-col size-md="12">
+        <ion-card>
+          <ion-card-content>
+            <ion-label class="text-tag">Select Tags:</ion-label>
+
+
+            <div class="optional-tags-container">
+              <ion-button *ngFor="let tag of optionalTags" (click)="toggleTag(tag)" [class.selected]="selectedTags.includes(tag)">
+                {{ tag }}
+              </ion-button>
+            </div>
+
+
+            <ion-item style="margin-top: 10px;">
+              <ion-label position="stacked">Add Tags:</ion-label>
+              <ion-input placeholder="Enter tags" [(ngModel)]="recipeTags" (keyup.enter)="addTag()"></ion-input>
+            </ion-item>
+
+
+            <div class="selected-tags" style="display: flex; gap: 10px; margin-top: 10px;">
+              <ion-label>Selected Tags:</ion-label>
+              <ion-chip *ngFor="let tag of selectedTags" (click)="deleteTag(tag)">
+                {{ tag }}
+                <ion-icon (click)="deleteTag(tag)"></ion-icon>
+              </ion-chip>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  <div class="ion-text-top">
+    <h1>Add instructions and ingredients</h1>
+  </div>
+
+  <app-recipe-menu-steps-ingredients></app-recipe-menu-steps-ingredients>
+
+</ion-content>
+

@@ -33,7 +33,7 @@ public static class DataConnection
                 Uri.UserInfo.Split(':')[1],
                 Uri.Port > 0 ? Uri.Port : 5432);
             DataSource =
-                new NpgsqlDataSourceBuilder(ProperlyFormattedConnectionString).Build();
+                new NpgsqlDataSourceBuilder(ProperlyFormattedConnectionString).EnableParameterLogging().Build();
             DataSource.OpenConnection().Close();
 
         }

@@ -1,5 +1,5 @@
 ion-toolbar {
-  --background: #DAEAEF;
+  --background: #ccd5ae;
 }
 .custom-toolbar ion-buttons[slot="start"] {
   margin-right: 100px;
@@ -41,6 +41,10 @@ ion-button:hover::after {
 
 .custom-toolbar ion-button {
   margin-left: 10px;
+}
+
+ion-button.active {
+  border-bottom: 1px solid black;
 }
 
 
