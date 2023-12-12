@@ -20,7 +20,7 @@ export class SideMenuComponent  implements OnInit {
   }
 
   clickCreateRecipe() {
-    this.router.navigate(['home/create-recipe'], {replaceUrl:true});
+    this.router.navigate(['/home/create-recipe'], {replaceUrl:true});
   }
 
   clickMyRecipes() {
@@ -32,10 +32,6 @@ export class SideMenuComponent  implements OnInit {
   }
 
   clickLogOut() {
-
-  }
-
-  clickDraft() {
 
   }
 }

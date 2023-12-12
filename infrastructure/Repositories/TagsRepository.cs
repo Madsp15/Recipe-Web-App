@@ -10,15 +10,15 @@ public class TagsRepository
         var sql = $@"INSERT INTO tags(tagname)
                         VALUES(@tagname)
                         RETURNING
-                        tagId as {nameof(Tag.tagId)},
-                        tagname as {nameof(Tag.tagName)};";
+                        tagId as {nameof(Tag.TagId)},
+                        tagname as {nameof(Tag.TagName)};";
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<Tag>(sql, new
             {
-                tagid = tag.tagId,
-                tagname = tag.tagName,
+                tagid = tag.TagId,
+                tagname = tag.TagName,
                 
             });
         }
@@ -41,15 +41,15 @@ public class TagsRepository
                         SET tagname = @tagname
                         WHERE tagId = @tagId
                         RETURNING
-                        tagId as {nameof(Tag.tagId)},
-                        tagname as {nameof(Tag.tagName)};";
+                        tagId as {nameof(Tag.TagId)},
+                        tagname as {nameof(Tag.TagName)};";
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<Tag>(sql, new
             {
-                tagid = tag.tagId,
-                tagname = tag.tagName,
+                tagid = tag.TagId,
+                tagname = tag.TagName,
                 
             });
         }
@@ -57,14 +57,15 @@ public class TagsRepository
     
     public Tag GetTagByName(string name)
     {
-        var sql = $@"SELECT * FROM tags
-                        WHERE tagname = @name;";
-        
+        var sql = $@"SELECT tagid, tagname FROM tags
+                    WHERE tagname = @name;";
+    
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.QueryFirst<Tag>(sql, new { name });
+            return conn.QueryFirstOrDefault<Tag>(sql, new { name });
         }
     }
+
     
     public List<Tag> GetAllTags()
     {
@@ -87,7 +88,7 @@ public class TagsRepository
         }
     }
     
-    public bool AddTagToRecipe(int tagId, int recipeId)
+    /*public bool AddTagToRecipe(int tagId, int recipeId)
     {
         var sql = $@"INSERT INTO recipeTags(tagId, recipeId)
                         VALUES(@tagId, @recipeId);";
@@ -96,7 +97,27 @@ public class TagsRepository
         {
             return conn.Execute(sql, new { tagId, recipeId }) == 1;
         }
-    }  
+    } */
+    
+    public bool AddTagsToRecipe(int recipeId, List<int> tagIds)
+    {
+        var sql = $@"INSERT INTO recipeTags(tagId, recipeId)
+                 VALUES (@tagId, @recipeId);";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            int affectedRows = 0;
+
+            foreach (int tagId in tagIds)
+            {
+                affectedRows += conn.Execute(sql, new { tagId, recipeId });
+            }
+            
+            return affectedRows > 0;
+        }
+    }
+
+    
     public List<Tag> GetTagsByRecipeId(int recipeId)
     {
         var sql = $@"SELECT * FROM tags
@@ -137,10 +158,6 @@ public class TagsRepository
             {
                 return false;
             }
-            
-            
-            
         }
     }
-    
 }

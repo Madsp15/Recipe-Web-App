@@ -19,13 +19,13 @@ public class TagsTest
     {
         Tag tagToAdd = new Tag
         {
-            tagName = "Test Tag",
+            TagName = "Test Tag",
         };
         Tag addedTag = _repository.CreateTag(tagToAdd);
-        Tag retrievedTag = _repository.GetTagById(addedTag.tagId);
+        Tag retrievedTag = _repository.GetTagById(addedTag.TagId);
         
         retrievedTag.Should().BeEquivalentTo(addedTag, "it should be the same");
-        _repository.DeleteTag(retrievedTag.tagId);
+        _repository.DeleteTag(retrievedTag.TagId);
         Assert.Pass("We did it!");
         
     }
@@ -35,13 +35,13 @@ public class TagsTest
     {
         Tag tagToAdd = new Tag
         {
-            tagName = "Test Tag",
+            TagName = "Test Tag",
         };
         Tag addedTag = _repository.CreateTag(tagToAdd);
-        addedTag.tagName = "Updated Test Tag";
+        addedTag.TagName = "Updated Test Tag";
         Tag updatedTag = _repository.UpdateTag(addedTag);
         updatedTag.Should().BeEquivalentTo(addedTag, "it should be the same");
-        _repository.DeleteTag(updatedTag.tagId);
+        _repository.DeleteTag(updatedTag.TagId);
         Assert.Pass("We did it!");
     }
     

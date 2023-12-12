@@ -1,0 +1,13 @@
+ion-toolbar{
+  --background: #FAEDCD;
+}
+
+ion-avatar{
+  margin-left: 20px;
+}
+
+ion-badge{
+  background-color: transparent;
+  color: black;
+}
+

@@ -1,0 +1,82 @@
+<ion-content>
+  <ion-grid>
+
+
+    <ion-row>
+      <ion-col size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="custom-title">Instructions</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <div *ngFor="let instruction of instructions; let i = index">
+              <p class="custom-text">{{ i + 1 }}. {{ instruction }}
+                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditInstruction(i)" class="edit-icon" />
+                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteInstruction(i)" class="delete-icon" />
+              </p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="custom-title">Ingredients</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <div *ngFor="let ingredient of ingredients; let i = index">
+              <p class="custom-text">{{ i + 1 }}. {{ ingredient }}
+                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditIngredient(i)" class="edit-icon" />
+                <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteIngredient(i)" class="delete-icon" />
+              </p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card style="border-radius: 10px;">
+          <ion-card-content>
+
+
+            <ion-item>
+              <ion-label position="stacked">Add Instruction:</ion-label>
+              <ion-input [(ngModel)]="newInstruction" placeholder="Enter instruction" (keyup.enter)="addInstruction()"></ion-input>
+            </ion-item>
+            <ion-button (click)="addInstruction()" expand="full">Add Instruction</ion-button>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <ion-card style="border-radius: 10px;">
+          <ion-card-content>
+
+
+            <ion-item>
+              <ion-label position="stacked">Add Ingredient:</ion-label>
+              <ion-input [(ngModel)]="newIngredient" placeholder="Enter ingredient" (keyup.enter)="addIngredient()"></ion-input>
+            </ion-item>
+            <ion-button (click)="addIngredient()" expand="full">Add Ingredient</ion-button>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="button-container">
+    <ion-button (click)="clickNext()">Save Recipe</ion-button>
+    <ion-button (click)="clickCancel()">Cancel</ion-button>
+  </div>
+
+</ion-content>
+
+

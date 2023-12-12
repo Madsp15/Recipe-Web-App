@@ -15,6 +15,10 @@ export class ToolbarComponent  implements OnInit {
 
   constructor(private router : Router) {}
 
+  isRouteActive(route: string): boolean {
+    return this.router.isActive(route, true);
+  }
+
   clickMenu() {
   }
 

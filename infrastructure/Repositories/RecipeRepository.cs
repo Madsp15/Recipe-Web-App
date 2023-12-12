@@ -8,8 +8,8 @@ public class RecipeRepository
     public Recipe CreateRecipe(Recipe recipe)
     {
     recipe.DateCreated = date;
-        var sql = $@"INSERT INTO recipes(userid, title, description, instructions, recipeurl, datecreated, notes)
-                        VALUES(@userId, @title, @description, @instructions, @recipeURL, @dateCreated, @notes)
+        var sql = $@"INSERT INTO recipes(userid, title, description, instructions, recipeurl, datecreated, duration, servings)
+                        VALUES(@userId, @title, @description, @instructions, @recipeURL, @dateCreated, @duration, @servings)
                         RETURNING
                         RecipeId as {nameof(Recipe.RecipeId)},
                         UserId as {nameof(Recipe.UserId)},
@@ -18,7 +18,8 @@ public class RecipeRepository
                         instructions as {nameof(Recipe.Instuctions)},
                         RecipeURL as {nameof(Recipe.RecipeURL)},
                         DateCreated as {nameof(Recipe.DateCreated)},
-                        Notes as {nameof(Recipe.Notes)};";
+                        Duration as {nameof(Recipe.Duration)},
+                        Servings as {nameof(Recipe.Servings)};";
 
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
@@ -31,7 +32,8 @@ public class RecipeRepository
                 instructions = recipe.Instuctions,
                 recipeURL = recipe.RecipeURL,
                 dateCreated = recipe.DateCreated,
-                notes = recipe.Notes
+                duration = recipe.Duration,
+                servings = recipe.Servings
             });
         }
     }
@@ -61,7 +63,7 @@ public class RecipeRepository
          recipe.DateCreated = date;
           using (var conn = DataConnection.DataSource.OpenConnection())
           {
-                var sql = $@"UPDATE recipes SET title = @title, description = @description, instructions = @instructions, recipeurl = @recipeURL, datecreated = @dateCreated, notes = @notes
+                var sql = $@"UPDATE recipes SET title = @title, description = @description, instructions = @instructions, recipeurl = @recipeURL, datecreated = @dateCreated, duration = @duration, servings = @servings 
                             WHERE recipeId = @id
                             RETURNING
                             RecipeId as {nameof(Recipe.RecipeId)},
@@ -71,7 +73,8 @@ public class RecipeRepository
                             Instructions as {nameof(Recipe.Instuctions)},
                             RecipeURL as {nameof(Recipe.RecipeURL)},
                             DateCreated as {nameof(Recipe.DateCreated)},
-                            Notes as {nameof(Recipe.Notes)};";
+                            Servings as {nameof(Recipe.Servings)}
+                            Duration as {nameof(Recipe.Duration)};";
                 return conn.QueryFirst<Recipe>(sql, new
                 {
                  id = recipe.RecipeId,
@@ -80,7 +83,8 @@ public class RecipeRepository
                  instructions = recipe.Instuctions,
                  recipeURL = recipe.RecipeURL,
                  dateCreated = recipe.DateCreated,
-                 notes = recipe.Notes
+                 duration = recipe.Duration,
+                 servings = recipe.Servings
                 });
           }
      }
@@ -99,7 +103,7 @@ public class RecipeRepository
     public Recipe GetRecipeById(int recipeId)
     {
       //since intructions is TEXT in the database, we needed to convert the data type to string by getting it as a reader
-        var sql = $@"SELECT recipeid, userid, title, description, CAST(instructions AS TEXT) AS instructions, recipeurl, datecreated, notes
+        var sql = $@"SELECT recipeid, userid, title, description, CAST(instructions AS TEXT) AS instructions, recipeurl, datecreated, duration, servings
                 FROM recipes
                 WHERE recipeId = @id;";
 
@@ -118,7 +122,8 @@ public class RecipeRepository
                     Instuctions  = reader.GetString(reader.GetOrdinal("instructions")),
                     RecipeURL = reader.GetString(reader.GetOrdinal("recipeurl")),
                     DateCreated = reader.GetString(reader.GetOrdinal("datecreated")),
-                    Notes = reader.GetString(reader.GetOrdinal("notes"))
+                    Duration = reader.GetString(reader.GetOrdinal("duration")),
+                    Servings = reader.GetInt32(reader.GetOrdinal("servings"))
                 };
 
                 return recipe;
