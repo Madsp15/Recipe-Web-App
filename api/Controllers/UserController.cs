@@ -188,14 +188,12 @@ public class UserController : ControllerBase
     [RequireAuthentication]
     [HttpGet]
     [Route("/api/users/whoami")]
-    public ResponseDto WhoAmI()
+    public User WhoAmI()
     {
         var data = HttpContext.GetSessionData();
+        Console.WriteLine(data);
         var user = _userService.GetUser(data.UserId);
-        return new ResponseDto
-        {
-            ResponseData = user
-        };
+        return user;
     }
     
     

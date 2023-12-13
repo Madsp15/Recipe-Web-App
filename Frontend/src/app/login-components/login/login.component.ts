@@ -5,8 +5,9 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TokenService} from "../../../services/token.service";
 import {firstValueFrom} from "rxjs";
-import {AccountService, Credentials} from "../../../services/account service";
+import {AccountService} from "../../../services/account service";
 import {HttpClientModule} from "@angular/common/http";
+import {Credentials} from "../../models";
 
 
 @Component({
@@ -44,7 +45,7 @@ export class LoginComponent {
       const {token} = await firstValueFrom(this.account.login(this.form.value as Credentials));
       this.token.setToken(token);
 
-      this.router.navigate(['http://localhost:4200/home/profile'], {replaceUrl:true});
+      this.router.navigate(['/home/profile'], {replaceUrl:true});
 
       await (await this.toast.create({
         message: "Welcome",

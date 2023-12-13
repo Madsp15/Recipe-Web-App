@@ -1,16 +1,17 @@
 <ion-header>
   <ion-toolbar full>
     <ion-avatar slot="start">
-      <ion-img src="https://jooinn.com/images/dog-67.jpg"></ion-img>
+      <ion-img src="{{ avatarUrl }}"></ion-img>
     </ion-avatar>
     <ion-title>
       <h3>
-        John Smith
+        Welcome back {{ username }} did you know your email is {{ email }} ?
         <!-- Use an img tag for the custom pen icon -->
-        <img src="https://icons.iconarchive.com/icons/designcontest/vintage/256/Ink-Pen-2-icon.png" (click)="clickEdit()" style="width: 20px; height: 20px; cursor: pointer; margin-left: 5px;" />
       </h3>
       <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" placeholder="Edit description" (keyup.enter)="saveChanges()"></ion-input>
-      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ description }}</p>
+      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ moreInfo }}
+        <img src="https://icons.iconarchive.com/icons/designcontest/vintage/256/Ink-Pen-2-icon.png" (click)="clickEdit()" style="width: 20px; height: 20px; cursor: pointer; margin-left: 5px;" />
+
     </ion-title>
     <ion-buttons slot="end">
       <ion-button>

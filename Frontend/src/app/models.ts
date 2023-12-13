@@ -1,10 +1,3 @@
-export interface User {
-  userid?: number;
-  username?: string;
-  email?: string;
-  type?: string;
-  moreinfo?: string;
-}
 
 export interface Recipe {
   recipeid?: number;
@@ -14,4 +7,31 @@ export interface Recipe {
   intructions?: string;
   duration?: string;
   servings?: number;
+}
+
+export interface Credentials {
+  email: string;
+  password: string;
+}
+
+export interface User {
+  userId: number;
+  userName: string;
+  email: string;
+  userAvatarUrl: string | null;
+  isAdmin: boolean;
+  moreInfo: string;
+}
+
+
+export interface Registration {
+  username: string;
+  email: String;
+  password: string;
+}
+
+export interface AccountUpdate {
+  username: string;
+  email: string;
+  avatar: File | null;
 }

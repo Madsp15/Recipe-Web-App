@@ -1,31 +1,9 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AccountUpdate, Credentials, Registration, User} from "../app/models";
 
 
-export interface Credentials {
-  email: string;
-  password: string;
-}
 
-export interface User {
-  userid: number;
-  username: string;
-  email: string;
-  avatarUrl: string | null;
-  isAdmin: boolean;
-}
-
-export interface Registration {
-  username: string;
-  email: String;
-  password: string;
-}
-
-export interface AccountUpdate {
-  username: string;
-  email: string;
-  avatar: File | null;
-}
 
 @Injectable({providedIn: "root"})
 export class AccountService {
@@ -33,7 +11,12 @@ export class AccountService {
   }
 
   getCurrentUser() {
-    return this.http.get<User>('/api/users/whoami');
+    let token = sessionStorage.getItem('token')
+    console.log(token)
+    let headers = new HttpHeaders( {
+      authorization: 'Bearer '+sessionStorage.getItem('token')!
+    })
+    return this.http.get<User>('http://localhost:5280/api/users/whoami', {headers: headers})
   }
 
   login(value: Credentials) {
