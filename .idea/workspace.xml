@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="a0773c2d-e48b-4da0-aec7-caecc25113ad" name="Changes" comment="Initial commit" />
+
+    <list default="true" id="a0773c2d-e48b-4da0-aec7-caecc25113ad" name="Changes" comment="Initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-menu/recipe-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-menu/recipe-menu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-menu/recipe-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-menu/recipe-menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/RecipeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/RecipeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/Properties/launchSettings.json" afterDir="false" />
+
+
+    </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +46,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -47,6 +62,22 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\madsp\\Documents\\Git stuff\\Recipe-Web-App\\Frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "login-frontend",
+    "last_opened_file_path": "C:/Users/nhi_t/OneDrive/Dokumenter/GitHub/Recipe-Web-App",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\nhi_t\\Documents\\GitHub\\Recipe-Web-App\\Frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+
   }
 }</component>
   <component name="RunManager" selected="HTTP Request.generated-requests | #1">
@@ -72,10 +103,17 @@
       <option name="presentableId" value="Default" />
       <updated>1701432744743</updated>
       <workItem from="1701432745593" duration="746000" />
+
       <workItem from="1701864908284" duration="5438000" />
       <workItem from="1701870428844" duration="4807000" />
+
       <workItem from="1702459304666" duration="2536000" />
       <workItem from="1702465431244" duration="12000" />
+
+      <workItem from="1701943487537" duration="47000" />
+      <workItem from="1701943544157" duration="169000" />
+      <workItem from="1701943731083" duration="798000" />
+
     </task>
     <servers />
   </component>
