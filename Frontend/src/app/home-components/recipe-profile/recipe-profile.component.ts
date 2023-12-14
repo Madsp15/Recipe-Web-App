@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {UserRecipeComponent} from "../user-recipe/user-recipe.component";
 import {Router} from "@angular/router";
-import {TokenService} from "../../../services/token.service";
 import {IonicModule, ToastController} from "@ionic/angular";import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {User} from "../../models";
+import {Recipe, User} from "../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../services/account service";
+import {RecipeService} from "../../recipe.service";
 
 @Component({
   selector: 'app-recipe-profile',
@@ -19,9 +18,11 @@ import {AccountService} from "../../../services/account service";
 })
 
 export class RecipeProfileComponent implements OnInit {
-  constructor(private router : Router,
+  constructor(
               private toast: ToastController,
-              private account: AccountService,) {}
+              private account: AccountService,
+              public recipeService: RecipeService,
+              private http : HttpClient) {}
 
 
 
@@ -32,7 +33,6 @@ export class RecipeProfileComponent implements OnInit {
   email: string = '';
   avatarUrl: string | null = '';
   amountOfRecipes: string = '0';
-
 
 
   async ngOnInit(){
@@ -82,8 +82,9 @@ export class RecipeProfileComponent implements OnInit {
   }
 
   async fetchRecipes() {
-    var recipes = await firstValueFrom(await this.account.getUserRecipes());
-    this.amountOfRecipes = recipes.length;
-    console.log(recipes);
+    var user:User = await firstValueFrom(this.account.getCurrentUser());
+    const data = this.http.get<Recipe[]>("http://localhost:5280/api/recipes/"+ user.userId)
+    this.recipeService.recipes = await firstValueFrom<Recipe[]>(data);
+    console.log(this.recipeService.recipes);
   }
 }

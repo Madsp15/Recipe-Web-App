@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { Credentials, Registration, User} from "../app/models";
+import {Credentials, Recipe, Registration, User} from "../app/models";
 import {firstValueFrom} from "rxjs";
 
 
@@ -40,11 +40,4 @@ export class AccountService {
     return this.http.put<User>('http://localhost:5280/api/users/' + user.userId + '/avatar', formData, {
     });
   }
-  async getUserRecipes() {
-    var user:User = await firstValueFrom(this.getCurrentUser());
-    return this.http.get<any>('http://localhost:5280/api/recipes/' + user.userId, {
-    });
-  }
-
-
 }
