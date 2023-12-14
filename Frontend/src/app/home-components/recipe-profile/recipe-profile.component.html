@@ -1,22 +1,21 @@
 <ion-header>
   <ion-toolbar full>
     <ion-avatar slot="start">
-      <ion-img src="{{ avatarUrl }}"></ion-img>
+      <ion-img src="{{ avatarUrl }}" (click)="fileSelector.click()"></ion-img>
+      <input type="file" #fileSelector id="file-selector" style="display:none" (change)="onFileSelected($event)" accept="image/png, image/jpeg"/>
     </ion-avatar>
     <ion-title>
       <h3>
         Welcome back {{ username }} did you know your email is {{ email }} ?
         <!-- Use an img tag for the custom pen icon -->
       </h3>
-      <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" placeholder="Edit description" (keyup.enter)="saveChanges()"></ion-input>
-      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ moreInfo }}
-        <img src="https://icons.iconarchive.com/icons/designcontest/vintage/256/Ink-Pen-2-icon.png" (click)="clickEdit()" style="width: 20px; height: 20px; cursor: pointer; margin-left: 5px;" />
-
+      <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" (keyup.enter)="saveChanges()"></ion-input>
+      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ moreInfo }} </p>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button>
         <ion-label>Recipes</ion-label>
-        <ion-badge>10</ion-badge>
+        <ion-badge>{{ amountOfRecipes}}</ion-badge>
       </ion-button>
       <ion-button>
         <ion-label>Followers</ion-label>

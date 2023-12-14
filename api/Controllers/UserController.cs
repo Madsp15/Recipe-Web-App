@@ -31,6 +31,7 @@ public class UserController : ControllerBase
         {
             UserName = dto.Username,
             Email = dto.Email,
+            MoreInfo = ""
         };
         
         var user = _userService.CreateUser(createdUser);
@@ -136,7 +137,7 @@ public class UserController : ControllerBase
 	
     
     [HttpPut]
-    [Route("/api/users/{userId}/avatar")]
+    [Route("/api/users/{userId}/avatar/")]
     public IActionResult UploadAvatar([FromRoute] int userId, IFormFile? avatar)
     {
         if (avatar == null)
@@ -195,6 +196,7 @@ public class UserController : ControllerBase
         var user = _userService.GetUser(data.UserId);
         return user;
     }
+    
     
     
     

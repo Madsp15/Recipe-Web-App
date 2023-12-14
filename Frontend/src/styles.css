@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.mytoast {
+
+}
+
+
+.toast-container {
+  background-color: black  !important;
+}

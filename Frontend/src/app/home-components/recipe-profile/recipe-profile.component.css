@@ -4,10 +4,22 @@ ion-toolbar{
 
 ion-avatar{
   margin-left: 20px;
+  cursor: pointer;
 }
 
 ion-badge{
   background-color: transparent;
   color: black;
+}
+iontoast {
+  .toast-message {
+    --background: #ff0000 !important;
+    --color:black !important;
+  }
+  .toast-container  {
+    --background: #ff0000 !important;
+    --color:black !important;
+  }
+
 }
 

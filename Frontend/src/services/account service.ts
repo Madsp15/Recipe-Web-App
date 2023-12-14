@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AccountUpdate, Credentials, Registration, User} from "../app/models";
+import { Credentials, Registration, User} from "../app/models";
+import {firstValueFrom} from "rxjs";
 
 
 
@@ -11,8 +12,6 @@ export class AccountService {
   }
 
   getCurrentUser() {
-    let token = sessionStorage.getItem('token')
-    console.log(token)
     let headers = new HttpHeaders( {
       authorization: 'Bearer '+sessionStorage.getItem('token')!
     })
@@ -24,17 +23,28 @@ export class AccountService {
   }
 
   register(value: Registration) {
-    return this.http.post<any>('/api/users', value);
+    return this.http.post<any>('http://localhost:5280/api/users', value);
   }
 
-  update(value: AccountUpdate) {
-    const formData = new FormData();
-    Object.entries(value).forEach(([key, value]) =>
-      formData.append(key, value)
-    );
-    return this.http.put<User>('/api/users/'+ "id" + formData, {
-      reportProgress: true,
-      observe: 'events'
+  async update(value: User) {
+    return this.http.put<User>('http://localhost:5280/api/users/'+value.userId, value, {
     });
   }
+  async updateAvatar(value: File) {
+
+    var user:User = await firstValueFrom(this.getCurrentUser());
+
+    const formData = new FormData();
+    formData.append('avatar', value);
+
+    return this.http.put<User>('http://localhost:5280/api/users/' + user.userId + '/avatar', formData, {
+    });
+  }
+  async getUserRecipes() {
+    var user:User = await firstValueFrom(this.getCurrentUser());
+    return this.http.get<any>('http://localhost:5280/api/recipes/' + user.userId, {
+    });
+  }
+
+
 }

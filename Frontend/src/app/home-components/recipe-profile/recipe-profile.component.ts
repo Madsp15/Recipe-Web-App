@@ -19,19 +19,20 @@ import {AccountService} from "../../../services/account service";
 })
 
 export class RecipeProfileComponent implements OnInit {
-  constructor(private router : Router, private tokenService: TokenService,
-              private readonly http: HttpClient,
-              private token: TokenService,
+  constructor(private router : Router,
+              private toast: ToastController,
               private account: AccountService,) {}
 
 
 
   isEditMode = false;
   moreInfo: string = '';
-  editedDescription: string | null = '';
-  username: string = 'Bob';
+  editedDescription: string = '';
+  username: string = 'User';
   email: string = '';
   avatarUrl: string | null = '';
+  amountOfRecipes: string = '0';
+
 
 
   async ngOnInit(){
@@ -41,18 +42,48 @@ export class RecipeProfileComponent implements OnInit {
     this.username = account.userName;
     this.avatarUrl = account.userAvatarUrl;
     if(account.moreInfo==""){
-      this.moreInfo = "Write a bit about yourself here!"
+      this.moreInfo = "Click here to write a short description about yourself"
     } else this.moreInfo = account.moreInfo;
+
+    await (await this.toast.create({
+      cssClass: 'mytoast',
+      message: "Did you know you can click on your profile picture to change it?",
+      icon: "information-circle-outline",
+      duration: 5000
+    })).present();
+    await this.fetchRecipes();
 
   }
 
-  saveChanges() {
+
+  async saveChanges() {
     this.isEditMode = false;
-    //this.moreInfo = this.editedDescription;
+    this.moreInfo = this.editedDescription;
+
+    var user:User = await firstValueFrom(this.account.getCurrentUser());
+    user.moreInfo = this.editedDescription;
+    console.log(user);
+    const responst = await this.account.update(user);
+    const data = await firstValueFrom(responst);
+
   }
 
   clickEdit() {
     this.isEditMode = true;
     this.editedDescription = this.moreInfo;
+  }
+
+  async onFileSelected($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    const responst= await this.account.updateAvatar(file);
+    const data = await firstValueFrom(responst);
+    location.reload();
+  }
+
+  async fetchRecipes() {
+    var recipes = await firstValueFrom(await this.account.getUserRecipes());
+    this.amountOfRecipes = recipes.length;
+    console.log(recipes);
   }
 }

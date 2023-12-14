@@ -30,8 +30,4 @@ export interface Registration {
   password: string;
 }
 
-export interface AccountUpdate {
-  username: string;
-  email: string;
-  avatar: File | null;
-}
+
