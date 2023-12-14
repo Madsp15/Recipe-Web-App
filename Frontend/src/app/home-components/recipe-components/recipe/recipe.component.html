@@ -1,7 +1,4 @@
-<ion-content>
-
-    <ion-grid>
-
+<ion-content style="margin-bottom: 200px;">
 
         <ion-row>
             <ion-col size="12" size-md="6">
@@ -12,9 +9,11 @@
                     <p class="ion-text-center">
                         Servings: {{recipeService.currentRecipe.servings}}
                     </p>
-                  <p class="ion-text-center">
-                    Description: {{recipeService.currentRecipe.description}}
-                  </p>
+                  <div class="description-container ion-text-center">
+                    <p class="description">
+                      Description: {{recipeService.currentRecipe.description}}
+                    </p>
+                  </div>
                 </ion-title>
             </ion-col>
 
@@ -60,19 +59,15 @@
             </ion-col>
         </ion-row>
 
-      <ion-row>
-        <ion-col size="12">
+      <ion-row style="margin-bottom: 100px">
+        <ion-col size="6">
           <ion-button expand="full" (click)="leaveReview()">LEAVE REVIEW</ion-button>
         </ion-col>
-      </ion-row>
 
-      <ion-row>
-        <ion-col size="12">
+        <ion-col size="6">
           <ion-button expand="full" (click)="goBack()">BACK</ion-button>
         </ion-col>
       </ion-row>
-
-    </ion-grid>
 
 </ion-content>
 

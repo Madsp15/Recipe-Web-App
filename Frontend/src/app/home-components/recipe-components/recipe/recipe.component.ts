@@ -58,10 +58,8 @@ export class RecipeComponent {
       const call = `http://localhost:5280/api/recipes/${id}`;
       const response = await firstValueFrom(this.http.get<any>(call));
 
-      // Parse the main response
       const parsedResponse = JSON.parse(response.instructions);
 
-      // Parse the instructions field
       this.instructions = JSON.parse(parsedResponse.instructions);
 
       console.log('Recipe Instructions:', this.instructions);
