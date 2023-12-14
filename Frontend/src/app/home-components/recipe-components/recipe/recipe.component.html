@@ -1,0 +1,78 @@
+<ion-content>
+
+    <ion-grid>
+
+
+        <ion-row>
+            <ion-col size="12" size-md="6">
+                <ion-title class="ion-text-center ion-padding">
+                    <h1 style="font-size: 2em;">{{recipeService.currentRecipe.title}}</h1>
+                    <p class="ion-text-center">By Author Name</p>
+                    <p class="ion-text-center">Duration: {{recipeService.currentRecipe.duration}}</p>
+                    <p class="ion-text-center">
+                        Servings: {{recipeService.currentRecipe.servings}}
+                    </p>
+                  <p class="ion-text-center">
+                    Description: {{recipeService.currentRecipe.description}}
+                  </p>
+                </ion-title>
+            </ion-col>
+
+
+            <ion-col size="12" size-md="6">
+                <ion-img src="https://zululandobserver.co.za/wp-content/uploads/sites/56/2015/07/Junk-food.jpg"></ion-img>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+            <ion-col size="12" size-md="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Ingredients</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                          <ion-list>
+                            <ion-item *ngFor="let ingredient of ingredients; let i = index">
+                              {{ i + 1 }}. {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredientName }}
+                            </ion-item>
+                          </ion-list>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+
+            <ion-col size="12" size-md="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Instructions</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                          <ion-item *ngFor="let instruction of instructions; let i = index">
+                            {{ i + 1 }}. {{ instruction }}
+                          </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-button expand="full" (click)="leaveReview()">LEAVE REVIEW</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-button expand="full" (click)="goBack()">BACK</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+</ion-content>
+

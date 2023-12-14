@@ -77,7 +77,7 @@ public class IngredientTests
         RecipeIngredient addedRecipeIngredient2 = _repository.CreateRecipeIngredient(recipeIngredientToAdd2);
         RecipeIngredient addedRecipeIngredient3 = _repository.CreateRecipeIngredient(recipeIngredientToAdd3);
         
-        IEnumerable<IngredientsForRecipe> retrievedRecipeIngredients = _repository.GetAllIngredientsFromRecipe(15);
+        IEnumerable<Ingredients> retrievedRecipeIngredients = _repository.GetAllIngredientsFromRecipe(15);
         
         retrievedRecipeIngredients.Should().HaveCount(3);
         _repository.DeleteRecipeIngredient(addedRecipeIngredient.RecipeIngredientId);

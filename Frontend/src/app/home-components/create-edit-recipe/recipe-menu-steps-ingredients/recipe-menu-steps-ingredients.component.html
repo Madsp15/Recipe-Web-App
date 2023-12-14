@@ -1,7 +1,6 @@
 <ion-content>
   <ion-grid>
 
-
     <ion-row>
       <ion-col size-md="6">
         <ion-card>
@@ -9,9 +8,9 @@
             <ion-card-title class="custom-title">Instructions</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-
             <div *ngFor="let instruction of instructions; let i = index">
-              <p class="custom-text">{{ i + 1 }}. {{ instruction }}
+              <p class="custom-text">
+                {{ i + 1 }}. {{ instruction }}
                 <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditInstruction(i)" class="edit-icon" />
                 <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteInstruction(i)" class="delete-icon" />
               </p>
@@ -26,10 +25,10 @@
             <ion-card-title class="custom-title">Ingredients</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-
             <div *ngFor="let ingredient of ingredients; let i = index">
-              <p class="custom-text">{{ i + 1 }}. {{ ingredient }}
-                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditIngredient(i)" class="edit-icon" />
+              <p class="custom-text">
+                {{ i + 1 }}. {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredientName }}
+                <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png" (click)="clickEditIngredient()" class="edit-icon" />
                 <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png" (click)="clickDeleteIngredient(i)" class="delete-icon" />
               </p>
             </div>
@@ -38,19 +37,15 @@
       </ion-col>
     </ion-row>
 
-
     <ion-row>
       <ion-col size="12" size-md="6">
         <ion-card style="border-radius: 10px;">
           <ion-card-content>
-
-
             <ion-item>
               <ion-label position="stacked">Add Instruction:</ion-label>
               <ion-input [(ngModel)]="newInstruction" placeholder="Enter instruction" (keyup.enter)="addInstruction()"></ion-input>
             </ion-item>
             <ion-button (click)="addInstruction()" expand="full">Add Instruction</ion-button>
-
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -58,14 +53,24 @@
       <ion-col size="12" size-md="6">
         <ion-card style="border-radius: 10px;">
           <ion-card-content>
-
-
             <ion-item>
-              <ion-label position="stacked">Add Ingredient:</ion-label>
-              <ion-input [(ngModel)]="newIngredient" placeholder="Enter ingredient" (keyup.enter)="addIngredient()"></ion-input>
+              <ion-label position="stacked">Quantity:</ion-label>
+              <ion-input [(ngModel)]="newIngredient.quantity" type="number" placeholder="Enter quantity"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Unit:</ion-label>
+              <ion-select [(ngModel)]="newIngredient.unit" placeholder="Select unit">
+                <ion-select-option value="kg">kg</ion-select-option>
+                <ion-select-option value="g">g</ion-select-option>
+                <ion-select-option value="lb">lb</ion-select-option>
+
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Ingredient:</ion-label>
+              <ion-input [(ngModel)]="newIngredient.ingredientName" placeholder="Enter ingredient"></ion-input>
             </ion-item>
             <ion-button (click)="addIngredient()" expand="full">Add Ingredient</ion-button>
-
           </ion-card-content>
         </ion-card>
       </ion-col>

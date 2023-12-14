@@ -47,13 +47,42 @@ public class IngredientService
     {
         return _ingredientRepository.GetRecipeIngredientById(id);
     }
-    public IEnumerable<IngredientsForRecipe> GetIngredientsForRecipe(int id)
+    public IEnumerable<Ingredients> GetIngredientsForRecipe(int id)
     {
         return _ingredientRepository.GetAllIngredientsFromRecipe(id);
     }
-    public RecipeIngredient GetRecipeIngredientByIngredientId(int id)
+
+    public void AddIngredientsToRecipe(List<Ingredients> ingredients, int recipeId)
     {
-        return _ingredientRepository.GetRecipeIngredientById(id);
+        foreach (Ingredients ingredient in ingredients)
+        {
+            Ingredient existingIngredient = GetIngredientByName(ingredient.IngredientName);
+
+            if (existingIngredient != null)
+            {
+                RecipeIngredient recipeIngredient = new RecipeIngredient()
+                {
+                    IngredientId = existingIngredient.IngredientId,
+                    Quantity = ingredient.Quantity,
+                    Unit = ingredient.Unit,
+                    RecipeId = recipeId
+                };
+
+                _ingredientRepository.CreateRecipeIngredient(recipeIngredient);
+            }
+            else
+            {
+                Ingredient newIngredient = CreateIngredient(new Ingredient { IngredientName = ingredient.IngredientName });
+                
+                RecipeIngredient recipeIngredient = new RecipeIngredient()
+                {
+                    IngredientId = newIngredient.IngredientId,
+                    Quantity = ingredient.Quantity,
+                    Unit = ingredient.Unit,
+                    RecipeId = recipeId
+                };
+                _ingredientRepository.CreateRecipeIngredient(recipeIngredient);
+            }
+        }
     }
-    
 }

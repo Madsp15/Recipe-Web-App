@@ -8,6 +8,7 @@ import {RecipeService} from "../../../recipe.service";
 import {
   RecipeMenuStepsIngredientsComponent
 } from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
+import {Ingredients} from "../../../models";
 
 
 @Component({
@@ -22,12 +23,14 @@ import {
 })
 export class RecipeMenuComponent  implements OnInit {
   constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController) {
+    this.durationUnit = 'minutes';
   }
 
   userIdInput = new FormControl('21', Validators.required);
   titleInput = new FormControl('', Validators.required);
   descriptionInput = new FormControl('', Validators.required);
   instructionsInput = new FormControl('', Validators.required);
+  ingredientsInput = new FormControl<Ingredients[]>([], Validators.required);
   recipeURLInput = new FormControl('', Validators.required);
   servingsInput = new FormControl('', Validators.required);
   durationInput = new FormControl('', Validators.required);
@@ -39,16 +42,15 @@ export class RecipeMenuComponent  implements OnInit {
     title: this.titleInput,
     description: this.descriptionInput,
     instructions: this.instructionsInput,
+    ingredients: this.ingredientsInput,
     recipeURL: this.recipeURLInput,
     servings: this.servingsInput,
     duration: this.durationInput,
     selectedTags: new FormControl<string[]>([])
   });
 
-  optionalTags: string[] = [];
   selectedTags: string[] = [];
   recipeTags: string = '';
-
   ngOnInit() {
     this.recipeService.setFormGroup(this.formGroup);
   }
@@ -119,9 +121,12 @@ export class RecipeMenuComponent  implements OnInit {
   }
 
   updateDuration() {
-      const inputValue = this.durationInput.value;
-      if (inputValue && inputValue.trim() !== '') {
-        this.durationInput.setValue(`${inputValue} ${this.durationUnit}`);
-      }
-    }
+    const inputValue = this.durationInput.value;
+
+    // Check if the input already contains a unit, and if yes, remove it
+    const inputValueWithoutUnit = inputValue?.replace(/\b(minutes|hours)\b/g, '').trim();
+
+    // Set the updated value with the selected durationUnit
+    this.durationInput.setValue(`${inputValueWithoutUnit} ${this.durationUnit}`);
+  }
   }

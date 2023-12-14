@@ -11,11 +11,13 @@ public class RecipeController : ControllerBase
     private readonly RecipeService _service;
     private readonly BlobService _BlobService;
     private readonly TagsService _tagService;
-    public RecipeController(RecipeService service, BlobService blobService, TagsService tagsService)
+    private readonly IngredientService _ingredientService;
+    public RecipeController(RecipeService service, BlobService blobService, TagsService tagsService, IngredientService ingredientService)
     {
         _service = service;
         _BlobService = blobService;
         _tagService = tagsService;
+        _ingredientService = ingredientService;
     }
 
     [Route("api/recipes")]
@@ -26,6 +28,7 @@ public class RecipeController : ControllerBase
         {
             Title = recipeDto.Title,
             UserId = recipeDto.UserId,
+            Instructions = recipeDto.Instructions,
             Description = recipeDto.Description,
             Servings = recipeDto.Servings,
             Duration = recipeDto.Duration
@@ -33,6 +36,8 @@ public class RecipeController : ControllerBase
         var recipe = _service.CreateRecipe(createdRecipe);
         
         _tagService.AddTagsToRecipe(recipe.RecipeId, _tagService.GetTagIds(recipeDto.SelectedTags));
+        Console.WriteLine("Recipe ingredients: "+recipeDto.Ingredients);
+        _ingredientService.AddIngredientsToRecipe(recipeDto.Ingredients, recipe.RecipeId);
 
         return recipe;
     }
@@ -46,7 +51,7 @@ public class RecipeController : ControllerBase
 
     [Route("api/recipes")]
     [HttpPut]
-    public Recipe updateRecipe([FromBody] Recipe recipe)
+    public Recipe UpdateRecipe([FromBody] Recipe recipe)
     {
         return _service.UpdateRecipe(recipe);
     }

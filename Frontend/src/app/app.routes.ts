@@ -4,16 +4,15 @@ import { LoginPageComponent } from "./login-components/login-page/login-page.com
 import { LoginComponent } from "./login-components/login/login.component";
 import { SignUpComponent } from "./login-components/sign-up/sign-up.component";
 import { ForgotPasswordComponent } from "./login-components/forgot-password/forgot-password.component";
-import {HomePage} from "./home-components/home/home.page";
-import {HomeRecipeComponent} from "./home-components/home-page-components/home-recipe/home-recipe.component";
-import {UserRecipeComponent} from "./home-components/user-recipe/user-recipe.component";
+import {HomePage} from "./home-components/home-page-components/home/home.page";
 import {RecipeProfileComponent} from "./home-components/recipe-profile/recipe-profile.component";
 import {RecipeSearchComponent} from "./home-components/recipe-search/recipe-search.component";
 import {HomeMenuComponent} from "./home-components/home-page-components/home-menu/home-menu.component";
 import {
   RecipeMenuStepsIngredientsComponent
 } from "./home-components/create-edit-recipe/recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
-import {HomeRecipeMenuComponent} from "./home-components/home-recipe-menu/home-recipe-menu.component";
+import {HomeRecipeMenuComponent} from "./home-components/home-page-components/home-recipe-menu/home-recipe-menu.component";
+import {RecipeComponent} from "./home-components/recipe-components/recipe/recipe.component";
 
 export const routes: Routes = [
   { path: 'create-recipe', component: RecipeMenuComponent },
@@ -36,6 +35,7 @@ export const routes: Routes = [
       { path: 'recipes', component: HomeRecipeMenuComponent },
       { path: 'profile', component: RecipeProfileComponent },
       { path: 'search', component: RecipeSearchComponent },
+      { path: 'recipedetails/:recipeid', component: RecipeComponent },
     ]
   },
   {

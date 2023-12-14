@@ -54,16 +54,16 @@ public class IngredientRepository
     
     public Ingredient GetIngredientByName(string name)
     {
-        var sql = $@"SELECT * FROM ingredients
+        var sql = $@"SELECT ingredientid, ingredientname FROM ingredients
                         WHERE ingredientName = @name;";
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.QueryFirst<Ingredient>(sql, new { name });
+            return conn.QueryFirstOrDefault<Ingredient>(sql, new { name });
         }
     }
     
-    public IEnumerable<IngredientsForRecipe> GetAllIngredientsFromRecipe(int recipeId)
+    public IEnumerable<Ingredients> GetAllIngredientsFromRecipe(int recipeId)
     {
         var sql = $@"SELECT * FROM ingredients
                         JOIN recipeingredients ON ingredients.ingredientId = recipeingredients.ingredientId
@@ -71,7 +71,7 @@ public class IngredientRepository
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.Query<IngredientsForRecipe>(sql, new { recipeId });
+            return conn.Query<Ingredients>(sql, new { recipeId });
         }
     }
     
