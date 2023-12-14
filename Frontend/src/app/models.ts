@@ -1,6 +1,7 @@
 
 export interface Recipe {
-  recipeid?: number;
+  recipeId?: number;
+  userId?: number;
   title?: string;
   recipeurl?: string;
   description?: string;
@@ -30,4 +31,9 @@ export interface Registration {
   password: string;
 }
 
+export interface Ingredients{
+  quantity?: number;
+  unit?: string;
+  ingredientName?: string;
+}
 

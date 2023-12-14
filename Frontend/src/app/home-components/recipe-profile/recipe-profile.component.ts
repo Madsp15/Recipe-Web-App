@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {IonicModule, ToastController} from "@ionic/angular";
 import {UserRecipeComponent} from "../user-recipe/user-recipe.component";
 import {Router} from "@angular/router";
 import {TokenService} from "../../../services/token.service";
+import {IonicModule, ToastController} from "@ionic/angular";import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {User} from "../../models";

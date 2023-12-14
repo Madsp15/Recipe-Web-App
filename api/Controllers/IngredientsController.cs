@@ -80,7 +80,7 @@ public class IngredientsController : ControllerBase
     
     [Route("api/recipeingredients/recipe/{id}")]
     [HttpGet]
-    public IEnumerable<IngredientsForRecipe> GetIngredientsForRecipe([FromRoute] int id)
+    public IEnumerable<Ingredients> GetIngredientsForRecipe([FromRoute] int id)
     {
         return _service.GetIngredientsForRecipe(id);
     }

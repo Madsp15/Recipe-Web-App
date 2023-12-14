@@ -11,6 +11,6 @@ public class RecipeDto
     public required int UserId { get; set; }
     public required string Instructions { get; set; }
     public List<string> SelectedTags { get; set; }
-    
-    public List<Ingredient> Ingredients { get; set; }
+
+    public List<Ingredients> Ingredients { get; set; }
 }

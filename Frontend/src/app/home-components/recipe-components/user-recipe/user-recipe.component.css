@@ -25,3 +25,8 @@ ion-card-header ion-item {
 h3{
   font-size: 20px;
 }
+
+.recipeImg:hover{
+  cursor:pointer;
+  transform: scale(1.05);
+}

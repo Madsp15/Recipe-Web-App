@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../recipe.service";
-import {Recipe} from "../../../models";
+import {Ingredients, Recipe} from "../../../models";
 import {firstValueFrom} from "rxjs";
 
 @Component({
@@ -21,10 +21,11 @@ import {firstValueFrom} from "rxjs";
 export class RecipeMenuStepsIngredientsComponent {
 
   instructions: string[] = [];
-  ingredients: string[] = [];
+  ingredients: Ingredients[] = [];
   newInstruction: string = '';
-  newIngredient: string = '';
-  editingIndex: number | null = null;
+  newIngredient = { quantity: 0, unit: '', ingredientName: '' };
+
+
 
   constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController) {
   }
@@ -32,7 +33,6 @@ export class RecipeMenuStepsIngredientsComponent {
   serializeData(): string {
     const serializedData = {
       instructions: JSON.stringify(this.instructions),
-      ingredients: JSON.stringify(this.ingredients)
     };
 
     return JSON.stringify(serializedData);
@@ -42,10 +42,8 @@ export class RecipeMenuStepsIngredientsComponent {
     try {
       const parsedData = JSON.parse(data);
 
-      // Check if the parsed data has the expected properties
-      if (parsedData && parsedData.instructions && parsedData.ingredients) {
+      if (parsedData && parsedData.instructions) {
         this.instructions = JSON.parse(parsedData.instructions);
-        this.ingredients = JSON.parse(parsedData.ingredients);
       } else {
         console.error('Unexpected data format:', parsedData);
       }
@@ -63,21 +61,28 @@ export class RecipeMenuStepsIngredientsComponent {
   }
 
   addIngredient() {
-    if (this.newIngredient.trim() !== '') {
-      this.ingredients = [...this.ingredients, this.newIngredient.trim()];
-      this.newIngredient = '';
-    }
-    console.log(this.ingredients)
+    const newIngredient = { ...this.newIngredient }; // Create a copy of the new ingredient
+    this.ingredients.push(newIngredient); // Add the new ingredient to the array
+    this.newIngredient = { quantity: 0, unit: '', ingredientName: '' }; // Reset for the next entry
   }
+
+
 
   clickCancel() {
 
   }
 
   async clickNext() {
+    const data = this.serializeData();
     console.log(this.recipeService.getFormGroup()?.value)
-    try {
-      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', this.recipeService.getFormGroup()?.getRawValue());
+    const recipeFormGroup = this.recipeService.getFormGroup();
+    recipeFormGroup?.get('instructions')?.setValue(data);
+    recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
+    console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
+
+
+    /*try {
+      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
       const result = await firstValueFrom<Recipe>(call)
       this.recipeService.recipes.push(result);
       const toast = await this.toastController.create({
@@ -88,35 +93,15 @@ export class RecipeMenuStepsIngredientsComponent {
       toast.present();
     } catch (error: any) {
       console.log(error);
-    }
-    const data = this.serializeData();
-    console.log(data);
+    }*/
   }
 
   clickEditInstruction(i: number) {
-    this.editingIndex = i;
-    this.newInstruction = this.instructions[i];
+
   }
 
-  clickEditIngredient(i: number) {
-    this.editingIndex = i;
-    this.newIngredient = this.ingredients[i];
-  }
 
-  clickSaveEditInstruction() {
-    if (this.editingIndex !== null) {
-      this.instructions[this.editingIndex] = this.newInstruction.trim();
-      this.editingIndex = null;
-      this.newInstruction = '';
-    }
-  }
-
-  clickSaveEditIngredient() {
-    if (this.editingIndex !== null) {
-      this.ingredients[this.editingIndex] = this.newIngredient.trim();
-      this.editingIndex = null;
-      this.newIngredient = '';
-    }
+  clickEditIngredient() {
   }
 
   clickDeleteInstruction(index: number) {
