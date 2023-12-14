@@ -81,7 +81,7 @@ export class RecipeMenuStepsIngredientsComponent {
     console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
 
-    /*try {
+    try {
       const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
       const result = await firstValueFrom<Recipe>(call)
       this.recipeService.recipes.push(result);
@@ -93,7 +93,7 @@ export class RecipeMenuStepsIngredientsComponent {
       toast.present();
     } catch (error: any) {
       console.log(error);
-    }*/
+    }
   }
 
   clickEditInstruction(i: number) {
