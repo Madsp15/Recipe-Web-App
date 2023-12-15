@@ -96,6 +96,7 @@ export class RecipeMenuStepsIngredientsComponent {
         message: "Success"
       })
       toast.present();
+      this.router.navigate(['/home'], {replaceUrl:true});
     } catch (error: any) {
       console.log(error);
     }

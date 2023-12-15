@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {LoginComponent} from "../login/login.component";
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +17,7 @@ import {RouterOutlet} from "@angular/router";
 export class LoginPageComponent  implements OnInit {
   showPassword: boolean = false;
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {}
 
@@ -25,8 +25,11 @@ export class LoginPageComponent  implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  clickLogin() {
-
+  clickHome() {
+    this.router.navigate([''], {replaceUrl:true})
+  }
+  isRouteActive(route: string): boolean {
+    return this.router.isActive(route, true);
   }
 
   clickSignUp() {

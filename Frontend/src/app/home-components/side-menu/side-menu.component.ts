@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {TokenService} from "../../../services/token.service";
+import {AccountService} from "../../../services/account service";
+import {User} from "../../models";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-side-menu',
@@ -13,12 +16,24 @@ import {TokenService} from "../../../services/token.service";
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent  implements OnInit {
+  Username: string="";
+  UserPicture: string | null="";
 
 
   constructor(private router : Router, private token: TokenService,
-              private toast: ToastController) {}
+              private toast: ToastController, private account: AccountService ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+      var account:User = await firstValueFrom(this.account.getCurrentUser());
+      this.Username = account.userName;
+      this.UserPicture = account.userAvatarUrl;
+    } catch (e) {
+      this.Username = "";
+      this.UserPicture = "https://placebear.com/300/300";
+    }
+
+
   }
 
   clickCreateRecipe() {

@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      My App Name
+      <ion-button color="dark" (click)="clickHome()" [class.active]="isRouteActive('/home')"></ion-button>  One of the recipe apps of all time!
+      <ion-buttons slot="end"/>
     </ion-title>
+
+
   </ion-toolbar>
 </ion-header>
 
