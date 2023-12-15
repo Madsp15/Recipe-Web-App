@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {firstValueFrom} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {RecipeService} from "../../../recipe.service";
+import {RecipeService} from "../../../../services/recipe.service";
 import {CommonModule} from "@angular/common";
 import {Ingredients} from "../../../models";
 

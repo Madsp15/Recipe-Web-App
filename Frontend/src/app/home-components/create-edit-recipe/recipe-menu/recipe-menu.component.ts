@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import {RecipeService} from "../../../recipe.service";
+import {RecipeService} from "../../../../services/recipe.service";
 import {
   RecipeMenuStepsIngredientsComponent
 } from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
-import {Ingredients} from "../../../models";
+import {Ingredients, User} from "../../../models";
+import {AccountService} from "../../../../services/account service";
+import {firstValueFrom} from "rxjs";
 
 
 @Component({
@@ -22,11 +24,12 @@ import {Ingredients} from "../../../models";
   styleUrls: ['./recipe-menu.component.scss'],
 })
 export class RecipeMenuComponent  implements OnInit {
-  constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController) {
+  constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController, private account: AccountService) {
     this.durationUnit = 'minutes';
   }
 
-  userIdInput = new FormControl('21', Validators.required);
+
+  userIdInput = new FormControl('', Validators.required);
   titleInput = new FormControl('', Validators.required);
   descriptionInput = new FormControl('', Validators.required);
   instructionsInput = new FormControl('', Validators.required);
@@ -51,14 +54,19 @@ export class RecipeMenuComponent  implements OnInit {
 
   selectedTags: string[] = [];
   recipeTags: string = '';
-  ngOnInit() {
+
+  async ngOnInit() {
     this.recipeService.setFormGroup(this.formGroup);
+    var account:User = await firstValueFrom(this.account.getCurrentUser());
+    this.formGroup.get('userId')?.setValue(account.userId.toString());
+    console.log(this.formGroup.get('userId')?.value);
   }
 
 
-  readonly storedIFormFiles: File[] = [];
+
   foodPicture: string = 'https://www.drsearswellnessinstitute.org/wp-content/uploads/2023/06/Nutrition4StagesPregnancy.jpg';
   durationUnit: string = 'minutes';
+
 
   handleImageChange($event: Event) {
     const file = (event?.target as HTMLInputElement)?.files?.[0];
@@ -73,7 +81,9 @@ export class RecipeMenuComponent  implements OnInit {
       const arrayBuffer = reader.result as ArrayBuffer;
       const blob = new Blob([new Uint8Array(arrayBuffer)], {type: file.type});
       const iFormFile = new File([blob], file.name, {type: file.type});
-      this.storedIFormFiles.push(iFormFile);
+      this.recipeService.storedIFormFile.push(iFormFile);
+
+
     };
   }
 
@@ -83,7 +93,7 @@ export class RecipeMenuComponent  implements OnInit {
   }
 
   async clickNext() {
-    if (this.storedIFormFiles.length === 0) {
+    if (this.recipeService.storedIFormFile.length === 0) {
       "No file selected"
       return;
     }
@@ -129,4 +139,5 @@ export class RecipeMenuComponent  implements OnInit {
     // Set the updated value with the selected durationUnit
     this.durationInput.setValue(`${inputValueWithoutUnit} ${this.durationUnit}`);
   }
-  }
+
+}

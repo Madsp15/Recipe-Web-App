@@ -31,12 +31,10 @@ export class AccountService {
     });
   }
   async updateAvatar(value: File) {
-
     var user:User = await firstValueFrom(this.getCurrentUser());
 
     const formData = new FormData();
     formData.append('avatar', value);
-
     return this.http.put<User>('http://localhost:5280/api/users/' + user.userId + '/avatar', formData, {
     });
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Recipe} from "./models";
+import {Recipe} from "../app/models";
 import {FormGroup} from "@angular/forms";
 
 
@@ -8,7 +8,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class RecipeService {
 
-
+  readonly storedIFormFile: File[] = [];
   public recipes: Recipe[] = [];
   public currentRecipe: Recipe = {};
   public formGroup: FormGroup | null = new FormGroup<any>({

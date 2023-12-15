@@ -64,28 +64,35 @@ public class RecipeRepository
          recipe.DateCreated = date;
           using (var conn = DataConnection.DataSource.OpenConnection())
           {
-                var sql = $@"UPDATE recipes SET title = @title, description = @description, instructions = @instructions, recipeurl = @recipeURL, datecreated = @dateCreated, duration = @duration, servings = @servings 
+                var sql = $@"UPDATE recipes
+                            SET title = @title,
+                                description = @description,
+                                instructions = @instructions,
+                                recipeurl = @recipeURL,
+                                datecreated = @dateCreated,
+                                duration = @duration,
+                                servings = @servings
                             WHERE recipeId = @id
                             RETURNING
                             RecipeId as {nameof(Recipe.RecipeId)},
                             UserId as {nameof(Recipe.UserId)},
                             Title as {nameof(Recipe.Title)},
                             Description as {nameof(Recipe.Description)},
-                            Instructions as {nameof(Recipe.Instructions)},
+                            instructions as {nameof(Recipe.Instructions)},
                             RecipeURL as {nameof(Recipe.RecipeURL)},
                             DateCreated as {nameof(Recipe.DateCreated)},
-                            Servings as {nameof(Recipe.Servings)}
-                            Duration as {nameof(Recipe.Duration)};";
+                            Duration as {nameof(Recipe.Duration)},
+                            Servings as {nameof(Recipe.Servings)};";
                 return conn.QueryFirst<Recipe>(sql, new
                 {
-                 id = recipe.RecipeId,
-                 title = recipe.Title,
-                 description = recipe.Description,
-                 instructions = recipe.Instructions,
-                 recipeURL = recipe.RecipeURL,
-                 dateCreated = recipe.DateCreated,
-                 duration = recipe.Duration,
-                 servings = recipe.Servings
+                    id = recipe.RecipeId,
+                    title = recipe.Title,
+                    description = recipe.Description,
+                    instructions = recipe.Instructions,
+                    recipeURL = recipe.RecipeURL,
+                    dateCreated = recipe.DateCreated,
+                    duration = recipe.Duration,
+                    servings = recipe.Servings
                 });
           }
      }

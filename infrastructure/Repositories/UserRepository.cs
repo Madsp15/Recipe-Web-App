@@ -52,28 +52,22 @@ public class UserRepository
             return conn.Execute(sql, new { id = userId }) == 1;
         }
     }
-    
+
     public User UpdateUser(User user)
     {
-        var sql = $@"UPDATE users
-                 SET
-                    username = @username,
-                    isadmin = @isadmin,
-                    Email = @email,
-                    MoreInfo = @moreinfo,
-                    useravatarurl = @useravatarurl
-                 WHERE
-                    userid = @id
-                 RETURNING
-                    userId as {nameof(User.UserId)},
-                    username as {nameof(User.UserName)},
-                    isadmin as {nameof(User.IsAdmin)},
-                    email as {nameof(User.Email)},
-                    moreinfo as {nameof(User.MoreInfo)},
-                    useravatarurl as {nameof(User.UserAvatarUrl)};";
-        
+        Console.WriteLine("User: "+user);
+        var sql = $@"UPDATE users SET username = @username, email = @email, moreinfo = @moreinfo, useravatarurl = @useravatarurl
+                        WHERE userid = @id
+                        RETURNING
+                        userId as {nameof(User.UserId)},
+                        username as {nameof(User.UserName)},
+                        isadmin as {nameof(User.IsAdmin)},
+                        email as {nameof(User.Email)},
+                        moreInfo as {nameof(User.MoreInfo)},
+                        useravatarurl as {nameof(User.UserAvatarUrl)};";
+    
 
-        using (var conn = DataConnection.DataSource.OpenConnection())
+    using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<User>(sql, new
             {

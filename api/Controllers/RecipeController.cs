@@ -29,6 +29,7 @@ public class RecipeController : ControllerBase
             Title = recipeDto.Title,
             UserId = recipeDto.UserId,
             Instructions = recipeDto.Instructions,
+            RecipeURL = recipeDto.RecipeURL,
             Description = recipeDto.Description,
             Servings = recipeDto.Servings,
             Duration = recipeDto.Duration
@@ -82,14 +83,17 @@ public class RecipeController : ControllerBase
     {
         if (picture == null)
         {
-            return BadRequest("No file was uploaded, when you needed the avatar the most he disappeared");
+            return BadRequest("No file was uploaded");
         }
         Recipe recipe = _service.GetRecipeById(id);
         
         if (recipe == null)
         {
-            return NotFound("User not found");
-        } String blobUrl = _BlobService.Save(picture.OpenReadStream(), id); recipe.RecipeURL = blobUrl; _service.UpdateRecipe(recipe);
+            return NotFound("Recipe not found");
+        } 
+        string blobUrl = _BlobService.Save(picture.OpenReadStream(), id); 
+        recipe.RecipeURL = blobUrl;
+        _service.UpdateRecipe(recipe);
         return Ok();
     }
     

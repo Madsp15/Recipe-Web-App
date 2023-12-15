@@ -31,7 +31,7 @@ export const routes: Routes = [
     component: HomePage,
     children: [
       { path: '', component: HomeMenuComponent },
-      { path: 'create-recipe', component: RecipeMenuComponent },
+      { path: 'create-recipe', component: RecipeMenuComponent,canActivate:[AuthenticatedGuard] },
       { path: 'instructions-ingredients', component: RecipeMenuStepsIngredientsComponent },
       { path: 'recipes', component: HomeRecipeMenuComponent },
       { path: 'profile', component: RecipeProfileComponent,canActivate:[AuthenticatedGuard] },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {IonicModule} from "@ionic/angular";
-import {RecipeService} from "../../../recipe.service";
+import {RecipeService} from "../../../../services/recipe.service";
 import {Recipe} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {HttpClient, HttpClientModule} from "@angular/common/http";

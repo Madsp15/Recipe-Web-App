@@ -4,9 +4,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {RecipeService} from "../../../recipe.service";
-import {Ingredients, Recipe} from "../../../models";
+import {RecipeService} from "../../../../services/recipe.service";
+import {Ingredients, Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
+import {RecipeMenuComponent} from "../recipe-menu/recipe-menu.component";
 
 @Component({
   selector: 'app-recipe-menu-steps-ingredients',
@@ -80,11 +81,15 @@ export class RecipeMenuStepsIngredientsComponent {
     recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
     console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
-
     try {
       const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
       const result = await firstValueFrom<Recipe>(call)
       this.recipeService.recipes.push(result);
+
+      if (result.recipeId != null) {
+        const response = await this.uploadPicture(result.recipeId);
+        const data = await firstValueFrom(response);
+      }
       const toast = await this.toastController.create({
         color: 'success',
         duration: 2000,
@@ -111,4 +116,14 @@ export class RecipeMenuStepsIngredientsComponent {
   clickDeleteIngredient(index: number) {
     this.ingredients.splice(index, 1);
   }
+
+  uploadPicture(id: number) {
+
+    const formData = new FormData();
+    formData.append('picture', this.recipeService.storedIFormFile[0]);
+    return this.http.put<Recipe>('http://localhost:5280/api/recipes/picture/'+id, formData,{
+    });
+
+  }
+
 }
