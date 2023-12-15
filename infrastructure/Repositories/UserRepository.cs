@@ -214,5 +214,14 @@ public class UserRepository
             return conn.QueryFirstOrDefault(sql, new { userid = userId }) != null;
         }
     }
+    public bool DeleteSavedRecipeFromUsers(int recipeId)
+    {
+        var sql = $@"DELETE FROM savedposts WHERE recipeid = @recipeid;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { recipeid = recipeId }) == 1;
+        }
+    }
     
 }

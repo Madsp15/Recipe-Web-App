@@ -13,6 +13,7 @@ import {
 } from "./home-components/create-edit-recipe/recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
 import {HomeRecipeMenuComponent} from "./home-components/home-page-components/home-recipe-menu/home-recipe-menu.component";
 import {RecipeComponent} from "./home-components/recipe-components/recipe/recipe.component";
+import {AuthenticatedGuard} from "./Guards";
 
 export const routes: Routes = [
   { path: 'create-recipe', component: RecipeMenuComponent },
@@ -33,7 +34,7 @@ export const routes: Routes = [
       { path: 'create-recipe', component: RecipeMenuComponent },
       { path: 'instructions-ingredients', component: RecipeMenuStepsIngredientsComponent },
       { path: 'recipes', component: HomeRecipeMenuComponent },
-      { path: 'profile', component: RecipeProfileComponent },
+      { path: 'profile', component: RecipeProfileComponent,canActivate:[AuthenticatedGuard] },
       { path: 'search', component: RecipeSearchComponent },
       { path: 'recipedetails/:recipeid', component: RecipeComponent },
     ]

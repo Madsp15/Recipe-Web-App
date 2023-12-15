@@ -167,4 +167,13 @@ public class IngredientRepository
             return conn.Query<Ingredient>(sql, new { search = $"%{search}%" });
         }
     }
+    public bool DeleteIngredientsFromRecipe(int recipeId)
+    {
+        var sql = $@"DELETE FROM recipeingredients WHERE recipeId = @recipeId;";
+        
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { recipeId }) == 1;
+        }
+    }
 }

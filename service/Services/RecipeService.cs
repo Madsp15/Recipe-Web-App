@@ -6,11 +6,21 @@ namespace service;
 public class RecipeService
 {
     private readonly RecipeRepository _repository;
+    private readonly TagsRepository _tagsRepository;
+    private readonly IngredientRepository _ingredientRepository;
+    private readonly ReviewRepository _reviewRepository;
+    private readonly UserRepository _userRepository;
+    
 
-    public RecipeService(RecipeRepository repository)
+    public RecipeService(RecipeRepository repository, TagsRepository tagsRepository, IngredientRepository ingredientRepository, ReviewRepository reviewRepository, UserRepository userRepository)
     {
         _repository = repository;
+        _tagsRepository = tagsRepository;
+        _ingredientRepository = ingredientRepository;
+        _reviewRepository = reviewRepository;
+        _userRepository = userRepository;
     }
+   
     
     public Recipe CreateRecipe(Recipe recipe)
     {
@@ -19,6 +29,11 @@ public class RecipeService
     
     public bool DeleteRecipe(int id)
     {
+        
+        _ingredientRepository.DeleteIngredientsFromRecipe(id);
+        _reviewRepository.DeleteReviewsByRecipeId(id);
+        _tagsRepository.DeleteTagsFromRecipe(id);
+        _userRepository.DeleteSavedRecipeFromUsers(id);
         return _repository.DeleteRecipe(id);
     }
     

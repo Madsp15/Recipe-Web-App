@@ -159,5 +159,15 @@ public class TagsRepository
                 return false;
             }
         }
+        
+    }
+    public bool DeleteTagsFromRecipe(int recipeId)
+    {
+        var sql = $@"DELETE FROM recipeTags WHERE recipeId = @recipeId;";
+        
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { recipeId }) == 1;
+        }
     }
 }

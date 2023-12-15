@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router} from "@angular/router";
+
 import {IonicModule, ToastController} from "@ionic/angular";import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
@@ -19,10 +19,10 @@ import {RecipeService} from "../../recipe.service";
 
 export class RecipeProfileComponent implements OnInit {
   constructor(
-              private toast: ToastController,
-              private account: AccountService,
-              public recipeService: RecipeService,
-              private http : HttpClient) {}
+    private toast: ToastController,
+    private account: AccountService,
+    public recipeService: RecipeService,
+    private http : HttpClient) {}
 
 
 

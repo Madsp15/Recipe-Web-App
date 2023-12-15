@@ -124,15 +124,22 @@ public class UserController : ControllerBase
         return _userService.GetFollowing(userId);
     }
 
-
+    
     [HttpPost]
     [Route("/api/users/login")]
     public IActionResult Login([FromBody] LoginDto dto)
     {
         var user = _passwordService.Authenticate(dto.Email, dto.Password);
-        if (user == null) return Unauthorized("Invalid credentials");
-        var token = _jwtTokenService.IssueToken(SessionData.FromUser(user!));
-        return Ok(new { token });
+        if (user == null)
+        {
+            return Unauthorized("Invalid credentials");
+        }
+        else
+        {
+            var token = _jwtTokenService.IssueToken(SessionData.FromUser(user!));
+            return Ok(new { token });
+        }
+        
     }
 	
     

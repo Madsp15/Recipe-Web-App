@@ -41,16 +41,28 @@ export class LoginComponent {
 
   async clickLogin() {
     if (this.form.invalid) return;
+      try {
+        const {token} = await firstValueFrom(this.account.login(this.form.value as Credentials));
+        this.token.setToken(token);
+      } catch (unauthorized) {
+        await (await this.toast.create({
+          message: "Wrong email or password",
+          duration: 5000
+        })).present();
 
-      const {token} = await firstValueFrom(this.account.login(this.form.value as Credentials));
-      this.token.setToken(token);
+      }
 
-      this.router.navigate(['/home/profile'], {replaceUrl:true});
+      if (this.token.getToken() == null || this.token.getToken() == "undefined" || this.token.getToken() == "") {
 
-      await (await this.toast.create({
-        message: "Welcome",
-        duration: 5000
-      })).present();
+      } else {
+        this.router.navigate(['/home/profile'], {replaceUrl:true});
+
+        await (await this.toast.create({
+          message: "Welcome",
+          duration: 5000
+        })).present();
+      }
+
 
   }
 

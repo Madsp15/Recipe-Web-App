@@ -91,4 +91,13 @@ public class ReviewRepository
             return conn.QueryFirst<Review>(sql, new { id = reviewId });
         }
     }
+    public bool DeleteReviewsByRecipeId(int recipeId)
+    {
+        var sql = $@"DELETE FROM reviews WHERE recipeId = @id;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { id = recipeId }) == 1;
+        }
+    }
 }
