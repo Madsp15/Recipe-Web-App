@@ -7,7 +7,6 @@ import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
 import {Ingredients, Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
-import {RecipeMenuComponent} from "../recipe-menu/recipe-menu.component";
 
 @Component({
   selector: 'app-recipe-menu-steps-ingredients',
