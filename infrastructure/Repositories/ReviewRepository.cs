@@ -1,5 +1,6 @@
 using Dapper;
 using infrastructure.Models;
+using Recipe_Web_App.TransferModels;
 
 namespace infrastructure.Repositories;
 
@@ -89,6 +90,19 @@ public class ReviewRepository
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<Review>(sql, new { id = reviewId });
+        }
+    }
+
+    public IEnumerable<ReviewWithUser> GetRecipeReview(int recipeId)
+    {
+        var sql = $@"SELECT r.*, u.userId, u.username, u.userAvatarUrl
+        FROM reviews r
+        JOIN users u ON r.userId = u.userId
+        WHERE r.recipeId = @id
+";
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<ReviewWithUser>(sql, new { id = recipeId });
         }
     }
 }

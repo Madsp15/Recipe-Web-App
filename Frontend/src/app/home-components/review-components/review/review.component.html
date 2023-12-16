@@ -1,0 +1,58 @@
+<ion-content>
+    <ion-img class="back-button" (click)="clickBack()" src="https://cdn3.iconfinder.com/data/icons/arrows-209/512/back-arrow-512.png" alt="Back Arrow"></ion-img>
+
+  <ion-card class="average-rating-card">
+    <ion-card-header>
+      <ion-card-subtitle>Average Rating</ion-card-subtitle>
+      <ion-card-title>
+        <app-rating [rating]="averageRating || 0"></app-rating>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="averageRating !== null; else notRatedYet">
+        {{ averageRating }} out of 5
+        <div>Number of Reviews: {{ recipeService.reviews.length }}</div>
+      </ng-container>
+      <ng-template #notRatedYet>
+        Recipe not rated yet
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <app-review-card *ngFor="let review of recipeService.reviews" [review]="review"></app-review-card>
+
+
+
+    <div class="review-text" *ngIf="recipeService.reviews.length === 0">
+      Be the first one to review this recipe!
+    </div>
+
+    <ion-buttons slot="end" *ngIf="recipeService.reviews.length > 5">
+      <ion-button (click)="loadPreviousReviews()">Previous</ion-button>
+      <ion-button (click)="loadNextReviews()">Next</ion-button>
+    </ion-buttons>
+
+  </ion-list>
+
+
+  <ion-card class ="star-card">
+    <ion-card-content>
+      <ion-row>
+        <ion-col *ngFor="let star of stars; let i = index">
+          <ion-img [src]="star" (click)="rate(i)"></ion-img>
+        </ion-col>
+        <ion-col style="color: black;">
+          Rating: {{ selectedStars }}
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-textarea [formControl]="reviewInput"  placeholder="Write your review" type="text"></ion-textarea>
+  <ion-button class="review-button" (click)="clickSubmitReview()">Submit Review</ion-button>
+
+</ion-content>
+
+
+

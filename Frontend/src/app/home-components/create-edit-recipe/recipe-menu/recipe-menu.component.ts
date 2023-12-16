@@ -4,7 +4,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import {RecipeService} from "../../../recipe.service";
+import {RecipeService} from "../../../../services/recipe.service";
 import {
   RecipeMenuStepsIngredientsComponent
 } from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";

@@ -1,6 +1,6 @@
-using infrastructure;
 using infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
+using Recipe_Web_App.TransferModels;
 using service;
 
 namespace Recipe_Web_App.Controllers;
@@ -40,10 +40,17 @@ public class ReviewController: ControllerBase
         return _reviewService.DeleteReview(reviewId) ? Ok() : Problem();
     }
 
-    [Route("api/recipes/{recipeId}/averagerating")]
+    [Route("api/recipe/averagerating/{recipeId}")]
     [HttpGet]
     public double GetAverageRating([FromRoute]int recipeId)
     {
         return _reviewService.GetAverageRating(recipeId);
+    }
+    
+    [Route("api/reviews/{recipeId}")]
+    [HttpGet]
+    public IEnumerable<ReviewWithUser> GetRecipeReview([FromRoute]int recipeId)
+    {
+        return _reviewService.GetRecipeReview(recipeId);
     }
 }

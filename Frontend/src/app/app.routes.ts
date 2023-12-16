@@ -13,6 +13,7 @@ import {
 } from "./home-components/create-edit-recipe/recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
 import {HomeRecipeMenuComponent} from "./home-components/home-page-components/home-recipe-menu/home-recipe-menu.component";
 import {RecipeComponent} from "./home-components/recipe-components/recipe/recipe.component";
+import {ReviewComponent} from "./home-components/review-components/review/review.component";
 
 export const routes: Routes = [
   { path: 'create-recipe', component: RecipeMenuComponent },
@@ -36,6 +37,7 @@ export const routes: Routes = [
       { path: 'profile', component: RecipeProfileComponent },
       { path: 'search', component: RecipeSearchComponent },
       { path: 'recipedetails/:recipeid', component: RecipeComponent },
+      { path: 'review/:recipeid', component: ReviewComponent },
     ]
   },
   {
