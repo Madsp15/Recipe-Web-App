@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
-import {TokenService} from "../../../services/token.service";
-import {AccountService} from "../../../services/account service";
-import {User} from "../../models";
 import {firstValueFrom} from "rxjs";
+import {TokenService} from "../../../../services/token.service";
+import {AccountService} from "../../../../services/account.service";
+import {User} from "../../../models";
 
 @Component({
   selector: 'app-side-menu',
@@ -57,8 +57,4 @@ export class SideMenuComponent  implements OnInit {
         color: 'success',
       })).present()
     }
-
-  clickDraft() {
-
-  }
 }

@@ -1,0 +1,51 @@
+ion-input {
+  width: 150%;
+  margin-bottom: 15px;
+}
+
+ion-img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.review-text{
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+ion-textarea{
+  margin-left: 20px;
+  width: 500px;
+  height: 200px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.review-button{
+  margin-left: 20px;
+  margin-bottom: 100px
+}
+
+.back-button{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.average-rating-card{
+  text-align: center;
+  color: black;
+}
+
+ion-card-subtitle{
+  color: black;
+  font-size: 20px;
+}
+
+.star-card{
+    width:500px;
+}
+
+

@@ -1,17 +1,15 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-
-import {
-  RecipeMenuStepsIngredientsComponent
-} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
-import {Ingredients, User} from "../../../models";
-import {AccountService} from "../../../../services/account service";
-import {firstValueFrom} from "rxjs";
 import {RecipeService} from "../../../../services/recipe.service";
+import {RecipeMenuStepsIngredientsComponent} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
+import {Ingredients, User} from "../../../models";
+import {firstValueFrom} from "rxjs";
+import {AccountService} from "../../../../services/account.service";
+import {Router} from "@angular/router";
+
 
 
 @Component({

@@ -37,3 +37,14 @@ export interface Ingredients{
   ingredientName?: string;
 }
 
+export interface Review{
+  recipeId?: number;
+  reviewId?: number;
+  userId?: number;
+  avatarurl?: string;
+  username?: string;
+  dateRated?: string;
+  comment?: string;
+  rating?: number;
+}
+

@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TokenService} from "../../../services/token.service";
 import {firstValueFrom} from "rxjs";
-import {AccountService} from "../../../services/account service";
+import {AccountService} from "../../../services/account.service";
 import {HttpClientModule} from "@angular/common/http";
 import {Credentials} from "../../models";
 

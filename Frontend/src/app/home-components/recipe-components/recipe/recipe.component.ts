@@ -69,8 +69,9 @@ export class RecipeComponent {
     }
   }
 
-  leaveReview() {
-
+  async leaveReview() {
+    const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
+    this.router.navigate(['home/review/'+id], {replaceUrl:true})
   }
 
   goBack() {

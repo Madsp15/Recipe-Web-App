@@ -6,7 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Recipe, User} from "../../models";
 import {firstValueFrom} from "rxjs";
-import {AccountService} from "../../../services/account service";
+import {AccountService} from "../../../services/account.service";
 import {RecipeService} from "../../../services/recipe.service";
 
 @Component({

@@ -8,6 +8,7 @@ ion-img {
 ion-content {
   height: 100%;
   overflow-y: auto;
+  margin-top: 20px;
 }
 
 .description-container {
