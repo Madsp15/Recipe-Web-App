@@ -1,0 +1,30 @@
+<ion-content class="ion-padding">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <ion-card>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="stacked">Username:</ion-label>
+                    <ion-input type="text" [formControl]="usernameInput" placeholder="Enter your username"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Email:</ion-label>
+                    <ion-input type="email" [formControl]="emailInput" placeholder="Enter your email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Password:</ion-label>
+                    <ion-input type="password" [formControl]="passwordInput" placeholder="Enter your password"></ion-input>
+                </ion-item>
+
+                <div class="button-group">
+                    <ion-button (click)="clickDeleteUser()">Delete User</ion-button>
+                    <ion-button (click)="clickSaveChanges()">Save Changes</ion-button>
+                    <ion-button (click)="clickCancel()">Cancel</ion-button>
+                </div>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
+
+

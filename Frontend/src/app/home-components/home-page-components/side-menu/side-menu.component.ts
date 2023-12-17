@@ -59,6 +59,6 @@ export class SideMenuComponent  implements OnInit {
     }
 
   clickSettings() {
-
+    this.router.navigate(['/home/settings'], {replaceUrl:true});
   }
 }

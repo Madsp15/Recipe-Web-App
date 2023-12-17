@@ -13,6 +13,7 @@ import {HomeRecipeMenuComponent} from "./home-components/home-page-components/ho
 import {RecipeComponent} from "./home-components/recipe-components/recipe/recipe.component";
 import {AuthenticatedGuard} from "./Guards";
 import { ReviewComponent } from './home-components/review-components/review/review.component';
+import {SettingsComponent} from "./home-components/settings/settings.component";
 
 
 export const routes: Routes = [
@@ -38,6 +39,7 @@ export const routes: Routes = [
       { path: 'search', component: RecipeSearchComponent },
       { path: 'recipedetails/:recipeid', component: RecipeComponent },
       { path: 'review/:recipeid', component: ReviewComponent },
+      { path: 'settings', component: SettingsComponent },
     ]
   },
   {
