@@ -32,3 +32,8 @@ iontoast {
   display: inline-block;
 }
 
+.profile-text{
+  text-align: center;
+  margin-top: 50px;
+}
+

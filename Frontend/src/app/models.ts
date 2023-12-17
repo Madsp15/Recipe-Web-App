@@ -41,7 +41,7 @@ export interface Review{
   recipeId?: number;
   reviewId?: number;
   userId?: number;
-  avatarurl?: string;
+  avatarUrl?: string;
   username?: string;
   dateRated?: string;
   comment?: string;

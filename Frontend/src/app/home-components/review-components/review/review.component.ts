@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {ReviewCardComponent} from "../review-card/review-card.component";
 import {CommonModule} from "@angular/common";
@@ -7,8 +7,9 @@ import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeService} from "../../../../services/recipe.service";
-import {Recipe, Review} from "../../../models";
+import {Recipe, Review, User} from "../../../models";
 import {RatingComponent} from "../rating/rating.component";
+import {AccountService} from "../../../../services/account.service";
 
 @Component({
   selector: 'app-review',
@@ -20,11 +21,12 @@ import {RatingComponent} from "../rating/rating.component";
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.css']
 })
-export class ReviewComponent {
+export class ReviewComponent{
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute, private router: Router,
-              public recipeService: RecipeService, public toastController : ToastController) {
+              public recipeService: RecipeService, public toastController : ToastController,
+              public accountService : AccountService) {
     this.getRecipe();
     this.getAverageRating();
     this.getReviews();
@@ -35,7 +37,7 @@ export class ReviewComponent {
   }
   reviewInput = new FormControl('', Validators.required);
   selectedStarsInput = new FormControl(0, Validators.required);
-  userIdInput = new FormControl(24, Validators.required);
+  userIdInput = new FormControl(0, Validators.required);
 
   formGroup = new FormGroup({
     userId: this.userIdInput,
@@ -51,6 +53,7 @@ export class ReviewComponent {
   stars: string[] = [];
   selectedStars: number = 0;
   averageRating: number | null = null;
+
 
   rate(index: number): void {
     // Check if the clicked star is already filled
@@ -91,7 +94,7 @@ export class ReviewComponent {
       console.log(id);
       const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipe/averagerating/' + id));
 
-      this.averageRating = response;
+      this.averageRating = response.toFixed(1);
       console.log("Average rating: "+this.averageRating)
       console.log("API response: "+response)
 
@@ -127,6 +130,9 @@ export class ReviewComponent {
     try {
       const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
       const recipeId = Number(recipeIdString);
+      var account:User = await firstValueFrom(this.accountService.getCurrentUser());
+      this.formGroup.get('userId')?.setValue(account.userId ? account.userId : 0);
+
       this.formGroup.patchValue({ recipeId });
       this.formGroup.patchValue({ rating: this.selectedStars });
 

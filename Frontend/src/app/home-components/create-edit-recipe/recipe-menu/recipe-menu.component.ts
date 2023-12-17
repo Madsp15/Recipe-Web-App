@@ -87,28 +87,6 @@ export class RecipeMenuComponent  implements OnInit {
   }
 
 
-  clickCancel() {
-    this.router.navigate([''], {replaceUrl: true})
-  }
-
-  async clickNext() {
-    if (this.recipeService.storedIFormFile.length === 0) {
-      "No file selected"
-      return;
-    }
-  }
-
-  toggleTag(tag: string): void {
-    const index = this.selectedTags.indexOf(tag);
-    if (index !== -1) {
-
-      this.selectedTags.splice(index, 1);
-    } else {
-
-      this.selectedTags.push(tag);
-    }
-  }
-
   addTag(): void {
     console.log('Adding tag:', this.recipeTags);
     const newTag: string = this.recipeTags.trim();

@@ -2,13 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {IonicModule} from "@ionic/angular";
 import {RecipeService} from "../../../../services/recipe.service";
-import {Recipe} from "../../../models";
+import {Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {RatingComponent} from "../../review-components/rating/rating.component";
 import {UserService} from "../../../../services/user.service";
+import {AccountService} from "../../../../services/account.service";
 
 @Component({
   selector: 'app-user-recipe',
@@ -25,15 +26,18 @@ export class UserRecipeComponent implements OnInit{
               private http : HttpClient,
               private router : Router,
               public route: ActivatedRoute,
-              public userService : UserService) {
+              public userService : UserService,
+              public accountService : AccountService) {
   }
 
   ngOnInit(): void {
     this.getAverageRating(this.recipe?.recipeId);
     this.getUser(this.recipe?.userId);
+    this.checkIsCurrentUserRecipe();
   }
 
   averageRating: number | null = null;
+  isCurrentUserRecipe = false;
 
   async getAverageRating(recipeId: number | undefined) {
     try {
@@ -59,5 +63,21 @@ export class UserRecipeComponent implements OnInit{
 
   clickUser(userId: number | undefined) {
     this.router.navigate(['home/profile/', userId], {replaceUrl:true})
+  }
+
+  editRecipe(recipe: Recipe | undefined) {
+
+  }
+
+  deleteRecipe(recipe: Recipe | undefined) {
+
+  }
+
+  async checkIsCurrentUserRecipe() {
+    const account: User = await firstValueFrom(this.accountService.getCurrentUser());
+    console.log("Logged in user: " + account.userId);
+    console.log("Review user id: " + this.recipe?.userId);
+
+    this.isCurrentUserRecipe = account.userId === this.recipe?.userId;
   }
 }

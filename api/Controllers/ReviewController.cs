@@ -29,7 +29,7 @@ public class ReviewController: ControllerBase
         return _reviewService.UpdateReview(review);
     }
 
-    [Route("/api/{reviewId}")]
+    [Route("/api/reviews/{reviewId}")]
     [HttpDelete]
     public IActionResult DeleteReview([FromRoute] int reviewId)
     {

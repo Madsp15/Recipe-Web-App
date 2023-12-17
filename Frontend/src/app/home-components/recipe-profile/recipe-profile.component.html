@@ -25,6 +25,12 @@
   <div class="container" *ngFor="let recipe of recipeService.recipes">
     <app-user-recipe [recipe]="recipe"></app-user-recipe>
   </div>
+
+  <div class="profile-text" *ngIf="recipeService.recipes.length === 0 && !onFileSelectedDisabled">
+    Looks empty.. Populate your profile by adding recipes!
+  </div>
+
+
 </ion-content>
 
 

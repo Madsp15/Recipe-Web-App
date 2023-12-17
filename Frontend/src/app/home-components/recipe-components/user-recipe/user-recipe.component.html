@@ -27,8 +27,28 @@
 
     <h3>{{recipe?.title}}</h3>
 
-    <p>{{recipe?.description}}</p>
+    <div class="description-container">
+      <p class="description">{{recipe?.description}}</p>
+    </div>
   </ion-card-content>
+
+  <div class="card-icons" *ngIf="isCurrentUserRecipe">
+    <img src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png"
+         alt="Edit"
+         width="20"
+         height="20"
+         style="cursor: pointer"
+         (click)="editRecipe(recipe)">
+
+    <img src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png"
+         alt="Delete"
+         width="20"
+         height="20"
+         style="cursor: pointer; margin-left: 5px;"
+         (click)="deleteRecipe(recipe)">
+  </div>
+
+
 </ion-card>
 
 
