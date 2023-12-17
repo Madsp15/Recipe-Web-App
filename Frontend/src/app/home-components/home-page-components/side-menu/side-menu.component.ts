@@ -26,8 +26,8 @@ export class SideMenuComponent  implements OnInit {
   async ngOnInit() {
     try {
       var account:User = await firstValueFrom(this.account.getCurrentUser());
-      this.Username = account.userName;
-      this.UserPicture = account.userAvatarUrl;
+      this.Username = account.userName ?? 'Unknown Username';
+      this.UserPicture = account.userAvatarUrl ?? 'DefaultAvatarUrl';
     } catch (e) {
       this.Username = "";
       this.UserPicture = "https://placebear.com/300/300";

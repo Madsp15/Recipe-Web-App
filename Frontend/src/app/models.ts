@@ -16,12 +16,12 @@ export interface Credentials {
 }
 
 export interface User {
-  userId: number;
-  userName: string;
-  email: string;
-  userAvatarUrl: string | null;
-  isAdmin: boolean;
-  moreInfo: string;
+  userId?: number;
+  userName?: string;
+  email?: string;
+  userAvatarUrl?: string | null;
+  isAdmin?: boolean;
+  moreInfo?: string;
 }
 
 

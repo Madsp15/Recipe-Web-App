@@ -34,7 +34,7 @@ export const routes: Routes = [
       { path: 'create-recipe', component: RecipeMenuComponent,canActivate:[AuthenticatedGuard] },
       { path: 'instructions-ingredients', component: RecipeMenuStepsIngredientsComponent },
       { path: 'recipes', component: HomeRecipeMenuComponent },
-      { path: 'profile', component: RecipeProfileComponent,canActivate:[AuthenticatedGuard] },
+      { path: 'profile/:userid', component: RecipeProfileComponent,canActivate:[AuthenticatedGuard] },
       { path: 'search', component: RecipeSearchComponent },
       { path: 'recipedetails/:recipeid', component: RecipeComponent },
       { path: 'review/:recipeid', component: ReviewComponent },

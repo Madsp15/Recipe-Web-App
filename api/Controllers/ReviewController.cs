@@ -42,7 +42,7 @@ public class ReviewController: ControllerBase
 
     [Route("api/recipe/averagerating/{recipeId}")]
     [HttpGet]
-    public double GetAverageRating([FromRoute]int recipeId)
+    public double? GetAverageRating([FromRoute]int recipeId)
     {
         return _reviewService.GetAverageRating(recipeId);
     }

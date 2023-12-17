@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {TokenService} from "../../../../services/token.service";
+import {User} from "../../../models";
+import {firstValueFrom} from "rxjs";
+import {AccountService} from "../../../../services/account.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -15,7 +18,7 @@ import {TokenService} from "../../../../services/token.service";
 export class ToolbarComponent  implements OnInit {
 
   constructor(
-    private router : Router) {}
+    private router : Router, public accountService : AccountService) {}
 
   isRouteActive(route: string): boolean {
     return this.router.isActive(route, true);
@@ -34,8 +37,9 @@ export class ToolbarComponent  implements OnInit {
     this.router.navigate(['/home/recipes'], {replaceUrl:true})
   }
 
-  clickProfile() {
-    this.router.navigate(['/home/profile'], {replaceUrl:true})
+  async clickProfile() {
+    var account:User = await firstValueFrom(this.accountService.getCurrentUser());
+    this.router.navigate(['/home/profile', account.userId], {replaceUrl:true})
   }
 
   clickSearch() {

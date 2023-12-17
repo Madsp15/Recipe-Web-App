@@ -72,7 +72,7 @@ public class ReviewRepository
         }
     }
     
-    public double GetAverageRatingForRecipe(int recipeId)
+    public double? GetAverageRatingForRecipe(int recipeId)
     {
         var sql = $@"SELECT AVG(rating) 
                  FROM reviews

@@ -57,7 +57,7 @@ export class RecipeMenuComponent  implements OnInit {
   async ngOnInit() {
     this.recipeService.setFormGroup(this.formGroup);
     var account:User = await firstValueFrom(this.account.getCurrentUser());
-    this.formGroup.get('userId')?.setValue(account.userId.toString());
+    this.formGroup.get('userId')?.setValue(account.userId?.toString() ?? '');
     console.log(this.formGroup.get('userId')?.value);
   }
 

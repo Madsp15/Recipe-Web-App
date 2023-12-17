@@ -1,10 +1,12 @@
 ion-toolbar{
   --background: #FAEDCD;
+  height: 150px;
 }
 
 ion-avatar{
   margin-left: 20px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 ion-badge{
@@ -21,5 +23,12 @@ iontoast {
     --color:black !important;
   }
 
+}
+
+.container {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  display: inline-block;
 }
 

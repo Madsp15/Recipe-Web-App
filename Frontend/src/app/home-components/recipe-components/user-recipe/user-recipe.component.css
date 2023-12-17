@@ -4,14 +4,11 @@ ion-card-header{
 
 
 ion-card {
-  margin-left: 50px;
-  margin-top: 50px;
   max-width: 400px;
   border: 5px solid #CCD5AE;
   border-radius: 8px;
   color: black;
   background-color: #E9EDC9;
-  display: inline-block;
 }
 
 ion-card-content {
@@ -28,5 +25,4 @@ h3{
 
 .recipeImg:hover{
   cursor:pointer;
-  transform: scale(1.05);
 }

@@ -29,9 +29,16 @@ public class ReviewService
         return _reviewRepository.DeleteReview(reviewId);
     }
 
-    public double GetAverageRating(int recipeId)
+    public double? GetAverageRating(int recipeId)
     {
-        return _reviewRepository.GetAverageRatingForRecipe(recipeId);
+        try
+        {
+            return _reviewRepository.GetAverageRatingForRecipe(recipeId);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public IEnumerable<ReviewWithUser> GetRecipeReview(int recipeId)

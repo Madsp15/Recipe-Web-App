@@ -1,36 +1,30 @@
 <ion-header>
-  <ion-toolbar full>
+  <ion-toolbar>
     <ion-avatar slot="start">
-      <ion-img src="{{ avatarUrl }}" (click)="fileSelector.click()"></ion-img>
-      <input type="file" #fileSelector id="file-selector" style="display:none" (change)="onFileSelected($event)" accept="image/png, image/jpeg"/>
+      <ion-img src="{{userService.currentUser.userAvatarUrl}}" (click)="fileSelector.click()"></ion-img>
+      <input type="file" #fileSelector id="file-selector" style="display:none" (change)="onFileSelected($event)" accept="image/png, image/jpeg"
+             [disabled]="onFileSelectedDisabled"/>
     </ion-avatar>
     <ion-title>
       <h3>
-        Welcome back {{ username }} did you know your email is {{ email }} ?
-        <!-- Use an img tag for the custom pen icon -->
+        {{userService.currentUser.userName}}
       </h3>
       <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" (keyup.enter)="saveChanges()"></ion-input>
-      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ moreInfo }} </p>
+      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ userService.currentUser.moreInfo }} </p>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button style="margin-right: 100px;">
         <ion-label>Recipes</ion-label>
-        <ion-badge>{{ amountOfRecipes}}</ion-badge>
-      </ion-button>
-      <ion-button>
-        <ion-label>Followers</ion-label>
-        <ion-badge>100</ion-badge>
-      </ion-button>
-      <ion-button>
-        <ion-label>Following</ion-label>
-        <ion-badge>50</ion-badge>
+        <ion-badge>{{ amountOfRecipes }}</ion-badge>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-user-recipe></app-user-recipe>
+  <div class="container" *ngFor="let recipe of recipeService.recipes">
+    <app-user-recipe [recipe]="recipe"></app-user-recipe>
+  </div>
 </ion-content>
 
 
