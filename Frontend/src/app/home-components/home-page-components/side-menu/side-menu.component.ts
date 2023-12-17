@@ -57,4 +57,8 @@ export class SideMenuComponent  implements OnInit {
         color: 'success',
       })).present()
     }
+
+  clickSettings() {
+
+  }
 }

@@ -23,3 +23,10 @@
   color: black;
 }
 
+.container {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  display: inline-block;
+}
+

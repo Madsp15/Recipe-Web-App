@@ -21,12 +21,30 @@ import {CommonModule} from "@angular/common";
 })
 export class HomeMenuComponent {
 
-  constructor(private http : HttpClient, public recipeService : RecipeService) {
+  newRecipeList: Recipe[] = [];
+
+  constructor(private http: HttpClient, public recipeService: RecipeService) {
     this.getData();
   }
 
   async getData() {
     const call = this.http.get<Recipe[]>('http://localhost:5280/api/recipes');
-    this.recipeService.recipes = await firstValueFrom<Recipe[]>(call);
+    const recipes = await firstValueFrom<Recipe[]>(call);
+
+    recipes.sort((a, b) => {
+      const dateA = new Date(this.parseDate(a.dateCreated ?? ''));
+      const dateB = new Date(this.parseDate(b.dateCreated ?? ''));
+
+      return dateB.getTime() - dateA.getTime();
+    });
+
+    // Take the first 6 recipes
+    this.newRecipeList = recipes.slice(0, 6);
+
+  }
+
+  parseDate(dateString: string): string {
+    const [day, month, year] = dateString.split('-');
+    return `${month}-${day}-${year}`;
   }
 }

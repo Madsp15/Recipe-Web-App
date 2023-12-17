@@ -2,14 +2,13 @@
   <ion-toolbar>
     <div class="search-bar-container">
 
-      <ion-select placeholder="Filter by..." class="choice-box">
+      <ion-select placeholder="Filter by..." class="choice-box" [(ngModel)]="selectedFilter">
         <ion-select-option value="option1">Recipes</ion-select-option>
         <ion-select-option value="option2">Users</ion-select-option>
-        <ion-select-option value="option3">Tags</ion-select-option>
       </ion-select>
 
 
-      <ion-searchbar class="search-bar" placeholder="Search"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchQuery" class="search-bar" placeholder="Search"></ion-searchbar>
 
 
       <ion-button (click)="clickSearch()" class="search-button">Search</ion-button>
@@ -18,6 +17,10 @@
 </ion-header>
 
 <ion-content>
+
+  <div class="container" *ngFor="let recipe of filteredRecipeList">
+    <app-user-recipe [recipe]="recipe"></app-user-recipe>
+  </div>
 
 </ion-content>
 

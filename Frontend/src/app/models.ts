@@ -8,6 +8,7 @@ export interface Recipe {
   intructions?: string;
   duration?: string;
   servings?: number;
+  dateCreated?: string;
 }
 
 export interface Credentials {
