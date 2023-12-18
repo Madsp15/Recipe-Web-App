@@ -31,7 +31,7 @@ public class UserController : ControllerBase
         {
             UserName = dto.Username,
             Email = dto.Email,
-            MoreInfo = ""
+            MoreInfo = "Click here to write a short description about yourself"
         };
         
         var user = _userService.CreateUser(createdUser);

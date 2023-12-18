@@ -129,7 +129,7 @@ export class ReviewComponent{
   async clickSubmitReview() {
     try {
       const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      const recipeId = Number(recipeIdString);
+      const recipeId = parseInt(<string>recipeIdString);
       var account:User = await firstValueFrom(this.accountService.getCurrentUser());
       this.formGroup.get('userId')?.setValue(account.userId ? account.userId : 0);
 

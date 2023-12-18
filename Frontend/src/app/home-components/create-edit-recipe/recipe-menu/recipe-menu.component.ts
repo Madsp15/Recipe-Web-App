@@ -5,7 +5,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {RecipeService} from "../../../../services/recipe.service";
 import {RecipeMenuStepsIngredientsComponent} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
-import {Ingredients, User} from "../../../models";
+import {Ingredients, Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../../services/account.service";
 import {Router} from "@angular/router";
@@ -23,7 +23,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./recipe-menu.component.scss'],
 })
 export class RecipeMenuComponent  implements OnInit {
-  constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController, private account: AccountService) {
+  constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController, private account: AccountService, ) {
     this.durationUnit = 'minutes';
   }
 
@@ -59,6 +59,10 @@ export class RecipeMenuComponent  implements OnInit {
     var account:User = await firstValueFrom(this.account.getCurrentUser());
     this.formGroup.get('userId')?.setValue(account.userId?.toString() ?? '');
     console.log(this.formGroup.get('userId')?.value);
+
+    if(this.recipeService.isEdit){
+      this.autofill(this.recipeService.currentRecipe);
+    }
   }
 
 
@@ -116,5 +120,41 @@ export class RecipeMenuComponent  implements OnInit {
     // Set the updated value with the selected durationUnit
     this.durationInput.setValue(`${inputValueWithoutUnit} ${this.durationUnit}`);
   }
+
+  autofill(recipe: Recipe) {
+
+    recipe.intructions
+
+    this.formGroup.patchValue(
+      {
+        userId: recipe.userId?.toString(),
+        title: recipe.title,
+        instructions: recipe.intructions,
+        description: recipe.description,
+        recipeURL: recipe.recipeURL,
+        servings: recipe.servings?.toString(),
+        duration: recipe.duration,
+      })
+    if (recipe.recipeURL != null) {
+      this.foodPicture = recipe.recipeURL;
+    }
+  }
+  async getInstructions(recipe:Recipe): Promise<void> {
+    try {
+      const id = (21);
+      const call = `http://localhost:5280/api/recipes/${id}`;
+      const response = await firstValueFrom(this.http.get<any>(call));
+
+      const parsedResponse = JSON.parse(response.instructions);
+
+      recipe.intructions = JSON.parse(parsedResponse.instructions);
+
+      console.log('Recipe Instructions:', recipe.intructions);
+    } catch (error) {
+      console.error('Error fetching recipe instructions:', error);
+      throw error;
+    }
+  }
+
 
 }

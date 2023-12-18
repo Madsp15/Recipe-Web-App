@@ -55,7 +55,7 @@ export class LoginComponent {
       if (this.token.getToken() == null || this.token.getToken() == "undefined" || this.token.getToken() == "") {
 
       } else {
-        this.router.navigate(['/home/profile'], {replaceUrl:true});
+        this.router.navigate(['/home'], {replaceUrl:true});
 
         await (await this.toast.create({
           message: "Welcome",

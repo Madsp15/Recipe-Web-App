@@ -20,7 +20,11 @@ export class UserService {
     this.users = await firstValueFrom<User[]>(call);
   }
 
-  getUserById(userId: number | undefined): User | undefined {
+  getUserByIdFromList(userId: number | undefined): User | undefined {
     return this.users.find(user => user.userId === userId);
+  }
+  async getUserByID(userId: number){
+    const call = this.http.get<User>('http://localhost:5280/api/users/' + userId);
+    return await firstValueFrom<User>(call);
   }
 }

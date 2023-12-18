@@ -8,6 +8,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class RecipeService {
 
+  public isEdit: boolean = false;
   readonly storedIFormFile: File[] = [];
   public recipes: Recipe[] = [];
   public reviews: Review[] = [];
