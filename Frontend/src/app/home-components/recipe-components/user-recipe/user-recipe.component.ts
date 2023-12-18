@@ -50,6 +50,12 @@ export class UserRecipeComponent implements OnInit{
     }
   }
 
+  getAvatarUrl(userId: number | undefined){
+    const user = this.userService.getUserByIdFromList(userId);
+    console.log("User: "+user)
+    return user ? user.userAvatarUrl : 'Unknown File';
+  }
+
   getUser(userId: number | undefined) {
     const user = this.userService.getUserByIdFromList(userId);
     console.log("User: "+user)
@@ -57,7 +63,6 @@ export class UserRecipeComponent implements OnInit{
   }
 
   async clickRecipe(recipeId?: number) {
-
     this.router.navigate(['home/recipedetails/', recipeId], {replaceUrl:true})
   }
 
@@ -85,5 +90,9 @@ export class UserRecipeComponent implements OnInit{
     console.log("Review user id: " + this.recipe?.userId);
 
     this.isCurrentUserRecipe = account.userId === this.recipe?.userId;
+  }
+
+  clickTitle(recipeId: number | undefined) {
+    this.router.navigate(['home/recipedetails/', recipeId], {replaceUrl:true})
   }
 }

@@ -125,32 +125,34 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
         console.log(error);
       }
     }
+    else {
 
-    const data = this.serializeData();
-    console.log(this.recipeService.getFormGroup()?.value)
-    const recipeFormGroup = this.recipeService.getFormGroup();
-    recipeFormGroup?.get('instructions')?.setValue(data);
-    recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
-    console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
+      const data = this.serializeData();
+      console.log(this.recipeService.getFormGroup()?.value)
+      const recipeFormGroup = this.recipeService.getFormGroup();
+      recipeFormGroup?.get('instructions')?.setValue(data);
+      recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
+      console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
-    try {
-      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
-      const result = await firstValueFrom<Recipe>(call)
-      this.recipeService.recipes.push(result);
+      try {
+        const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
+        const result = await firstValueFrom<Recipe>(call)
+        this.recipeService.recipes.push(result);
 
-      if (result.recipeId != null) {
-        const response = await this.uploadPicture(result.recipeId);
-        const data = await firstValueFrom(response);
+        if (result.recipeId != null) {
+          const response = await this.uploadPicture(result.recipeId);
+          const data = await firstValueFrom(response);
+        }
+        const toast = await this.toastController.create({
+          color: 'success',
+          duration: 2000,
+          message: "Successfully updated recipe"
+        })
+        toast.present();
+        this.router.navigate(['/home'], {replaceUrl: true});
+      } catch (error: any) {
+        console.log(error);
       }
-      const toast = await this.toastController.create({
-        color: 'success',
-        duration: 2000,
-        message: "Successfully updated recipe"
-      })
-      toast.present();
-      this.router.navigate(['/home'], {replaceUrl:true});
-    } catch (error: any) {
-      console.log(error);
     }
   }
 
