@@ -2,7 +2,7 @@
   <ion-card-header>
     <ion-item lines="none">
       <ion-avatar slot="start">
-        <ion-img src="{{getAvatarUrl(recipe?.userId)}}"></ion-img>
+        <ion-img src="https://jooinn.com/images/dog-67.jpg"></ion-img>
       </ion-avatar>
       <ion-label (click)="clickUser(recipe?.userId)" style="cursor: pointer">
         <h2>{{getUser(recipe?.userId)}}</h2>
@@ -11,7 +11,7 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-img class="recipeImg" (click)="clickRecipe(recipe?.recipeId)" src="{{recipe?.recipeURL}}"></ion-img>
+    <ion-img class="recipeImg" (click)="clickRecipe(recipe?.recipeId)" src="https://www.eatingwell.com/thmb/088YHsNmHkUQ7iNGP4375MiAXOY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/article_7866255_foods-you-should-eat-every-week-to-lose-weight_-04-d58e9c481bce4a29b47295baade4072d.jpg"></ion-img>
   </ion-card-content>
 
 
@@ -25,7 +25,7 @@
       </ion-col>
     </ion-row>
 
-    <h3 (click)="clickTitle(recipe?.recipeId)">{{recipe?.title}}</h3>
+    <h3>{{recipe?.title}}</h3>
 
     <div class="description-container">
       <p class="description">{{recipe?.description}}</p>
