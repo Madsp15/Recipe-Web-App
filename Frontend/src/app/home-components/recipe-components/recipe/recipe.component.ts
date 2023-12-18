@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {FormsModule} from "@angular/forms";
 import {firstValueFrom} from "rxjs";
@@ -6,7 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
 import {CommonModule} from "@angular/common";
-import {Ingredients} from "../../../models";
+import {Ingredients, Recipe} from "../../../models";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'app-recipe',
@@ -18,23 +19,33 @@ import {Ingredients} from "../../../models";
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css']
 })
-export class RecipeComponent {
+export class RecipeComponent  implements OnInit{
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, public recipeService: RecipeService) {
-    this.getRecipe();
-    this.getIngredients();
-    this.getInstructions();
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, public recipeService: RecipeService, public userService: UserService ) {
+
   }
+
 
   ingredients: Ingredients[] = [];
   instructions: string[] = [];
+  image: string | null = "";
+  userCreator: string | undefined = "";
 
+
+  async ngOnInit() {
+    this.getRecipe();
+    this.getIngredients();
+    this.getInstructions();
+    this.filledOutAuthor();
+
+
+  }
   async getRecipe() {
+
     try {
       const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      console.log(id);
       this.recipeService.currentRecipe = (await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipes/' + id)));
-
+      this.image = <string>this.recipeService.currentRecipe.recipeURL;
     } catch (e) {
       this.router.navigate(['']);
     }
@@ -69,11 +80,18 @@ export class RecipeComponent {
     }
   }
 
+
+
+
   async leaveReview() {
     const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
     this.router.navigate(['home/review/'+id], {replaceUrl:true})
   }
 
+   filledOutAuthor(){
+     const user = this.userService.getUserByIdFromList(this.recipeService.currentRecipe.userId);
+     this.userCreator = user ? user.userName : 'Unknown User';
+  }
   goBack() {
 
   }

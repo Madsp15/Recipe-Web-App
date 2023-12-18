@@ -3,7 +3,7 @@ export interface Recipe {
   recipeId?: number;
   userId?: number;
   title?: string;
-  recipeurl?: string;
+  recipeURL?: string;
   description?: string;
   intructions?: string;
   duration?: string;

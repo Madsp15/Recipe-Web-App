@@ -31,13 +31,14 @@ public class ReviewController: ControllerBase
 
     [Route("/api/reviews/{reviewId}")]
     [HttpDelete]
-    public IActionResult DeleteReview([FromRoute] int reviewId)
+    public bool DeleteReview([FromRoute] int reviewId)
     {
         if(_reviewService.DeleteReview(reviewId) == null)
         {
-            return NotFound("Review not found");
+            return false;
         }
-        return _reviewService.DeleteReview(reviewId) ? Ok() : Problem();
+        return _reviewService.DeleteReview(reviewId);
+
     }
 
     [Route("api/recipe/averagerating/{recipeId}")]

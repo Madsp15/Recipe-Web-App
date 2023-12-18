@@ -51,13 +51,13 @@ export class UserRecipeComponent implements OnInit{
   }
 
   getUser(userId: number | undefined) {
-    const user = this.userService.getUserById(userId);
+    const user = this.userService.getUserByIdFromList(userId);
     console.log("User: "+user)
     return user ? user.userName : 'Unknown User';
   }
 
   async clickRecipe(recipeId?: number) {
-    console.log(recipeId)
+
     this.router.navigate(['home/recipedetails/', recipeId], {replaceUrl:true})
   }
 
@@ -66,11 +66,19 @@ export class UserRecipeComponent implements OnInit{
   }
 
   editRecipe(recipe: Recipe | undefined) {
+    if (recipe) {
+      this.recipeService.currentRecipe = recipe;
+      this.recipeService.isEdit = true;
+      this.router.navigate(['home/create-recipe'], {replaceUrl:true});
+    }
+
 
   }
 
   deleteRecipe(recipe: Recipe | undefined) {
-
+    const response =  firstValueFrom(this.http.delete<any>('http://localhost:5280/api/recipes/'+recipe?.recipeId));
+    console.log("Delete response: "+response)
+    location.reload();
   }
 
   async checkIsCurrentUserRecipe() {

@@ -37,28 +37,32 @@ export class ReviewCardComponent implements OnInit{
 
     this.isCurrentUserReview = account.userId === this.review?.userId;
   }
-  async clickDeleteReview(review: number | undefined) {
-    try{
-    const call = this.http.delete('http://localhost:5280/api/reviews/' + review);
-    const response = await firstValueFrom(call);
+  async clickDeleteReview(reviewID: number | undefined) {
+    try {
+      const call = this.http.delete('http://localhost:5280/api/reviews/' + reviewID);
+      const response = await firstValueFrom(call);
+      location.reload();
       const toast = await this.toastController.create({
         message: 'Review deleted successfully',
         duration: 2000,
         position: 'bottom'
       });
       toast.present();
-    console.log('Review deleted successfully', response);}
-    catch(error){
-
+      console.log('Review deleted successfully', response);
+    } catch (error) {
       const toast = await this.toastController.create({
         message: 'Error deleting review',
-        duration: 2000, // Duration in milliseconds
-        position: 'bottom' // Choose the desired position
+        duration: 2000,
+        position: 'bottom'
       });
       toast.present();
-
+      console.log('Error deleting review', error);
     }
   }
+
+
+
+
 
   clickEditReview() {
 

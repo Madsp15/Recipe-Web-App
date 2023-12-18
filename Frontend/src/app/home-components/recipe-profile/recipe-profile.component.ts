@@ -57,13 +57,15 @@ export class RecipeProfileComponent implements OnInit {
       this.moreInfo = "Click here to write a short description about yourself"
     } else this.moreInfo = account.moreInfo;
 
+    await this.fetchRecipes();*/
+
+
     await (await this.toast.create({
       cssClass: 'mytoast',
       message: "Did you know you can click on your profile picture to change it?",
       icon: "information-circle-outline",
       duration: 5000
     })).present();
-    await this.fetchRecipes();*/
     this.getUser();
     this.fetchRecipes();
   }
@@ -73,7 +75,7 @@ export class RecipeProfileComponent implements OnInit {
       const idFromRoute = (await firstValueFrom(this.route.paramMap)).get('userid');
       const currentUser: User = await firstValueFrom(this.account.getCurrentUser());
 
-      if (currentUser.userId === Number(idFromRoute)) {
+      if (currentUser.userId === parseInt(<string>idFromRoute)) {
         this.userService.currentUser = (await firstValueFrom(this.http.get<User>('http://localhost:5280/api/users/' + idFromRoute)));
 
         this.enableMethods();
@@ -132,7 +134,7 @@ export class RecipeProfileComponent implements OnInit {
   async fetchRecipes() {
     try{
     const idString = (await firstValueFrom(this.route.paramMap)).get('userid');
-    const id = Number(idString);
+    const id = parseInt(<string>idString);
     console.log(id)
     const data = this.http.get<Recipe[]>("http://localhost:5280/api/recipes/user"+ id)
     this.recipeService.recipes = await firstValueFrom<Recipe[]>(data);

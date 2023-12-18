@@ -4,7 +4,7 @@
             <ion-col size="12" size-md="6">
                 <ion-title class="ion-text-center ion-padding">
                     <h1 style="font-size: 2em;">{{recipeService.currentRecipe.title}}</h1>
-                    <p class="ion-text-center">By Author Name</p>
+                    <p class="ion-text-center">By: {{ userCreator }}</p>
                     <p class="ion-text-center">Duration: {{recipeService.currentRecipe.duration}}</p>
                     <p class="ion-text-center">
                         Servings: {{recipeService.currentRecipe.servings}}
@@ -18,8 +18,8 @@
             </ion-col>
 
 
-            <ion-col size="12" size-md="6">
-                <ion-img src="https://zululandobserver.co.za/wp-content/uploads/sites/56/2015/07/Junk-food.jpg"></ion-img>
+            <ion-col size="6" size-md="6">
+              <ion-img src= "{{image}}" alt="Food Picture"></ion-img>
             </ion-col>
         </ion-row>
 
