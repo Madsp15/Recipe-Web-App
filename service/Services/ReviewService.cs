@@ -45,4 +45,9 @@ public class ReviewService
     {
         return _reviewRepository.GetRecipeReview(recipeId);
     }
+
+    public bool DoesUserReviewExist(int userId, int recipeId)
+    {
+        return _reviewRepository.DoesUserReviewAlreadyExist(userId, recipeId);
+    }
 }

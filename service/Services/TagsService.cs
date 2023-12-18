@@ -11,13 +11,13 @@ public class TagsService
     {
         _repository = repository;
     }
-    public Tag CheckTag(Tag tag)
+    public Tag CheckTag(Tag tags)
     {
-        if (CheckIfTagExists(tag.TagName))
+        if (CheckIfTagExists(tags.TagName))
         {
-            return GetTagByName(tag.TagName);
+            return GetTagByName(tags.TagName);
         }
-        else return CreateTag(tag);
+        else return CreateTag(tags);
     }
 
     public List<int> GetTagIds(List<string> tags)
@@ -26,33 +26,33 @@ public class TagsService
 
         foreach (string tag in tags)
         {
-            Tag existingTag = GetTagByName(tag);
-            if (existingTag != null)
+            Tag existingTags = GetTagByName(tag);
+            if (existingTags != null)
             {
-                tagIds.Add(existingTag.TagId);
+                tagIds.Add(existingTags.TagId);
             }
 
             else
             {
-                Tag newTag = CreateTag(new Tag { TagName = tag });
-                tagIds.Add(newTag.TagId);
+                Tag newTags = CreateTag(new Tag { TagName = tag });
+                tagIds.Add(newTags.TagId);
             }
         }
 
         return tagIds;
     }
 
-    public Tag CreateTag(Tag tag)
+    public Tag CreateTag(Tag tags)
     {
-        return _repository.CreateTag(tag);
+        return _repository.CreateTag(tags);
     }
     public bool DeleteTag(int id)
     {
         return _repository.DeleteTag(id);
     }
-    public Tag UpdateTag(Tag tag)
+    public Tag UpdateTag(Tag tags)
     {
-        return _repository.UpdateTag(tag);
+        return _repository.UpdateTag(tags);
     }
     public Tag GetTagByName(string name)
     {
@@ -85,5 +85,24 @@ public class TagsService
     public bool CheckIfTagExists(string name)
     {
         return _repository.CheckIfTagExists(name);
+    }
+    
+    public List<string> GetTagNamesByRecipeId(int recipeId)
+    {
+        return _repository.GetTagNamesByRecipeId(recipeId);
+    }
+
+    public bool DeleteTagByName(string tagname)
+    {
+        List<Tag> tags = _repository.GetAllTags();
+        foreach (Tag tag in tags)
+        {
+            if (tagname.Equals(tag.TagName))
+            {
+                return _repository.DeleteTagByName(tag.TagId);
+            }
+        }
+
+        return false;
     }
 }

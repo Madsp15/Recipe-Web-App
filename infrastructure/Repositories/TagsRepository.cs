@@ -129,7 +129,20 @@ public class TagsRepository
             return conn.Query<Tag>(sql, new { recipeId }).ToList();
         }
     }
-    
+
+    public List<string> GetTagNamesByRecipeId(int recipeId)
+    {
+        var sql = $@"SELECT tags.TagName
+                            FROM tags
+                            JOIN recipetags ON tags.TagId = recipetags.TagId
+                            WHERE recipetags.RecipeId = @recipeId;";
+        
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<string>(sql, new { recipeId }).ToList();
+        }
+    }
+
     public bool DeleteTagFromRecipe(int tagId, int recipeId)
     {
         var sql = $@"DELETE FROM recipeTags WHERE tagId = @tagId AND recipeId = @recipeId;";
@@ -168,6 +181,16 @@ public class TagsRepository
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.Execute(sql, new { recipeId }) == 1;
+        }
+    }
+
+    public bool DeleteTagByName(int tagId)
+    {
+        var sql = $@"DELETE FROM recipeTags WHERE tagid = @tagId;";
+        
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { tagId }) == 1;
         }
     }
 }

@@ -71,8 +71,6 @@ export class UserRecipeComponent implements OnInit{
       this.recipeService.isEdit = true;
       this.router.navigate(['home/create-recipe'], {replaceUrl:true});
     }
-
-
   }
 
   deleteRecipe(recipe: Recipe | undefined) {

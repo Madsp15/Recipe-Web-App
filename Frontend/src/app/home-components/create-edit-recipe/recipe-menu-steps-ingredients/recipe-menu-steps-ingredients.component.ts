@@ -31,8 +31,44 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   }
 
   ngOnInit() {
-    const recipeFormGroup = this.recipeService.getFormGroup();
-    recipeFormGroup?.get('instructions')?.setValue(this.instructions);
+    if(this.recipeService.isEdit){
+    this.autofill();}
+  }
+
+  autofill() {
+    this.getIngredients();
+    this.getInstructions();
+
+  }
+
+
+  async getIngredients() {
+    try {
+      const id = this.recipeService.currentRecipe.recipeId;
+      const call = `http://localhost:5280/api/recipeingredients/recipe/${id}`;
+      this.ingredients = await firstValueFrom(this.http.get<any>(call));
+      console.log('Recipe Ingredients:', this.ingredients);
+    } catch (error) {
+      console.error('Error fetching recipe ingredients:', error);
+      throw error;
+    }
+  }
+
+  async getInstructions(): Promise<void> {
+    try {
+      const id = this.recipeService.currentRecipe.recipeId;
+      const call = `http://localhost:5280/api/recipes/${id}`;
+      const response = await firstValueFrom(this.http.get<any>(call));
+
+      const parsedResponse = JSON.parse(response.instructions);
+
+      this.instructions = JSON.parse(parsedResponse.instructions);
+
+      console.log('Recipe Instructions:', this.instructions);
+    } catch (error) {
+      console.error('Error fetching recipe instructions:', error);
+      throw error;
+    }
   }
 
   serializeData(): string {
@@ -41,20 +77,6 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     };
 
     return JSON.stringify(serializedData);
-  }
-
-  deserializeData(data: string): void {
-    try {
-      const parsedData = JSON.parse(data);
-
-      if (parsedData && parsedData.instructions) {
-        this.instructions = JSON.parse(parsedData.instructions);
-      } else {
-        console.error('Unexpected data format:', parsedData);
-      }
-    } catch (error) {
-      console.error('Error parsing data:', error);
-    }
   }
 
   addInstruction() {
@@ -91,14 +113,10 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
         const result = await firstValueFrom<Recipe>(call)
         this.recipeService.recipes.push(result);
 
-        if (result.recipeId != null) {
-          const response = await this.uploadPicture(result.recipeId);
-          const data = await firstValueFrom(response);
-        }
         const toast = await this.toastController.create({
           color: 'success',
           duration: 2000,
-          message: "Success"
+          message: "Successfully created new recipe"
         })
         this.recipeService.isEdit = false;
         toast.present();
@@ -127,7 +145,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
       const toast = await this.toastController.create({
         color: 'success',
         duration: 2000,
-        message: "Success"
+        message: "Successfully updated recipe"
       })
       toast.present();
       this.router.navigate(['/home'], {replaceUrl:true});

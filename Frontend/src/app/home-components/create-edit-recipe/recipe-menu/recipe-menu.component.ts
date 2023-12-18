@@ -61,12 +61,10 @@ export class RecipeMenuComponent  implements OnInit {
     console.log(this.formGroup.get('userId')?.value);
 
     if(this.recipeService.isEdit){
-      this.getInstructions(this.recipeService.currentRecipe);
+      this.getTags();
       this.autofill(this.recipeService.currentRecipe);
     }
   }
-
-
 
   foodPicture: string = 'https://www.drsearswellnessinstitute.org/wp-content/uploads/2023/06/Nutrition4StagesPregnancy.jpg';
   durationUnit: string = 'minutes';
@@ -86,8 +84,6 @@ export class RecipeMenuComponent  implements OnInit {
       const blob = new Blob([new Uint8Array(arrayBuffer)], {type: file.type});
       const iFormFile = new File([blob], file.name, {type: file.type});
       this.recipeService.storedIFormFile.push(iFormFile);
-
-
     };
   }
 
@@ -110,6 +106,14 @@ export class RecipeMenuComponent  implements OnInit {
       this.selectedTags.splice(index, 1);
     }
     this.formGroup.get('selectedTags')?.setValue(this.selectedTags);
+
+    if (this.recipeService.isEdit) {
+      try {
+        this.http.delete<any>('http://localhost:5280/api/tags/' + tag);
+      } catch (error) {
+        console.error('Error deleting tag from the backend:', error);
+      }
+    }
   }
 
   updateDuration() {
@@ -124,7 +128,8 @@ export class RecipeMenuComponent  implements OnInit {
 
   async autofill(recipe: Recipe) {
     try {
-      await this.getInstructions(recipe);
+
+
 
       this.formGroup.patchValue({
         userId: recipe.userId?.toString(),
@@ -133,10 +138,10 @@ export class RecipeMenuComponent  implements OnInit {
         recipeURL: recipe.recipeURL,
         servings: recipe.servings?.toString(),
         duration: recipe.duration,
-        instructions: recipe.intructions,
+        selectedTags: this.selectedTags,
       });
-      console.log("Autofill recipe instructions: "+recipe.intructions)
       this.recipeService.setFormGroup(this.formGroup);
+      console.log("Formgroup in first component:", JSON.stringify(this.recipeService.getFormGroup()?.getRawValue()));
 
       if (recipe.recipeURL != null) {
         this.foodPicture = recipe.recipeURL;
@@ -146,19 +151,15 @@ export class RecipeMenuComponent  implements OnInit {
     }
   }
 
-  // @ts-ignore
-  async getInstructions(recipe:Recipe): Promise<string> {
+  async getTags(){
     try {
-      const call = `http://localhost:5280/api/recipes/${recipe.recipeId}`;
-      const response = await firstValueFrom(this.http.get<any>(call));
-
-      const parsedResponse = JSON.parse(response.instructions);
-
-      recipe.intructions = JSON.parse(parsedResponse.instructions);
-
-      console.log('Recipe Instructions:', recipe.intructions);
+      const id = this.recipeService.currentRecipe.recipeId
+      const call = `http://localhost:5280/api/tagnames/${id}`;
+      console.log("Tags: "+this.selectedTags)
+      const results = await firstValueFrom(this.http.get<string[]>(call));
+      this.selectedTags = results;
     } catch (error) {
-      console.error('Error fetching recipe instructions:', error);
+      console.error('Error fetching tags ', error);
       throw error;
     }
   }

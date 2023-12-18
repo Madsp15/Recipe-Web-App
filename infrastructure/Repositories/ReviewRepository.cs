@@ -115,4 +115,15 @@ public class ReviewRepository
             return conn.Query<ReviewWithUser>(sql, new { id = recipeId });
         }
     }
+
+    public bool DoesUserReviewAlreadyExist(int userId, int recipeId)
+    {
+        var sql = "SELECT COUNT(*) AS review_count FROM reviews WHERE userid = @UserId AND recipeid = @RecipeId;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            var parameters = new { UserId = userId, RecipeId = recipeId };
+            return conn.ExecuteScalar<int>(sql, parameters) > 0;
+        }
+    }
 }

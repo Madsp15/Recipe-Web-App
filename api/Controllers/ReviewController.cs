@@ -54,4 +54,11 @@ public class ReviewController: ControllerBase
     {
         return _reviewService.GetRecipeReview(recipeId);
     }
+    
+    [Route("api/reviews/{recipeId}/{userId}")]
+    [HttpGet]
+    public bool DoesUserReviewExist([FromRoute]int userId, int recipeId)
+    {
+        return _reviewService.DoesUserReviewExist(userId, recipeId);
+    }
 }

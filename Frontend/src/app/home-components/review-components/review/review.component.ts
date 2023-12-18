@@ -30,6 +30,8 @@ export class ReviewComponent{
     this.getRecipe();
     this.getAverageRating();
     this.getReviews();
+    this.doesUserReviewExist();
+    console.log(this.doesUserReviewExistBool)
     for (let i = 0; i < 5; i++) {
       this.stars.push('/assets/icon/empty-star.png');
     }
@@ -38,6 +40,7 @@ export class ReviewComponent{
   reviewInput = new FormControl('', Validators.required);
   selectedStarsInput = new FormControl(0, Validators.required);
   userIdInput = new FormControl(0, Validators.required);
+  doesUserReviewExistBool: boolean = false;
 
   formGroup = new FormGroup({
     userId: this.userIdInput,
@@ -113,6 +116,20 @@ export class ReviewComponent{
       }
   }
 
+  async doesUserReviewExist(): Promise<void> {
+    try {
+      const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
+      const recipeId = Number(recipeIdString);
+      var account: User = await firstValueFrom(this.accountService.getCurrentUser());
+      const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/reviews/' + recipeId + '/' + account.userId));
+
+      this.doesUserReviewExistBool = response;
+    } catch (error) {
+      console.error('Error fetching review:', error);
+    }
+  }
+
+
   loadPreviousReviews() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -127,28 +144,38 @@ export class ReviewComponent{
   }
 
   async clickSubmitReview() {
-    try {
-      const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      const recipeId = parseInt(<string>recipeIdString);
-      var account:User = await firstValueFrom(this.accountService.getCurrentUser());
-      this.formGroup.get('userId')?.setValue(account.userId ? account.userId : 0);
+    if(!this.doesUserReviewExistBool) {
+      try {
+        const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
+        const recipeId = parseInt(<string>recipeIdString);
+        var account: User = await firstValueFrom(this.accountService.getCurrentUser());
+        this.formGroup.get('userId')?.setValue(account.userId ? account.userId : 0);
 
-      this.formGroup.patchValue({ recipeId });
-      this.formGroup.patchValue({ rating: this.selectedStars });
+        this.formGroup.patchValue({recipeId});
+        this.formGroup.patchValue({rating: this.selectedStars});
 
-      console.log(JSON.stringify(this.formGroup.getRawValue(), null, 2));
+        console.log(JSON.stringify(this.formGroup.getRawValue(), null, 2));
 
-      const call = this.http.post<Review>('http://localhost:5280/api/reviews', this.formGroup.getRawValue());
-      const result = await firstValueFrom<Review>(call)
-      this.recipeService.reviews.push(result);
+        const call = this.http.post<Review>('http://localhost:5280/api/reviews', this.formGroup.getRawValue());
+        const result = await firstValueFrom<Review>(call)
+        this.recipeService.reviews.push(result);
+        const toast = await this.toastController.create({
+          color: 'success',
+          duration: 2000,
+          message: "Success"
+        })
+        toast.present();
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+    else{
       const toast = await this.toastController.create({
-        color: 'success',
+        color: 'danger',
         duration: 2000,
-        message: "Success"
+        message: "You have already reviewed this recipe"
       })
       toast.present();
-    } catch (error: any) {
-      console.log(error);
     }
   }
 

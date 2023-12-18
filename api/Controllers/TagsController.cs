@@ -70,4 +70,17 @@ public class TagsController: ControllerBase
         return _tagsService.GetTagById(id);
     }
     
+    [Route("api/tagnames/{recipeId}")]
+    [HttpGet]
+    public List<string> GetTagNamesByRecipeId([FromRoute] int recipeId)
+    {
+        return _tagsService.GetTagNamesByRecipeId(recipeId);
+    }
+
+    [Route("api/tags/{tagname}")]
+    [HttpDelete]
+    public bool DeleteTagByName(string tagname)
+    {
+        return _tagsService.DeleteTagByName(tagname);
+    }
 }
