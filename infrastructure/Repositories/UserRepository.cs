@@ -80,7 +80,32 @@ public class UserRepository
             });
         }
     }
-    
+    public User UpdateAccount(User user)
+    {
+        Console.WriteLine("User: "+user);
+        var sql = $@"UPDATE users SET username = @username, email = @email
+                        WHERE userid = @id
+                        RETURNING
+                        userId as {nameof(User.UserId)},
+                        username as {nameof(User.UserName)},
+                        isadmin as {nameof(User.IsAdmin)},
+                        email as {nameof(User.Email)},
+                        moreInfo as {nameof(User.MoreInfo)},
+                        useravatarurl as {nameof(User.UserAvatarUrl)};";
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.QueryFirst<User>(sql, new
+            {
+                id = user.UserId,
+                username = user.UserName,
+                isadmin = user.IsAdmin,
+                email = user.Email,
+                moreinfo = user.MoreInfo,
+                useravatarurl = user.UserAvatarUrl
+            });
+        }
+    }
+        
     public IEnumerable<User> GetAllUsers()
     {
             var sql = $@"SELECT * FROM users";

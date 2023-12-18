@@ -14,9 +14,7 @@ public class PasswordRepository
     }
     public bool Deletepassword(int userId)
     {
-        const string sql = $@"
-        DELETE FROM security
-        WHERE userid = @userId";
+        const string sql = $@"DELETE FROM security WHERE userid = @userId";
         using var connection = DataConnection.DataSource.OpenConnection();
         return connection.Execute(sql, new { userId }) > 0;
     }

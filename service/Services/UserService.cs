@@ -10,12 +10,14 @@ public class UserService
     private readonly UserRepository _userRepository;
     private readonly PasswordHashAlgorithm _passwordHashAlgorithm;
     private readonly PasswordRepository _passwordRepository;
+    private readonly RecipeService _recipeService;
 
-    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository)
+    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository, RecipeService recipeService)
     {
         _userRepository = userRepository;
         _passwordHashAlgorithm = passwordHashAlgorithm;
         _passwordRepository = passwordRepository;
+        _recipeService = recipeService;
     }
 
     public User CreateUser(User user)
@@ -27,12 +29,19 @@ public class UserService
     {
         return _userRepository.UpdateUser(user);
     }
+    public User UpdateAccount(User user)
+    {
+        return _userRepository.UpdateAccount(user);
+    }
 
     public bool DeleteUser(int userId)
     {
-        if (_passwordRepository.Deletepassword(userId))
+        if (_passwordRepository.Deletepassword(userId)==true)
         {
-            return _userRepository.DeleteUserById(userId);
+            if (_recipeService.DeleteAllRecipesFromUser(userId)==true)
+            {
+                return _userRepository.DeleteUserById(userId);
+            }
         }
         return false;
     }

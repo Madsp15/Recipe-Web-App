@@ -48,6 +48,24 @@ public class UserController : ControllerBase
         user.UserId = userId;
         return _userService.UpdateUser(user);
     }
+    [Route("/api/account/email/{userId}")]
+    [HttpPut]
+    public User UpdateAccount([FromBody] EmailDto dto, [FromRoute] int userId)
+    {
+        
+        User user = _userService.GetUser(userId);
+        user.Email = dto.Email;
+        return _userService.UpdateAccount(user);
+    }
+    [Route("/api/account/Username/{userId}")]
+    [HttpPut]
+    public User UpdateAccount([FromBody] UserNameDto dto, [FromRoute] int userId)
+    {
+        User user = _userService.GetUser(userId);
+        user.UserName = dto.Username;
+        return _userService.UpdateAccount(user);
+    }
+    
 
     [Route("/api/users/{userId}")]
     [HttpDelete]
@@ -59,9 +77,9 @@ public class UserController : ControllerBase
         }
         if (_userService.DeleteUser(userId))
         {
-            return Ok();
-        } 
-        return BadRequest("User could not be deleted");
+            return Ok("User deleted");
+        } else return BadRequest("User could not be deleted");
+        
     }
 
     [Route("/api/users")]

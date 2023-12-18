@@ -44,12 +44,13 @@ export class SignUpComponent {
         });
         toast.duration = 5000;
         toast.present();
+        this.router.navigate(['login'] , {replaceUrl: true});
       }
     }
   }
 
   clickBack() {
-    this.router.navigate(['login']);
+    this.router.navigate(['login'] , {replaceUrl: true});
   }
 
   togglePasswordVisibility() {
