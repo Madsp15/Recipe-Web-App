@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
@@ -18,7 +18,7 @@ import {firstValueFrom} from "rxjs";
   templateUrl: './recipe-menu-steps-ingredients.component.html',
   styleUrls: ['./recipe-menu-steps-ingredients.component.css']
 })
-export class RecipeMenuStepsIngredientsComponent {
+export class RecipeMenuStepsIngredientsComponent implements OnInit{
 
   instructions: string[] = [];
   ingredients: Ingredients[] = [];
@@ -28,6 +28,11 @@ export class RecipeMenuStepsIngredientsComponent {
 
 
   constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController) {
+  }
+
+  ngOnInit() {
+    const recipeFormGroup = this.recipeService.getFormGroup();
+    recipeFormGroup?.get('instructions')?.setValue(this.instructions);
   }
 
   serializeData(): string {
@@ -101,7 +106,6 @@ export class RecipeMenuStepsIngredientsComponent {
       } catch (error: any) {
         console.log(error);
       }
-
     }
 
     const data = this.serializeData();
@@ -156,5 +160,4 @@ export class RecipeMenuStepsIngredientsComponent {
     });
 
   }
-
 }

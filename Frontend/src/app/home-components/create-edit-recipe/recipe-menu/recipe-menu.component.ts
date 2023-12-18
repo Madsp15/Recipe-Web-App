@@ -61,6 +61,7 @@ export class RecipeMenuComponent  implements OnInit {
     console.log(this.formGroup.get('userId')?.value);
 
     if(this.recipeService.isEdit){
+      this.getInstructions(this.recipeService.currentRecipe);
       this.autofill(this.recipeService.currentRecipe);
     }
   }
@@ -121,28 +122,34 @@ export class RecipeMenuComponent  implements OnInit {
     this.durationInput.setValue(`${inputValueWithoutUnit} ${this.durationUnit}`);
   }
 
-  autofill(recipe: Recipe) {
+  async autofill(recipe: Recipe) {
+    try {
+      await this.getInstructions(recipe);
 
-    recipe.intructions
-
-    this.formGroup.patchValue(
-      {
+      this.formGroup.patchValue({
         userId: recipe.userId?.toString(),
         title: recipe.title,
-        instructions: recipe.intructions,
         description: recipe.description,
         recipeURL: recipe.recipeURL,
         servings: recipe.servings?.toString(),
         duration: recipe.duration,
-      })
-    if (recipe.recipeURL != null) {
-      this.foodPicture = recipe.recipeURL;
+        instructions: recipe.intructions,
+      });
+      console.log("Autofill recipe instructions: "+recipe.intructions)
+      this.recipeService.setFormGroup(this.formGroup);
+
+      if (recipe.recipeURL != null) {
+        this.foodPicture = recipe.recipeURL;
+      }
+    } catch (error) {
+      console.error('Error in autofill:', error);
     }
   }
-  async getInstructions(recipe:Recipe): Promise<void> {
+
+  // @ts-ignore
+  async getInstructions(recipe:Recipe): Promise<string> {
     try {
-      const id = (21);
-      const call = `http://localhost:5280/api/recipes/${id}`;
+      const call = `http://localhost:5280/api/recipes/${recipe.recipeId}`;
       const response = await firstValueFrom(this.http.get<any>(call));
 
       const parsedResponse = JSON.parse(response.instructions);
@@ -155,6 +162,4 @@ export class RecipeMenuComponent  implements OnInit {
       throw error;
     }
   }
-
-
 }
