@@ -64,6 +64,14 @@ public class RecipeController : ControllerBase
         return _service.GetAllRecipes();
     }
     
+    [Route("api/random/recipes")]
+    [HttpGet]
+    public IEnumerable<Recipe> GetRandomRecipes()
+    {
+        return _service.GetRandomRecipes();
+    }
+
+    
     [Route("api/recipes/user{id}")]
     [HttpGet]
     public IEnumerable<Recipe> GetRecipeByUserId([FromRoute]int id)

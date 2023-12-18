@@ -19,34 +19,17 @@ import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.
 export class RecipeSearchComponent {
 
   filteredRecipeList: Recipe[] = [];
-  selectedFilter: string = 'option1';
   searchQuery: string = '';
 
   constructor(private http: HttpClient, public recipeService: RecipeService,
               public userService: UserService) {
     this.getRecipes();
-    console.log(this.selectedFilter)
   }
 
   clickSearch() {
-    if (this.selectedFilter === 'option1') {
       this.filteredRecipeList = this.recipeService.recipes.filter(recipe => {
         return recipe?.title?.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
-    } else if (this.selectedFilter === 'option2') {
-      const matchingUsers: User[] = this.userService.users.filter(user => {
-        return user.userName?.toLowerCase().includes(this.searchQuery);
-      });
-
-      // Get recipes belonging to the matching user(s)
-      this.filteredRecipeList = [];
-      for (const user of matchingUsers) {
-        const userRecipes = this.recipeService.recipes.filter(recipe => {
-          return recipe.userId === user.userId;
-        });
-        this.filteredRecipeList.push(...userRecipes);
-      }
-    }
   }
 
   async getRecipes(){

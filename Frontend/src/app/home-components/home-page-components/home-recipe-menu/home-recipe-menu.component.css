@@ -8,8 +8,20 @@
   margin-left: 40px;
 }
 
-:host ::ng-deep app-user-recipe {
-  width: 70%; /* Adjust the width as needed */
-  /* Add any other styles as needed */
+.container {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  display: inline-block;
+  margin-bottom: 50px;
+}
+
+.refresh-button {
+  position: absolute;
+  margin-left: 550px;
+  margin-top: -58px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
 }
 

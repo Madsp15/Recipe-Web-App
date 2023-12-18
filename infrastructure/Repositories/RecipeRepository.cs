@@ -59,7 +59,17 @@ public class RecipeRepository
         }
     }
     
- public Recipe updateRecipe(Recipe recipe)
+    public IEnumerable<Recipe> GetRandomRecipes()
+    {
+        var sql = $@"SELECT * FROM recipes ORDER BY RANDOM() LIMIT 9;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<Recipe>(sql);
+        }
+    }
+    
+ public Recipe UpdateRecipe(Recipe recipe)
      {
          recipe.DateCreated = date;
           using (var conn = DataConnection.DataSource.OpenConnection())

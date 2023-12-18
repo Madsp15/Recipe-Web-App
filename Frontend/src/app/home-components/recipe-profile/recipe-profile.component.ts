@@ -75,7 +75,7 @@ export class RecipeProfileComponent implements OnInit {
 
       if (currentUser.userId === Number(idFromRoute)) {
         this.userService.currentUser = (await firstValueFrom(this.http.get<User>('http://localhost:5280/api/users/' + idFromRoute)));
-        // Enable methods when the IDs match
+
         this.enableMethods();
       } else {
         this.userService.currentUser = await firstValueFrom(this.http.get<User>('http://localhost:5280/api/users/' + idFromRoute));

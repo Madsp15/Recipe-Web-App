@@ -51,7 +51,7 @@ public class RecipeTests
         };
         Recipe addedRecipe = _repository.CreateRecipe(recipeToAdd);
         addedRecipe.Title = "Updated Test Recipe";
-        Recipe updatedRecipe = _repository.updateRecipe(addedRecipe);
+        Recipe updatedRecipe = _repository.UpdateRecipe(addedRecipe);
         updatedRecipe.Should().BeEquivalentTo(addedRecipe, "it should be the same");
         _repository.DeleteRecipe(updatedRecipe.RecipeId);
         Assert.Pass("We did it!");

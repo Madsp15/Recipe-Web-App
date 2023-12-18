@@ -42,9 +42,14 @@ public class RecipeService
         return _repository.GetAllRecipes();
     }
     
+    public IEnumerable<Recipe> GetRandomRecipes()
+    {
+        return _repository.GetRandomRecipes();
+    }
+    
     public Recipe UpdateRecipe(Recipe recipe)
     {
-        return _repository.updateRecipe(recipe);
+        return _repository.UpdateRecipe(recipe);
     }
     
     public IEnumerable<Recipe> GetRecipeByUserId(int id)
