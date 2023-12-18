@@ -40,14 +40,6 @@ export class SideMenuComponent  implements OnInit {
     this.router.navigate(['/home/create-recipe'], {replaceUrl:true});
   }
 
-  clickMyRecipes() {
-
-  }
-
-  clickSavedRecipes() {
-
-  }
-
   async clickLogOut() {
       this.token.clearToken();
       this.router.navigate(['/login'], {replaceUrl:true});

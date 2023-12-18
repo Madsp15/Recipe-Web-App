@@ -77,8 +77,11 @@ public class RecipeService
             Console.WriteLine(e);
             return false;
         }
-        
-       
+    }
+
+    public Recipe GetTrendingRecipe()
+    {
+        return _repository.GetTrendingRecipe();
     }
 
 }

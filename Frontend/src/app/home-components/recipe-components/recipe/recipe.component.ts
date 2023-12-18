@@ -93,6 +93,6 @@ export class RecipeComponent  implements OnInit{
      this.userCreator = user ? user.userName : 'Unknown User';
   }
   goBack() {
-
+    this.router.navigate(['/home'], {replaceUrl: true});
   }
 }

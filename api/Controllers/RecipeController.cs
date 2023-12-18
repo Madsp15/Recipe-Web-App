@@ -105,7 +105,10 @@ public class RecipeController : ControllerBase
         return Ok();
     }
     
-    
-    
-
+    [Route("api/trending/recipe")]
+    [HttpGet]
+    public Recipe GetTrendingRecipe()
+    {
+        return _service.GetTrendingRecipe();
+    }
 }

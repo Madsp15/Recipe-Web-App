@@ -152,5 +152,16 @@ public class RecipeRepository
             }
         }
     }
-    
+
+    public Recipe GetTrendingRecipe()
+    {
+        var sql = "SELECT r.* FROM recipes r JOIN (SELECT recipeid, COUNT(reviewid) AS num_reviews, " +
+                  "AVG(rating) AS average_rating FROM reviews GROUP BY recipeid ORDER BY num_reviews DESC, " +
+                  "average_rating DESC LIMIT 1) top_recipe ON r.recipeid = top_recipe.recipeid";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Query<Recipe>(sql).FirstOrDefault();
+        }
+    }
 }

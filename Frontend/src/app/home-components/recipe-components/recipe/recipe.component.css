@@ -23,3 +23,12 @@ ion-content {
   margin: 0;
 }
 
+ion-button {
+  --background: transparent;
+  --color: black;
+  border: 1px solid black;
+  color: black;
+}
+
+
+

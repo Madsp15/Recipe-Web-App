@@ -1,7 +1,7 @@
-<ion-card>
+<ion-card style="height: 500px;">
   <ion-card-header>
     <ion-item lines="none">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" style="height: 50px; width: 50px;">
         <ion-img src="{{getAvatarUrl(recipe?.userId)}}"></ion-img>
       </ion-avatar>
       <ion-label (click)="clickUser(recipe?.userId)" style="cursor: pointer">
@@ -14,19 +14,13 @@
     <ion-img class="recipeImg" (click)="clickRecipe(recipe?.recipeId)" src="{{recipe?.recipeURL}}"></ion-img>
   </ion-card-content>
 
-
   <ion-card-content>
-
     <ion-row>
       <ion-col>
-
         <app-rating [rating]="averageRating || 0"></app-rating>
-
       </ion-col>
     </ion-row>
-
     <h3 (click)="clickTitle(recipe?.recipeId)">{{recipe?.title}}</h3>
-
     <div class="description-container">
       <p class="description">{{recipe?.description}}</p>
     </div>
@@ -47,9 +41,8 @@
          style="cursor: pointer; margin-left: 5px;"
          (click)="deleteRecipe(recipe)">
   </div>
-
-
 </ion-card>
+
 
 
 

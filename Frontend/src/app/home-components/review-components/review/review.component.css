@@ -48,4 +48,10 @@ ion-card-subtitle{
     width:500px;
 }
 
+ion-button {
+  --background: transparent;
+  --color: black;
+  border: 1px solid black;
+  color: black;
+}
 
