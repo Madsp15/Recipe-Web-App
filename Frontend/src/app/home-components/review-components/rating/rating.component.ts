@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {CommonModule, NgForOf, NgStyle} from "@angular/common";
 import {FormsModule} from "@angular/forms";

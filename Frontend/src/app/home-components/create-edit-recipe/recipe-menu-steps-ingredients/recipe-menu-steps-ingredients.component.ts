@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
-import {Ingredients, Recipe, RecipeIngredient} from "../../../models";
+import {Ingredients, Recipe} from "../../../models";
 import {firstValueFrom} from "rxjs";
 
 @Component({
@@ -127,7 +127,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
         })
         this.recipeService.isEdit = false;
         toast.present();
-        //this.router.navigate(['/home'], {replaceUrl:true});
+        this.router.navigate(['/home'], {replaceUrl:true});
       } catch (error: any) {
         console.log(error);
       }

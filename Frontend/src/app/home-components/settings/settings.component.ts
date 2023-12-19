@@ -68,7 +68,6 @@ export class SettingsComponent {
         }
       ]
     });
-
     await alert.present();
   }
 
@@ -95,8 +94,6 @@ export class SettingsComponent {
       console.log(result);
     }
   }
-
-
 
   async clickCancel() {
     await this.router.navigate(['/home'], {replaceUrl: true});

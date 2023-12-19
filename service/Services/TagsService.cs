@@ -12,15 +12,6 @@ public class TagsService
         _repository = repository;
     }
 
-    public Tag CheckTag(Tag tags)
-    {
-        if (CheckIfTagExists(tags.TagName))
-        {
-            return GetTagByName(tags.TagName);
-        }
-        else return CreateTag(tags);
-    }
-
     public List<int> GetTagIds(List<string> tags)
     {
         List<int> tagIds = new List<int>();
@@ -62,26 +53,14 @@ public class TagsService
     }
     
 
-
     public Tag CreateTag(Tag tags)
     {
         return _repository.CreateTag(tags);
     }
-    public bool DeleteTag(int id)
-    {
-        return _repository.DeleteTag(id);
-    }
-    public Tag UpdateTag(Tag tags)
-    {
-        return _repository.UpdateTag(tags);
-    }
+    
     public Tag GetTagByName(string name)
     {
         return _repository.GetTagByName(name);
-    }
-    public List<Tag> GetAllTags()
-    {
-        return _repository.GetAllTags();
     }
     
     public List<Tag> GetTagsByRecipeId(int recipeId)
@@ -97,21 +76,6 @@ public class TagsService
     public bool AddTagToRecipe(int tagId, int recipeId)
     {
         return _repository.AddTagToRecipe(tagId, recipeId);
-    }
-
-    public Tag GetTagById(int id)
-    {
-        return _repository.GetTagById(id);
-    }
-    
-    public bool DeleteTagFromRecipe(int recipeId, int tagId)
-    {
-        return _repository.DeleteTagFromRecipe(recipeId, tagId);
-    }
-    
-    public bool CheckIfTagExists(string name)
-    {
-        return _repository.CheckIfTagExists(name);
     }
     
     public List<string> GetTagNamesByRecipeId(int recipeId)

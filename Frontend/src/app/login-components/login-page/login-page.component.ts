@@ -15,15 +15,10 @@ import {Router, RouterOutlet} from "@angular/router";
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent  implements OnInit {
-  showPassword: boolean = false;
 
   constructor(private router : Router) { }
 
   ngOnInit() {}
-
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-  }
 
   clickHome() {
     this.router.navigate([''], {replaceUrl:true})

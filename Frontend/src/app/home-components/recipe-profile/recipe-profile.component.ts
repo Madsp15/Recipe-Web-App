@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import {IonicModule, ToastController} from "@ionic/angular";import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
+import {CommonModule} from '@angular/common';
+import {IonicModule} from "@ionic/angular";
+import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 import {FormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Recipe, User} from "../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../services/account.service";
 import {RecipeService} from "../../../services/recipe.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 
 @Component({
@@ -21,12 +21,10 @@ import {UserService} from "../../../services/user.service";
 
 export class RecipeProfileComponent implements OnInit {
   constructor(
-    private toast: ToastController,
     private account: AccountService,
     public recipeService: RecipeService,
     private http : HttpClient,
     private route : ActivatedRoute,
-    private router: Router,
     public userService : UserService) {}
 
 
@@ -36,13 +34,11 @@ export class RecipeProfileComponent implements OnInit {
   editedDescription: string = '';
   username: string = 'User';
   email: string = '';
-  avatarUrl: string | null = '';
   amountOfRecipes: string = '0';
 
   saveChangesDisabled: boolean = true;
   clickEditDisabled: boolean = true;
   onFileSelectedDisabled: boolean = true;
-  isFollowing: boolean = false;
   followButtonDisabled: boolean = false;
 
   @Input() user: User | undefined;
@@ -67,7 +63,7 @@ export class RecipeProfileComponent implements OnInit {
         this.disableMethods();
       }
     } catch (e) {
-      
+
     }
   }
 

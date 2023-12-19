@@ -21,14 +21,6 @@ public class ReviewController: ControllerBase
         return _reviewService.CreateReview(review);
     }
 
-    [Route("/api/{reviewId}")]
-    [HttpPut]
-    public Review UpdateReview([FromBody]Review review, [FromRoute] int reviewId)
-    {
-        review.ReviewId = reviewId;
-        return _reviewService.UpdateReview(review);
-    }
-
     [Route("/api/reviews/{reviewId}")]
     [HttpDelete]
     public bool DeleteReview([FromRoute] int reviewId)

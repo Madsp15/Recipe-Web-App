@@ -59,12 +59,4 @@ export class ReviewCardComponent implements OnInit{
       console.log('Error deleting review', error);
     }
   }
-
-
-
-
-
-  clickEditReview() {
-
-  }
 }

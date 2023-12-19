@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {ReviewCardComponent} from "../review-card/review-card.component";
 import {CommonModule} from "@angular/common";
@@ -7,7 +7,7 @@ import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeService} from "../../../../services/recipe.service";
-import {Recipe, Review, User} from "../../../models";
+import {Review, User} from "../../../models";
 import {RatingComponent} from "../rating/rating.component";
 import {AccountService} from "../../../../services/account.service";
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Recipe, User} from "../app/models";
+import {User} from "../app/models";
 import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -22,9 +22,5 @@ export class UserService {
 
   getUserByIdFromList(userId: number | undefined): User | undefined {
     return this.users.find(user => user.userId === userId);
-  }
-  async getUserByID(userId: number){
-    const call = this.http.get<User>('http://localhost:5280/api/users/' + userId);
-    return await firstValueFrom<User>(call);
   }
 }

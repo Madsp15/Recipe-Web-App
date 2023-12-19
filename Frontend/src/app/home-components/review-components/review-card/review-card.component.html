@@ -6,13 +6,6 @@
     <ion-card-subtitle>{{ review?.username }}</ion-card-subtitle>
     <div style="display: flex; align-items: center; margin-left: auto;">
       <img *ngIf="isCurrentUserReview"
-           src="https://cdn4.iconfinder.com/data/icons/simplicity-vector-icon-set/512/pen.png"
-           alt="Edit"
-           width="20"
-           height="20"
-           style="margin-right: 5px; cursor: pointer"
-           (click)="clickEditReview()">
-      <img *ngIf="isCurrentUserReview"
            src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png"
            alt="Delete"
            width="24"

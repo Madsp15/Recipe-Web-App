@@ -1,4 +1,3 @@
-
 export interface Recipe {
   recipeId?: number;
   userId?: number;
@@ -9,11 +8,6 @@ export interface Recipe {
   duration?: string;
   servings?: number;
   dateCreated?: string;
-}
-
-export interface RecipeIngredient{
-  recipeId?: number;
-  ingredientId?: number;
 }
 
 export interface Credentials {

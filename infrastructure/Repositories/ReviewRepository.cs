@@ -6,6 +6,7 @@ namespace infrastructure.Repositories;
 
 public class ReviewRepository
 {
+    
     String date = DateHelper.GetDate();
     public Review CreateReview(Review review)
     {
@@ -33,34 +34,7 @@ public class ReviewRepository
             });
         }
     }
-    
-    public Review UpdateReview(Review review)
-    {
-        review.DateRated = date;
-        var sql = $@"UPDATE reviews
-                 SET rating = @rating,
-                     comment = @comment,
-                     dateRated = @dateRated
-                 WHERE reviewId = @reviewId
-                 RETURNING
-                    reviewId as {nameof(Review.ReviewId)},
-                    recipeId as {nameof(Review.RecipeId)},
-                    userId as {nameof(Review.UserId)},
-                    rating as {nameof(Review.Rating)},
-                    comment as {nameof(Review.Comment)},
-                    dateRated as {nameof(Review.DateRated)};";
-
-        using (var conn = DataConnection.DataSource.OpenConnection())
-        {
-            return conn.QueryFirst<Review>(sql, new
-            {
-                reviewId = review.ReviewId,
-                rating = review.Rating,
-                comment = review.Comment,
-                dateRated = review.DateRated
-            });
-        }
-    }
+   
     
     public bool DeleteReview(int reviewId)
     {
@@ -69,6 +43,16 @@ public class ReviewRepository
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.Execute(sql, new { id = reviewId }) == 1;
+        }
+    }
+    
+    public bool DeleteReviewFromRecipe(int recipeId)
+    {
+        var sql = $@"DELETE FROM reviews WHERE recipeId = @id;";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.Execute(sql, new { id = recipeId }) == 1;
         }
     }
     
@@ -81,15 +65,6 @@ public class ReviewRepository
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
             return conn.QueryFirst<double>(sql, new { recipeId });
-        }
-    }
-    public Review GetReviewById(int reviewId)
-    {
-        var sql = $@"SELECT * FROM reviews WHERE reviewId = @id;";
-
-        using (var conn = DataConnection.DataSource.OpenConnection())
-        {
-            return conn.QueryFirst<Review>(sql, new { id = reviewId });
         }
     }
 

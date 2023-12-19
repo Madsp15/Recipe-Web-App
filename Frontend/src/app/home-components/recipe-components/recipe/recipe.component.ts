@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
 import {CommonModule} from "@angular/common";
-import {Ingredients, Recipe} from "../../../models";
+import {Ingredients} from "../../../models";
 import {UserService} from "../../../../services/user.service";
 
 @Component({

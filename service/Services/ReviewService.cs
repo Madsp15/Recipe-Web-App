@@ -19,11 +19,6 @@ public class ReviewService
         return _reviewRepository.CreateReview(review);
     }
 
-    public Review UpdateReview(Review review)
-    {
-        return _reviewRepository.UpdateReview(review);
-    }
-
     public bool DeleteReview(int reviewId)
     {
         return _reviewRepository.DeleteReview(reviewId);

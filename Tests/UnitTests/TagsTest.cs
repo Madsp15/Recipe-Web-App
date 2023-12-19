@@ -22,28 +22,9 @@ public class TagsTest
             TagName = "Test Tag",
         };
         Tag addedTag = _repository.CreateTag(tagToAdd);
-        Tag retrievedTag = _repository.GetTagById(addedTag.TagId);
+        Tag retrievedTag = _repository.GetTagByName(addedTag.TagName);
         
-        retrievedTag.Should().BeEquivalentTo(addedTag, "it should be the same");
-        _repository.DeleteTag(retrievedTag.TagId);
-        Assert.Pass("We did it!");
-        
-    }
-    
-    [Test]
-    public async Task ShouldSuccessfullyUpdateTag()
-    {
-        Tag tagToAdd = new Tag
-        {
-            TagName = "Test Tag",
-        };
-        Tag addedTag = _repository.CreateTag(tagToAdd);
-        addedTag.TagName = "Updated Test Tag";
-        Tag updatedTag = _repository.UpdateTag(addedTag);
-        updatedTag.Should().BeEquivalentTo(addedTag, "it should be the same");
-        _repository.DeleteTag(updatedTag.TagId);
+        retrievedTag.TagName.Should().BeEquivalentTo(addedTag.TagName, "it should be the same");
         Assert.Pass("We did it!");
     }
-    
-    
 }

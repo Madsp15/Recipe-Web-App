@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {IonicModule, ToastController} from "@ionic/angular";
+import {Component, OnInit} from '@angular/core';
+import {IonicModule} from "@ionic/angular";
 import {Router} from "@angular/router";
-import {TokenService} from "../../../../services/token.service";
 import {User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../../services/account.service";
@@ -23,9 +22,6 @@ export class ToolbarComponent  implements OnInit {
 
   isRouteActive(route: string): boolean {
     return this.router.isActive(route, true);
-  }
-
-  clickMenu() {
   }
 
   ngOnInit() {}

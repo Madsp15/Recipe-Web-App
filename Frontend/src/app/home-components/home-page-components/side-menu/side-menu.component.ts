@@ -32,8 +32,6 @@ export class SideMenuComponent  implements OnInit {
       this.Username = "";
       this.UserPicture = "https://placebear.com/300/300";
     }
-
-
   }
 
   clickCreateRecipe() {

@@ -48,6 +48,7 @@ public class UserController : ControllerBase
         user.UserId = userId;
         return _userService.UpdateUser(user);
     }
+    
     [Route("/api/account/email/{userId}")]
     [HttpPut]
     public User UpdateAccount([FromBody] EmailDto dto, [FromRoute] int userId)
@@ -57,6 +58,7 @@ public class UserController : ControllerBase
         user.Email = dto.Email;
         return _userService.UpdateAccount(user);
     }
+    
     [Route("/api/account/Username/{userId}")]
     [HttpPut]
     public User UpdateAccount([FromBody] UserNameDto dto, [FromRoute] int userId)
@@ -66,7 +68,6 @@ public class UserController : ControllerBase
         return _userService.UpdateAccount(user);
     }
     
-
     [Route("/api/users/{userId}")]
     [HttpDelete]
     public IActionResult DeleteUser([FromRoute] int userId)
@@ -95,53 +96,6 @@ public class UserController : ControllerBase
     {
         return _userService.GetUser(userId);
     }
-
-    [Route("/api/users/{userId}/follow/{userIdToFollow}")]
-    [HttpPost]
-    public IActionResult FollowUser([FromRoute] int userId, [FromRoute] int userIdToFollow)
-    {
-        if (_userService.GetUser(userId) == null || _userService.GetUser(userIdToFollow) == null)
-        {
-            return NotFound("User not found");
-        }
-        if (_userService.FollowUser(userId, userIdToFollow))
-        {
-            return Ok();
-        }
-        return BadRequest("User could not be followed");
-    }
-
-    [Route("/api/users/{userId}/unfollow/{userIdToUnfollow}")]
-    [HttpDelete]
-    public IActionResult UnfollowUser([FromRoute] int userId, [FromRoute] int userIdToUnfollow)
-    {
-        User user = _userService.GetUser(userId);
-        User userToUnfollow = _userService.GetUser(userIdToUnfollow);
-        if (user == null || userToUnfollow == null)
-        {
-            return NotFound("User not found");
-        }
-        if (_userService.UnfollowUser(userId, userIdToUnfollow))
-        {
-            return Ok();
-        }
-        return BadRequest("User could not be followed");
-    }
-
-    [Route("/api/users/{userId}/followers")]
-    [HttpGet]
-    public IEnumerable<User> GetFollowers([FromRoute] int userId)
-    {
-        return _userService.GetFollowers(userId);
-    }
-
-    [Route("/api/users/{userId}/following")]
-    [HttpGet]
-    public IEnumerable<User> GetFollowing([FromRoute] int userId)
-    {
-        return _userService.GetFollowing(userId);
-    }
-
     
     [HttpPost]
     [Route("/api/users/login")]
@@ -157,7 +111,6 @@ public class UserController : ControllerBase
             var token = _jwtTokenService.IssueToken(SessionData.FromUser(user!));
             return Ok(new { token });
         }
-        
     }
 	
     
@@ -182,35 +135,6 @@ public class UserController : ControllerBase
         return Ok();
     }
     
-    [HttpPost]
-    [Route("/api/users/save/{userId}/{recipeId}")]
-    public IActionResult SaveRecipe([FromRoute] int userId, [FromRoute] int recipeId)
-    {
-        if (_userService.GetUser(userId) == null)
-        {
-            return NotFound("User not found");
-        }
-        if (_userService.SaveRecipe(userId, recipeId))
-        {
-            return Ok();
-        }
-        return BadRequest("Recipe could not be saved");
-    }
-    
-    [HttpDelete]
-    [Route("/api/users/unsave/{userId}/{recipeId}")]
-    public IActionResult UnsaveRecipe([FromRoute] int userId, [FromRoute] int recipeId)
-    {
-        if (_userService.GetUser(userId) == null)
-        {
-            return NotFound("User not found");
-        }
-        if (_userService.UnsaveRecipe(userId, recipeId))
-        {
-            return Ok();
-        }
-        return BadRequest("Recipe could not be unsaved");
-    }
     [RequireAuthentication]
     [HttpGet]
     [Route("/api/users/whoami")]
@@ -221,9 +145,4 @@ public class UserController : ControllerBase
         var user = _userService.GetUser(data.UserId);
         return user;
     }
-    
-    
-    
-    
-
 }

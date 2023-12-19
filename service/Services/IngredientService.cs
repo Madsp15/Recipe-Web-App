@@ -17,16 +17,6 @@ public class IngredientService
         return _ingredientRepository.CreateIngredient(ingredient);
     }
     
-    public bool DeleteIngredient(int id)
-    {
-        return _ingredientRepository.DeleteIngredient(id);
-    }
-    
-    public Ingredient UpdateIngredient(Ingredient ingredient)
-    {
-        return _ingredientRepository.UpdateIngredient(ingredient);
-    }
-    
     public Ingredient GetIngredientByName(string name)
     {
         return _ingredientRepository.GetIngredientByName(name);
@@ -38,14 +28,6 @@ public class IngredientService
     public bool DeleteRecipeIngredient(int ingredientId, int recipeId)
     {
         return _ingredientRepository.DeleteRecipeIngredient(ingredientId, recipeId);
-    }
-    public RecipeIngredient UpdateRecipeIngredient(RecipeIngredient recipeIngredient)
-    {
-        return _ingredientRepository.UpdateRecipeIngredient(recipeIngredient);
-    }
-    public RecipeIngredient GetRecipeIngredientById(int id)
-    {
-        return _ingredientRepository.GetRecipeIngredientById(id);
     }
     public IEnumerable<Ingredients> GetIngredientsForRecipe(int id)
     {

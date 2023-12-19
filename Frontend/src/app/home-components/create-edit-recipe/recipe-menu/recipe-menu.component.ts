@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicModule, ToastController} from "@ionic/angular";
+import {IonicModule} from "@ionic/angular";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {RecipeService} from "../../../../services/recipe.service";
 import {RecipeMenuStepsIngredientsComponent} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
 import {Ingredients, Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../../services/account.service";
-import {Router} from "@angular/router";
 
 
 
@@ -23,7 +22,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./recipe-menu.component.scss'],
 })
 export class RecipeMenuComponent  implements OnInit {
-  constructor(private router: Router, private http: HttpClient, public recipeService : RecipeService, public toastController : ToastController, private account: AccountService, ) {
+  constructor(private http: HttpClient, public recipeService : RecipeService, private account: AccountService) {
     this.durationUnit = 'Minutes';
   }
 

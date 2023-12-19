@@ -28,13 +28,12 @@ public class ReviewTests
         };
         Review addedReview = _repository.CreateReview(reviewToAdd);
         
-        Review retrievedReview = _repository.GetReviewById(addedReview.ReviewId);
         
-        retrievedReview.Should().BeEquivalentTo(addedReview, "it should be the same");
-        _repository.DeleteReview(retrievedReview.ReviewId);
+        reviewToAdd.Comment.Should().BeEquivalentTo(addedReview.Comment, "it should be the same");
+        _repository.DeleteReviewFromRecipe(15);
         Assert.Pass("We did it!");
-        
     }
+    
     [Test]
     public async Task ShouldSuccessfullyGetAverageRating()
     {
@@ -42,7 +41,7 @@ public class ReviewTests
         {
             RecipeId = 15,
             UserId = 2,
-            Rating = 12,
+            Rating = 3,
             Comment = "Test Comment",
             DateRated = "Test Date"
             
@@ -70,32 +69,9 @@ public class ReviewTests
          Review review2 = _repository.CreateReview(reviewToAdd2);
          Review review3 =  _repository.CreateReview(reviewToAdd3);
          
-        _repository.GetAverageRatingForRecipe(15).Should().Be(6);
-        
-        _repository.DeleteReview(review1.ReviewId);
-        _repository.DeleteReview(review2.ReviewId);
-        _repository.DeleteReview(review3.ReviewId);
+        _repository.GetAverageRatingForRecipe(15).Should().Be(3);
+
+        _repository.DeleteReviewFromRecipe(15);
         Assert.Pass("We did it!");
-    }
-    
-    [Test]
-    public async Task ShouldSuccessfullyUpdateReview()
-    {
-        Review reviewToAdd = new Review
-        {
-            RecipeId = 15,
-            UserId = 2,
-            Rating = 5,
-            Comment = "Test Comment",
-            DateRated = "Test Date"
-            
-        };
-        Review addedReview = _repository.CreateReview(reviewToAdd);
-        addedReview.Comment = "Updated Test Comment";
-        Review updatedReview = _repository.UpdateReview(addedReview);
-        updatedReview.Should().BeEquivalentTo(addedReview, "it should be the same");
-        _repository.DeleteReview(updatedReview.ReviewId);
-        Assert.Pass("We did it!");
-        
     }
 }

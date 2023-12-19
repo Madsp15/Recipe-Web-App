@@ -18,8 +18,4 @@ export class ForgotPasswordComponent {
   clickBack() {
     this.router.navigate(['login']);
   }
-
-  clickSend() {
-
-  }
 }

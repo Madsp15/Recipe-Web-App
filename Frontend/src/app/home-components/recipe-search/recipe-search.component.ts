@@ -5,7 +5,6 @@ import {Recipe, User} from "../../models";
 import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../services/recipe.service";
-import {UserService} from "../../../services/user.service";
 import {FormsModule} from "@angular/forms";
 import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 
@@ -21,8 +20,7 @@ export class RecipeSearchComponent {
   filteredRecipeList: Recipe[] = [];
   searchQuery: string = '';
 
-  constructor(private http: HttpClient, public recipeService: RecipeService,
-              public userService: UserService) {
+  constructor(private http: HttpClient, public recipeService: RecipeService) {
     this.getRecipes();
   }
 

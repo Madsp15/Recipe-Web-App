@@ -52,8 +52,4 @@ export class SignUpComponent {
   clickBack() {
     this.router.navigate(['login'] , {replaceUrl: true});
   }
-
-  togglePasswordVisibility() {
-
-  }
 }

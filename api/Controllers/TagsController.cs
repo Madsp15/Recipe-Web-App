@@ -13,13 +13,6 @@ public class TagsController: ControllerBase
     {
         _tagsService = tagsService;
     }
-    
-    [Route("api/tags")]
-    [HttpPost]
-    public Tag CreateTag([FromBody] Tag tag)
-    {
-        return _tagsService.CheckTag(tag);
-    }
 
     [Route("api/add/tag/{recipeId}")]
     [HttpPost]
@@ -27,41 +20,7 @@ public class TagsController: ControllerBase
     {
         _tagsService.AddTagToRecipe(_tagsService.GetTagId(tagname), recipeId);
     }
-
-    [Route("api/tags/{id}")]
-    [HttpDelete]
-    public IActionResult DeleteTag([FromRoute] int id)
-    {
-        if (GetTagById(id) == null)
-            return NotFound("Tag not found");
-            
-        if (_tagsService.DeleteTag(id))
-            return Ok("Tag deleted");
-       
-        return BadRequest("Tag not deleted");
-       
-    }
     
-    [Route("api/tags")]
-    [HttpPut]
-    public Tag UpdateTag([FromBody] Tag tag)
-    {
-        return _tagsService.UpdateTag(tag);
-    }
-    
-    [Route("api/tagname")]
-    [HttpGet]
-    public Tag GetTagByName([FromQuery] string name)
-    {
-        return _tagsService.GetTagByName(name);
-    }
-    
-    [Route("api/tags")]
-    [HttpGet]
-    public List<Tag> GetAllTags()
-    {
-        return _tagsService.GetAllTags();
-    }
     
     [Route("api/tags/recipe/{recipeId}")]
     [HttpGet]
@@ -70,12 +29,6 @@ public class TagsController: ControllerBase
         return _tagsService.GetTagsByRecipeId(recipeId);
     }
     
-    [Route("api/tags/{id}")]
-    [HttpGet]
-    public Tag GetTagById([FromRoute] int id)
-    {
-        return _tagsService.GetTagById(id);
-    }
     
     [Route("api/tagnames/{recipeId}")]
     [HttpGet]

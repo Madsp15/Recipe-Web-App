@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Credentials, Recipe, Registration, User} from "../app/models";
+import {Credentials, Registration, User} from "../app/models";
 import {firstValueFrom} from "rxjs";
 
 

@@ -8,14 +8,12 @@ namespace service;
 public class UserService
 {
     private readonly UserRepository _userRepository;
-    private readonly PasswordHashAlgorithm _passwordHashAlgorithm;
     private readonly PasswordRepository _passwordRepository;
     private readonly RecipeService _recipeService;
 
-    public UserService(UserRepository userRepository, PasswordHashAlgorithm passwordHashAlgorithm, PasswordRepository passwordRepository, RecipeService recipeService)
+    public UserService(UserRepository userRepository, PasswordRepository passwordRepository, RecipeService recipeService)
     {
         _userRepository = userRepository;
-        _passwordHashAlgorithm = passwordHashAlgorithm;
         _passwordRepository = passwordRepository;
         _recipeService = recipeService;
     }
@@ -36,7 +34,7 @@ public class UserService
 
     public bool DeleteUser(int userId)
     {
-        if (_passwordRepository.Deletepassword(userId)==true)
+        if (_passwordRepository.DeletePassword(userId)==true)
         {
             if (_recipeService.DeleteAllRecipesFromUser(userId)==true)
             {
@@ -55,37 +53,4 @@ public class UserService
     {
         return _userRepository.GetAllUsers();
     }
-
-    
-    public bool FollowUser(int userId, int userIdToFollow)
-    {
-        return _userRepository.FollowUser(userId, userIdToFollow);
-    }
-    
-    public bool UnfollowUser(int userId, int userIdToUnfollow)
-    {
-        return _userRepository.UnfollowUser(userId, userIdToUnfollow);
-    }
-    
-    public IEnumerable<User> GetFollowers(int userId)
-    {
-        return _userRepository.GetFollowers(userId);
-    }
-    
-    public IEnumerable<User> GetFollowing(int userId)
-    {
-        return _userRepository.GetFollowing(userId);
-    }
-    
-    public bool SaveRecipe(int userId, int recipeId)
-    {
-        return _userRepository.saveRecipe(userId, recipeId);
-    }
-    
-    public bool UnsaveRecipe(int userId, int recipeId)
-    {
-        return _userRepository.unsaveRecipe(userId, recipeId);
-    }   
-    
-   
 }

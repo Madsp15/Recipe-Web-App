@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {AlertController, IonicModule} from "@ionic/angular";
 import {RecipeService} from "../../../../services/recipe.service";
 import {Recipe, User} from "../../../models";

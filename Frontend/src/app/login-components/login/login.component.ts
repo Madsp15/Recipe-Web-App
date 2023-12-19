@@ -62,8 +62,6 @@ export class LoginComponent {
           duration: 5000
         })).present();
       }
-
-
   }
 
   clickSignUp() {
@@ -75,5 +73,4 @@ export class LoginComponent {
     this.router.navigate(['login/forgot-password'], {replaceUrl:true});
     console.log('Forgot Password clicked');
   }
-
 }
