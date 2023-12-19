@@ -11,6 +11,11 @@ export interface Recipe {
   dateCreated?: string;
 }
 
+export interface RecipeIngredient{
+  recipeId?: number;
+  ingredientId?: number;
+}
+
 export interface Credentials {
   email: string;
   password: string;
@@ -33,6 +38,7 @@ export interface Registration {
 }
 
 export interface Ingredients{
+  ingredientId?: number;
   quantity?: number;
   unit?: string;
   ingredientName?: string;
@@ -48,4 +54,5 @@ export interface Review{
   comment?: string;
   rating?: number;
 }
+
 

@@ -20,7 +20,7 @@
         <app-rating [rating]="averageRating || 0"></app-rating>
       </ion-col>
     </ion-row>
-    <h3 (click)="clickTitle(recipe?.recipeId)">{{recipe?.title}}</h3>
+    <h3 style="cursor: pointer;" (click)="clickTitle(recipe?.recipeId)">{{recipe?.title}}</h3>
     <div class="description-container">
       <p class="description">{{recipe?.description}}</p>
     </div>

@@ -6,7 +6,7 @@
     <ion-card-title (click)="clickRecipeTitle()" class="recipe-title">{{this.recipeService.currentRecipe.title}}</ion-card-title>
 
     <div class="subtitle-line">
-      <span>By: {{getUser(this.recipeService.currentRecipe.userId)}}</span>
+      <span style="cursor: pointer" (click)="clickUser(this.recipeService.currentRecipe.userId)">By: {{getUser(this.recipeService.currentRecipe.userId)}}</span>
     </div>
 
     <ion-card-subtitle class="description">{{this.recipeService.currentRecipe.description}}.</ion-card-subtitle>

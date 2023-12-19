@@ -77,10 +77,10 @@ public class TagsController: ControllerBase
         return _tagsService.GetTagNamesByRecipeId(recipeId);
     }
 
-    [Route("api/tags/{tagname}")]
+    [Route("api/tag/{tagname}/recipe/{recipeId}")]
     [HttpDelete]
-    public bool DeleteTagByName(string tagname)
+    public bool DeleteTagByName(string tagname, int recipeId)
     {
-        return _tagsService.DeleteTagByName(tagname);
+        return _tagsService.DeleteTagByName(tagname, recipeId);
     }
 }

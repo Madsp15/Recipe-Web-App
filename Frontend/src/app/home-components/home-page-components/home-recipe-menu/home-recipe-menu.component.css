@@ -5,7 +5,7 @@
 .ion-text-top{
   font-size: 20px;
   margin-top: 50px;
-  margin-left: 40px;
+  margin-left: 60px;
 }
 
 .container {
@@ -18,7 +18,7 @@
 
 .refresh-button {
   position: absolute;
-  margin-left: 550px;
+  margin-left: 555px;
   margin-top: -58px;
   cursor: pointer;
   width: 20px;

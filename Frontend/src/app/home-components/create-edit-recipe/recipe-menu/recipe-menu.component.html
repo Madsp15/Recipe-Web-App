@@ -1,7 +1,7 @@
 <ion-content>
 
   <div class="ion-text-top">
-    <h1>Create new Recipe</h1>
+    <h1>{{ this.recipeService.isEdit ? 'Edit Recipe' : 'Create New Recipe' }}</h1>
   </div>
 
     <ion-row>
@@ -40,9 +40,9 @@
 
             <ion-item>
               <ion-label position="stacked">Duration:</ion-label>
-              <ion-input type="text" [formControl]="durationInput" [placeholder]="'Enter duration in ' + durationUnit"></ion-input>
+              <ion-input type="number" [(ngModel)]="durationValue" (ngModelChange)="updateDuration()" [placeholder]="'Enter duration in ' + durationUnit"></ion-input>
 
-              <ion-select [(ngModel)]="durationUnit" (ionChange)="updateDuration()">
+              <ion-select [(ngModel)]="durationUnit" (ngModelChange)="updateDuration()">
                 <ion-select-option value="minutes">Minutes</ion-select-option>
                 <ion-select-option value="hours">Hours</ion-select-option>
               </ion-select>

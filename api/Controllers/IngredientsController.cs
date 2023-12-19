@@ -31,7 +31,14 @@ public class IngredientsController : ControllerBase
         return _service.DeleteIngredient(id) ? Ok() : Problem();
         
     }
-    
+
+    [Route("api/add/ingredient/recipe/{recipeId}")]
+    [HttpPost]
+    public void AddIngredientToRecipe([FromBody]Ingredients ingredient, [FromRoute]int recipeId)
+    {
+        _service.AddOneIngredientToRecipe(ingredient, recipeId);
+    }
+
     [Route("api/ingredients")]
     [HttpPut]
     public Ingredient UpdateIngredient([FromBody] Ingredient ingredient)
@@ -53,15 +60,11 @@ public class IngredientsController : ControllerBase
         return _service.CreateRecipeIngredient(recipeIngredient);
     }
     
-    [Route("api/recipeingredients/{id}")]
+    [Route("api/delete/recipeingredients/{ingredientId}/{recipeId}")]
     [HttpDelete]
-    public IActionResult DeleteRecipeIngredient([FromRoute] int id)
+    public bool DeleteRecipeIngredient([FromRoute] int ingredientId, int recipeId)
     {
-        if(_service.DeleteRecipeIngredient(id) == null)
-        {
-            return NotFound("RecipeIngredient not found");
-        }
-        return _service.DeleteRecipeIngredient(id) ? Ok() : Problem();
+        return _service.DeleteRecipeIngredient(ingredientId, recipeId);
     }
     
     [Route("api/recipeingredients")]

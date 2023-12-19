@@ -184,13 +184,13 @@ public class TagsRepository
         }
     }
 
-    public bool DeleteTagByName(int tagId)
+    public bool DeleteTagByName(int tagId, int recipeId)
     {
-        var sql = $@"DELETE FROM recipeTags WHERE tagid = @tagId;";
+        var sql = $@"DELETE FROM recipeTags WHERE recipeId = @recipeId AND tagId = @tagId;";
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.Execute(sql, new { tagId }) == 1;
+            return conn.Execute(sql, new { tagId, recipeId}) == 1;
         }
     }
 }

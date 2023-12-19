@@ -92,14 +92,14 @@ public class TagsService
         return _repository.GetTagNamesByRecipeId(recipeId);
     }
 
-    public bool DeleteTagByName(string tagname)
+    public bool DeleteTagByName(string tagname, int recipeId)
     {
         List<Tag> tags = _repository.GetAllTags();
         foreach (Tag tag in tags)
         {
             if (tagname.Equals(tag.TagName))
             {
-                return _repository.DeleteTagByName(tag.TagId);
+                return _repository.DeleteTagByName(tag.TagId, recipeId);
             }
         }
 

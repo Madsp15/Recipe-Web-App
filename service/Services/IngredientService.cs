@@ -35,9 +35,9 @@ public class IngredientService
     {
         return _ingredientRepository.CreateRecipeIngredient(recipeIngredient);
     }
-    public bool DeleteRecipeIngredient(int id)
+    public bool DeleteRecipeIngredient(int ingredientId, int recipeId)
     {
-        return _ingredientRepository.DeleteRecipeIngredient(id);
+        return _ingredientRepository.DeleteRecipeIngredient(ingredientId, recipeId);
     }
     public RecipeIngredient UpdateRecipeIngredient(RecipeIngredient recipeIngredient)
     {
@@ -51,6 +51,37 @@ public class IngredientService
     {
         return _ingredientRepository.GetAllIngredientsFromRecipe(id);
     }
+
+    public void AddOneIngredientToRecipe(Ingredients ingredient, int recipeId)
+    {
+        Ingredient existingIngredient = GetIngredientByName(ingredient.IngredientName);
+        if (existingIngredient != null)
+        {
+            RecipeIngredient recipeIngredient = new RecipeIngredient()
+            {
+                IngredientId = existingIngredient.IngredientId,
+                Quantity = ingredient.Quantity,
+                Unit = ingredient.Unit,
+                RecipeId = recipeId
+            };
+
+            _ingredientRepository.CreateRecipeIngredient(recipeIngredient);
+        }
+        else
+        {
+            Ingredient newIngredient = CreateIngredient(new Ingredient { IngredientName = ingredient.IngredientName });
+                
+            RecipeIngredient recipeIngredient = new RecipeIngredient()
+            {
+                IngredientId = newIngredient.IngredientId,
+                Quantity = ingredient.Quantity,
+                Unit = ingredient.Unit,
+                RecipeId = recipeId
+            };
+            _ingredientRepository.CreateRecipeIngredient(recipeIngredient);
+        }
+    }
+
 
     public void AddIngredientsToRecipe(List<Ingredients> ingredients, int recipeId)
     {

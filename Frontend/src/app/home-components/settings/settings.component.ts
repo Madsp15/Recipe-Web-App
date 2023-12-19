@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
+import {AlertController, IonicModule} from "@ionic/angular";
 import {AccountService} from "../../../services/account.service";
 import {User} from "../../models";
 import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {routes} from "../../app.routes";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {TokenService} from "../../../services/token.service";
 
 @Component({
@@ -33,23 +32,44 @@ export class SettingsComponent {
   constructor(public accountService: AccountService,
               private http: HttpClient,
               private router: Router,
-              private token: TokenService) {
+              private token: TokenService,
+              private  alertController :AlertController) {
     this.autofill();
   }
 
 
   async clickDeleteUser() {
-    if(confirm("Are you sure you want to delete your account? This will also Delete all your recipes and reviews. And is irreversible.")) {
-    try {
-      const account: User = await firstValueFrom(this.accountService.getCurrentUser());
-      const call = this.http.delete<boolean>('http://localhost:5280/api/users/' + account.userId,);
-      const result = await firstValueFrom<boolean>(call)
-      this.token.clearToken();
-      await this.router.navigate(['/login'], {replaceUrl: true});
+    const alert = await this.alertController.create({
+      header: 'Delete Account',
+      message: 'Are you sure you want to delete your account? All your recipes will be deleted and changes cannot be reverted.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: async () => {
+            try {
+              const account: User = await firstValueFrom(this.accountService.getCurrentUser());
+              const call = this.http.delete<boolean>('http://localhost:5280/api/users/' + account.userId);
+              const result = await firstValueFrom<boolean>(call);
+              this.token.clearToken();
+              await this.router.navigate(['/login'], { replaceUrl: true });
 
-    } catch (error) {
-    }
-    }
+            } catch (error) {
+              console.error('Error during account deletion:', error);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async autofill() {
@@ -60,7 +80,6 @@ export class SettingsComponent {
         email: account.email,
       }
     )
-
   }
 
   async clickSaveChanges() {

@@ -30,6 +30,7 @@ export class RecipeComponent  implements OnInit{
   instructions: string[] = [];
   image: string | null = "";
   userCreator: string | undefined = "";
+  tags: string[] = [];
 
 
   async ngOnInit() {
@@ -37,6 +38,7 @@ export class RecipeComponent  implements OnInit{
     this.getIngredients();
     this.getInstructions();
     this.filledOutAuthor();
+    this.getTags();
 
 
   }
@@ -81,6 +83,18 @@ export class RecipeComponent  implements OnInit{
   }
 
 
+  async getTags(){
+    try {
+      const id = this.recipeService.currentRecipe.recipeId
+      const call = `http://localhost:5280/api/tagnames/${id}`;
+      console.log("Tags: "+this.tags)
+      const results = await firstValueFrom(this.http.get<string[]>(call));
+      this.tags = results;
+    } catch (error) {
+      console.error('Error fetching tags ', error);
+      throw error;
+    }
+  }
 
 
   async leaveReview() {

@@ -55,4 +55,8 @@ export class HomeRecipeComponent  implements OnInit {
   clickRecipeImg() {
     this.router.navigate(['home/recipedetails/', this.recipeService.currentRecipe.recipeId], {replaceUrl:true})
   }
+
+  clickUser(userId: number | undefined) {
+    this.router.navigate(['home/profile/', userId], {replaceUrl:true})
+  }
 }

@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
-import {Ingredients, Recipe} from "../../../models";
+import {Ingredients, Recipe, RecipeIngredient} from "../../../models";
 import {firstValueFrom} from "rxjs";
 
 @Component({
@@ -31,14 +31,10 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   }
 
   ngOnInit() {
-    if(this.recipeService.isEdit){
-    this.autofill();}
-  }
-
-  autofill() {
-    this.getIngredients();
-    this.getInstructions();
-
+    if(this.recipeService.isEdit) {
+      this.getIngredients();
+      this.getInstructions();
+    }
   }
 
 
@@ -46,7 +42,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     try {
       const id = this.recipeService.currentRecipe.recipeId;
       const call = `http://localhost:5280/api/recipeingredients/recipe/${id}`;
-      this.ingredients = await firstValueFrom(this.http.get<any>(call));
+      this.ingredients = await firstValueFrom(this.http.get<Ingredients[]>(call));
       console.log('Recipe Ingredients:', this.ingredients);
     } catch (error) {
       console.error('Error fetching recipe ingredients:', error);
@@ -87,16 +83,28 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     console.log(this.instructions)
   }
 
-  addIngredient() {
-    const newIngredient = { ...this.newIngredient }; // Create a copy of the new ingredient
-    this.ingredients.push(newIngredient); // Add the new ingredient to the array
-    this.newIngredient = { quantity: 0, unit: '', ingredientName: '' }; // Reset for the next entry
+  async addIngredient() {
+      const newIngredient = {...this.newIngredient}; // Create a copy of the new ingredient
+      this.ingredients.push(newIngredient); // Add the new ingredient to the array
+      this.newIngredient = {quantity: 0, unit: '', ingredientName: ''}; // Reset for the next entry
+    if (this.recipeService.isEdit) {
+      try {
+        const id = this.recipeService.currentRecipe.recipeId;
+        const call = `http://localhost:5280/api/add/ingredient/recipe/${id}`;
+        const result = await firstValueFrom(this.http.post<Ingredients[]>(call, newIngredient, { responseType: 'json' }));
+        console.log('Recipe Ingredients:', this.ingredients);
+      } catch (error) {
+        console.error('Error fetching recipe ingredients:', error);
+        throw error;
+      }
+    }
   }
 
 
 
   clickCancel() {
-
+    const recipeFormGroup = this.recipeService.getFormGroup();
+    console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
   }
 
   async clickNext() {
@@ -105,8 +113,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
       console.log(this.recipeService.getFormGroup()?.value)
       const recipeFormGroup = this.recipeService.getFormGroup();
       recipeFormGroup?.get('instructions')?.setValue(data);
-      recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
-      console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
+      console.log('Full Form Group Edit: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
       try {
         const call = this.http.put<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
@@ -116,50 +123,43 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
         const toast = await this.toastController.create({
           color: 'success',
           duration: 2000,
-          message: "Successfully created new recipe"
+          message: "Successfully updated recipe"
         })
         this.recipeService.isEdit = false;
         toast.present();
-        this.router.navigate(['/home'], {replaceUrl:true});
+        //this.router.navigate(['/home'], {replaceUrl:true});
       } catch (error: any) {
         console.log(error);
       }
     }
 
-    const data = this.serializeData();
-    console.log(this.recipeService.getFormGroup()?.value)
-    const recipeFormGroup = this.recipeService.getFormGroup();
-    recipeFormGroup?.get('instructions')?.setValue(data);
-    recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
-    console.log('Full Form Group:', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
+    else {
+      const data = this.serializeData();
+      console.log(this.recipeService.getFormGroup()?.value)
+      const recipeFormGroup = this.recipeService.getFormGroup();
+      recipeFormGroup?.get('instructions')?.setValue(data);
+      console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
-    try {
-      const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
-      const result = await firstValueFrom<Recipe>(call)
-      this.recipeService.recipes.push(result);
+      try {
+        const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
+        const result = await firstValueFrom<Recipe>(call)
+        this.recipeService.recipes.push(result);
 
-      if (result.recipeId != null) {
-        const response = await this.uploadPicture(result.recipeId);
-        const data = await firstValueFrom(response);
+        if (result.recipeId != null) {
+          const response = await this.uploadPicture(result.recipeId);
+          const data = await firstValueFrom(response);
+        }
+        const toast = await this.toastController.create({
+          color: 'success',
+          duration: 2000,
+          message: "Successfully created recipe"
+        })
+        toast.present();
+        this.router.navigate(['/home'], {replaceUrl: true});
+      } catch (error: any) {
+        console.log(error);
       }
-      const toast = await this.toastController.create({
-        color: 'success',
-        duration: 2000,
-        message: "Successfully updated recipe"
-      })
-      toast.present();
-      this.router.navigate(['/home'], {replaceUrl:true});
-    } catch (error: any) {
-      console.log(error);
     }
-  }
-
-  clickEditInstruction(i: number) {
-
-  }
-
-
-  clickEditIngredient() {
   }
 
   clickDeleteInstruction(index: number) {
@@ -167,15 +167,22 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   }
 
   clickDeleteIngredient(index: number) {
-    this.ingredients.splice(index, 1);
+    if(this.recipeService.isEdit){
+      const ingredient = this.ingredients[index].ingredientId;
+      const recipeId = this.recipeService.currentRecipe.recipeId;
+      const call = firstValueFrom(this.http.delete<any>('http://localhost:5280/api/delete/recipeingredients/'+ingredient+'/'+recipeId));
+    }
+      this.ingredients.splice(index, 1);
+    if(this.ingredients[index].ingredientId == undefined){
+      this.ingredients.splice(index, 1);
+    }
   }
 
-  uploadPicture(id: number) {
 
+  uploadPicture(id: number) {
     const formData = new FormData();
     formData.append('picture', this.recipeService.storedIFormFile[0]);
     return this.http.put<Recipe>('http://localhost:5280/api/recipes/picture/'+id, formData,{
     });
-
   }
 }

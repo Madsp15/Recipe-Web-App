@@ -48,24 +48,6 @@ export class RecipeProfileComponent implements OnInit {
 
 
   async ngOnInit(){
-    /*var account:User = await firstValueFrom(this.account.getCurrentUser());
-
-    this.email = account.email;
-    this.username = account.userName;
-    this.avatarUrl = account.userAvatarUrl;
-    if(account.moreInfo==""){
-      this.moreInfo = "Click here to write a short description about yourself"
-    } else this.moreInfo = account.moreInfo;
-
-    await this.fetchRecipes();*/
-
-
-    await (await this.toast.create({
-      cssClass: 'mytoast',
-      message: "Did you know you can click on your profile picture to change it?",
-      icon: "information-circle-outline",
-      duration: 5000
-    })).present();
     this.getUser();
     this.fetchRecipes();
   }

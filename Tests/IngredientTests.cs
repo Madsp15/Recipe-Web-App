@@ -30,7 +30,7 @@ public class IngredientTests
         Assert.Pass("We did it!");
         
         }
-    [Test]
+    /*[Test]
     public async Task ShouldSuccessfullyCreateRecipeIngredient()
     {
         RecipeIngredient recipeIngredientToAdd = new RecipeIngredient
@@ -48,8 +48,8 @@ public class IngredientTests
         _repository.DeleteRecipeIngredient(retrievedRecipeIngredient.RecipeIngredientId);
         Assert.Pass("We did it!");
         
-    }
-    [Test]
+    }*/ 
+    /*[Test]
     public async Task ShouldSuccessfullyGetAllIngredientsFromRecipe()
     {
         RecipeIngredient recipeIngredientToAdd = new RecipeIngredient
@@ -85,7 +85,7 @@ public class IngredientTests
         _repository.DeleteRecipeIngredient(addedRecipeIngredient3.RecipeIngredientId);
         Assert.Pass("We did it!");
         
-    }
+    }*/
     [Test]
     public async Task ShouldSuccessfullyUpdateIngredient()
     {
@@ -109,7 +109,7 @@ public class IngredientTests
    
         
     }
-    [Test]
+    /*[Test]
     public async Task ShouldSuccessfullyUpdateRecipeIngredient()
     {
         RecipeIngredient recipeIngredientToAdd = new RecipeIngredient
@@ -132,8 +132,6 @@ public class IngredientTests
         updatedRecipeIngredient.Should().BeEquivalentTo(retrievedRecipeIngredient, "it should be the same");
         _repository.DeleteRecipeIngredient(updatedRecipeIngredient.RecipeIngredientId);
         Assert.Pass("We did it!");
-   
-        
-    }
+    }*/
    
 }

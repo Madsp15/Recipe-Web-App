@@ -100,16 +100,57 @@ public class IngredientRepository
             });
         }
     }
-    public bool DeleteRecipeIngredient(int id)
+
+    /*public bool DeleteRecipeIngredient(List<RecipeIngredient> recipeIngredients)
     {
-        var sql = $@"DELETE FROM recipeingredients WHERE recipeIngredientId = @id;";
+        if (recipeIngredients == null || recipeIngredients.Count == 0)
+        {
+            return false;
+        }
+
+        var sql = "DELETE FROM recipeingredients WHERE recipeId = @recipeId AND ingredientId = @ingredientId";
+
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            foreach (var recipeIngredient in recipeIngredients)
+            {
+                var affectedRows = conn.Execute(sql,
+                    new { recipeId = recipeIngredient.RecipeId, ingredientId = recipeIngredient.IngredientId });
+
+                if (affectedRows == 0)
+                {
+                    return false; 
+                }
+            }
+        }
+
+        return true; 
+    }*/
+
+    public bool DeleteRecipeIngredient(int ingredientId, int recipeId)
+    {
+        var sql = $@"DELETE FROM recipeingredients WHERE recipeId = @recipeId AND ingredientId = @ingredientId";
         
         using (var conn = DataConnection.DataSource.OpenConnection())
         {
-            return conn.Execute(sql, new { id }) == 1;
+            return conn.Execute(sql, new { ingredientId, recipeId }) == 1;
         }
     }
-    
+
+
+    public Ingredients GetIngredientNameByRecipeId(int recipeId)
+    {
+        var sql = $@"SELECT ingredients.*
+                FROM ingredients
+                JOIN recipeingredients ON ingredients.ingredientid = recipeingredients.ingredientid
+                WHERE recipeingredients.recipeid = @recipeId;";
+        
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Ingredients>(sql, new { recipeId });
+        }
+    }
+
     public RecipeIngredient UpdateRecipeIngredient(RecipeIngredient recipeIngredient)
     {
         var sql = $@"UPDATE recipeingredients

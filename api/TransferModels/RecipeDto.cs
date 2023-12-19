@@ -5,6 +5,7 @@ namespace Recipe_Web_App.TransferModels;
 
 public class RecipeDto
 {
+    public int RecipeId { get; set; }
     [Required] public string Title { get; set; }
     [Required] public string Description { get; set; }
     [Required] public int Servings { get; set; }

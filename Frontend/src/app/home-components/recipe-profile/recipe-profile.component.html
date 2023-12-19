@@ -9,7 +9,7 @@
       <h3>
         {{userService.currentUser.userName}}
       </h3>
-      <ion-input *ngIf="isEditMode" [(ngModel)]="editedDescription" (keyup.enter)="saveChanges()"></ion-input>
+      <ion-input [placeholder]="'Click here to edit your description!'" *ngIf="isEditMode" [(ngModel)]="editedDescription" (keyup.enter)="saveChanges()"></ion-input>
       <p *ngIf="!isEditMode" (click)="clickEdit()">{{ userService.currentUser.moreInfo }} </p>
     </ion-title>
     <ion-buttons slot="end">

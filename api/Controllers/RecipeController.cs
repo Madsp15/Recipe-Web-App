@@ -37,8 +37,8 @@ public class RecipeController : ControllerBase
         var recipe = _service.CreateRecipe(createdRecipe);
         
         _tagService.AddTagsToRecipe(recipe.RecipeId, _tagService.GetTagIds(recipeDto.SelectedTags));
-        Console.WriteLine("Recipe ingredients: "+recipeDto.Ingredients);
         _ingredientService.AddIngredientsToRecipe(recipeDto.Ingredients, recipe.RecipeId);
+        Console.WriteLine("Recipe ingredients: "+recipeDto.Ingredients);
 
         return recipe;
     }
@@ -52,9 +52,20 @@ public class RecipeController : ControllerBase
 
     [Route("api/recipes")]
     [HttpPut]
-    public Recipe UpdateRecipe([FromBody] Recipe recipe)
+    public Recipe UpdateRecipe([FromBody] RecipeDto recipeDto)
     {
-        return _service.UpdateRecipe(recipe);
+        Recipe existingRecipe = _service.GetRecipeById(recipeDto.RecipeId);
+        existingRecipe.Title = recipeDto.Title;
+        existingRecipe.UserId = recipeDto.UserId;
+        existingRecipe.Instructions = recipeDto.Instructions;
+        existingRecipe.RecipeURL = recipeDto.RecipeURL;
+        existingRecipe.Description = recipeDto.Description;
+        existingRecipe.Servings = recipeDto.Servings;
+        existingRecipe.Duration = recipeDto.Duration;
+
+        
+        var recipe = _service.UpdateRecipe(existingRecipe);
+        return recipe;
     }
     
     [Route("api/recipes")]
