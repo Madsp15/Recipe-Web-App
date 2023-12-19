@@ -1,5 +1,4 @@
 using FluentAssertions;
-using infrastructure;
 using infrastructure.Models;
 using infrastructure.Repositories;
 
