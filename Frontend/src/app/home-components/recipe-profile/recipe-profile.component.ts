@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import {IonicModule, ToastController} from "@ionic/angular";import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
 import {FormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
 import {Recipe, User} from "../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../services/account.service";
 import {RecipeService} from "../../../services/recipe.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 
 @Component({
@@ -26,6 +26,7 @@ export class RecipeProfileComponent implements OnInit {
     public recipeService: RecipeService,
     private http : HttpClient,
     private route : ActivatedRoute,
+    private router: Router,
     public userService : UserService) {}
 
 
@@ -84,6 +85,7 @@ export class RecipeProfileComponent implements OnInit {
         this.disableMethods();
       }
     } catch (e) {
+      
     }
   }
 

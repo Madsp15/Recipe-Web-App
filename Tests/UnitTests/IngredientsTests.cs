@@ -1,12 +1,11 @@
 using FluentAssertions;
 using infrastructure.Models;
 using infrastructure.Repositories;
-
 namespace PlaywrightTests;
 
-public class IngredientTests
+public class IngredientsTests
 {
-    private IngredientRepository _repository;
+     private IngredientRepository _repository;
     
     [SetUp]
     public void Setup()
@@ -24,7 +23,6 @@ public class IngredientTests
         Ingredient addedIngredient = _repository.CreateIngredient(ingredientToAdd);
         
         Ingredient retrievedIngredient = _repository.GetIngredientByName(addedIngredient.IngredientName);
-        
         retrievedIngredient.Should().BeEquivalentTo(addedIngredient, "it should be the same");
         _repository.DeleteIngredient(retrievedIngredient.IngredientId);
         Assert.Pass("We did it!");
@@ -135,5 +133,4 @@ public class IngredientTests
    
         
     }
-   
 }

@@ -5,6 +5,7 @@ import {TokenService} from "../../../../services/token.service";
 import {User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../../services/account.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-toolbar',
@@ -38,10 +39,15 @@ export class ToolbarComponent  implements OnInit {
   }
 
   async clickProfile() {
-    var account:User = await firstValueFrom(this.accountService.getCurrentUser());
-    this.router.navigate(['/home/profile', account.userId], {replaceUrl:true})
+    try {
+      var account: User = await firstValueFrom(this.accountService.getCurrentUser());
+      this.router.navigate(['/home/profile', account.userId], {replaceUrl: true})
+    } catch (e) {
+      if (e instanceof HttpErrorResponse && e.status == 401) {
+        await this.router.navigate(['/login'], {replaceUrl: true});
+      }
+    }
   }
-
   clickSearch() {
     this.router.navigate(['/home/search'], {replaceUrl:true})
   }

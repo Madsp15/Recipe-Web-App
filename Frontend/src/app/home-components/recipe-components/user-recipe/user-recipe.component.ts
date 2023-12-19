@@ -86,4 +86,12 @@ export class UserRecipeComponent implements OnInit{
 
     this.isCurrentUserRecipe = account.userId === this.recipe?.userId;
   }
+  getAvatarUrl(userId: number | undefined) {
+    const user = this.userService.getUserByIdFromList(userId);
+    return user ? user.userAvatarUrl : 'Unknown File';
+  }
+
+  clickTitle(recipeId: number | undefined) {
+    this.router.navigate(['home/recipedetails/', recipeId], {replaceUrl:true})
+  }
 }

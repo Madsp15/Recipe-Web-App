@@ -1,3 +1,4 @@
+using api.Middleware;
 using Azure.Storage.Blobs;
 using infrastructure;
 using infrastructure.Repositories;
@@ -123,6 +124,7 @@ var app = builder.Build();
     app.UseStaticFiles();
     app.UseRouting();
 app.UseMiddleware<TokenBearerHandler>();
+app.UseMiddleware<GlobalExceptionHandler>();
 
 
     app.MapControllerRoute(
