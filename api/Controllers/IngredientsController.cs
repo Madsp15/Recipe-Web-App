@@ -87,6 +87,14 @@ public class IngredientsController : ControllerBase
     {
         return _service.GetIngredientsForRecipe(id);
     }
-    
-    
+
+    [Route("api/recipeingredients/recipe/{id}/{tagname}")]
+    [HttpDelete]
+    public bool DeleteRecipeIngredientsByName(string tagname, int id)
+    {
+        return _service.DeleteIngredientsByName(tagname, id);
+    }
+
+
+
 }

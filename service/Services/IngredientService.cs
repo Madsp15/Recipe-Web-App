@@ -116,4 +116,17 @@ public class IngredientService
             }
         }
     }
+    public bool DeleteIngredientsByName(string tagname, int recipeId)
+    {
+        IEnumerable<Ingredient> ingredients = _ingredientRepository.GetAllIngredients();
+        foreach (Ingredient  ingredient in ingredients)
+        {
+            if (tagname.Equals(ingredient.IngredientName))
+            {
+               return _ingredientRepository.DeleteIngredientsFromRecipeByName(ingredient.IngredientId, recipeId);
+            }
+        }
+
+        return false;
+    }
 }

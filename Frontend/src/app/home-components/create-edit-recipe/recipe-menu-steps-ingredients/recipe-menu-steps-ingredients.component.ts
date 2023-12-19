@@ -170,7 +170,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     if(this.recipeService.isEdit){
       const ingredient = this.ingredients[index].ingredientId;
       const recipeId = this.recipeService.currentRecipe.recipeId;
-      const call = firstValueFrom(this.http.delete<any>('http://localhost:5280/api/delete/recipeingredients/'+ingredient+'/'+recipeId));
+      const call = firstValueFrom(this.http.delete<any>('http://localhost:5280/api/recipeingredients/recipe/'+ingredient+'/'+recipeId));
     }
       this.ingredients.splice(index, 1);
     if(this.ingredients[index].ingredientId == undefined){
