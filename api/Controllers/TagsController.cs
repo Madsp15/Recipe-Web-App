@@ -20,7 +20,14 @@ public class TagsController: ControllerBase
     {
         return _tagsService.CheckTag(tag);
     }
-    
+
+    [Route("api/add/tag/{recipeId}")]
+    [HttpPost]
+    public void AddTagToRecipe([FromBody]string tagname, [FromRoute] int recipeId)
+    {
+        _tagsService.AddTagToRecipe(_tagsService.GetTagId(tagname), recipeId);
+    }
+
     [Route("api/tags/{id}")]
     [HttpDelete]
     public IActionResult DeleteTag([FromRoute] int id)

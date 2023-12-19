@@ -11,6 +11,7 @@ public class TagsService
     {
         _repository = repository;
     }
+
     public Tag CheckTag(Tag tags)
     {
         if (CheckIfTagExists(tags.TagName))
@@ -42,6 +43,26 @@ public class TagsService
         return tagIds;
     }
 
+    public int GetTagId(string tag)
+    {
+        int tagId;
+        Tag existingTags = GetTagByName(tag);
+            if (existingTags != null)
+            {
+                tagId = existingTags.TagId;
+            }
+
+            else
+            {
+                Tag newTag = CreateTag(new Tag { TagName = tag });
+                tagId = newTag.TagId;
+            }
+
+            return tagId;
+    }
+    
+
+
     public Tag CreateTag(Tag tags)
     {
         return _repository.CreateTag(tags);
@@ -72,6 +93,12 @@ public class TagsService
     {
         return _repository.AddTagsToRecipe(recipeId, tagIds);
     }
+
+    public bool AddTagToRecipe(int tagId, int recipeId)
+    {
+        return _repository.AddTagToRecipe(tagId, recipeId);
+    }
+
     public Tag GetTagById(int id)
     {
         return _repository.GetTagById(id);
@@ -102,7 +129,6 @@ public class TagsService
                 return _repository.DeleteTagByName(tag.TagId, recipeId);
             }
         }
-
         return false;
     }
 }

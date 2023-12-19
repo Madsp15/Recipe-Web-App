@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IonicModule, ToastController} from "@ionic/angular";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {RecipeService} from "../../../../services/recipe.service";
 import {RecipeMenuStepsIngredientsComponent} from "../recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component";
@@ -95,8 +95,7 @@ export class RecipeMenuComponent  implements OnInit {
   }
 
 
-  addTag(): void {
-    console.log('Adding tag:', this.recipeTags);
+  async addTag() {
     const newTag: string = this.recipeTags.trim();
     if (newTag && !this.selectedTags.includes(newTag)) {
       this.selectedTags.push(newTag);
@@ -104,9 +103,20 @@ export class RecipeMenuComponent  implements OnInit {
       console.log('Tags after addition:', this.selectedTags);
       this.formGroup.get('selectedTags')?.setValue(this.selectedTags);
     }
+    try {
+      console.log("newTag value: "+newTag)
+      const id = this.recipeService.currentRecipe.recipeId;
+      const call = `http://localhost:5280/api/add/tag/${id}`;
+      const requestBody = JSON.stringify(newTag);
+      console.log('Request Body:', requestBody);
+      await firstValueFrom(this.http.post<any>(call, requestBody, { headers: { 'Content-Type': 'application/json' } }));    }
+      catch(error){
+      console.error('Error adding tag: ', error);
+      throw error;
+    }
   }
 
-  deleteTag(tag: string): void {
+  async deleteTag(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index !== -1) {
 
@@ -116,7 +126,7 @@ export class RecipeMenuComponent  implements OnInit {
 
     if (this.recipeService.isEdit) {
       try {
-        this.http.delete<any>('http://localhost:5280/api/deletebytagname/' + tag);
+        await firstValueFrom(this.http.delete<any>('http://localhost:5280/api/tag/'+tag+'/recipe/'+this.recipeService.currentRecipe));
       } catch (error) {
         console.error('Error deleting tag from the backend:', error);
       }
@@ -139,7 +149,6 @@ export class RecipeMenuComponent  implements OnInit {
         recipeURL: recipe.recipeURL,
         servings: recipe.servings?.toString(),
         duration: recipe.duration,
-        selectedTags: this.selectedTags,
       });
 
       this.formGroup?.get('recipeId')?.setValue(recipe?.recipeId || 0);

@@ -116,7 +116,20 @@ public class TagsRepository
             return affectedRows > 0;
         }
     }
+    
+    public bool AddTagToRecipe(int tagId, int recipeId)
+    {
+        var sql = @"INSERT INTO recipeTags (tagId, recipeId)
+                VALUES (@tagId, @recipeId);";
 
+        using (var conn = DataConnection.DataSource.OpenConnection())
+        {
+            int affectedRows = conn.Execute(sql, new { tagId, recipeId });
+            return affectedRows == 1;
+        }
+    }
+
+    
     
     public List<Tag> GetTagsByRecipeId(int recipeId)
     {
