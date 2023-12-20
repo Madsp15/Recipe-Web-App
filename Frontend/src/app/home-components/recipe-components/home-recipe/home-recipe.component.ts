@@ -7,6 +7,7 @@ import {RecipeService} from "../../../../services/recipe.service";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../../../services/user.service";
 import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-home-recipe',
@@ -28,7 +29,7 @@ export class HomeRecipeComponent  implements OnInit {
   }
 
   async getRecipe(){
-    this.recipeService.currentRecipe = (await firstValueFrom(this.http.get<any>('http://localhost:5280/api/trending/recipe')));
+    this.recipeService.currentRecipe = (await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/trending/recipe')));
   }
 
   getUser(userId: number | undefined) {
@@ -39,7 +40,7 @@ export class HomeRecipeComponent  implements OnInit {
 
   async getAverageRating(recipeId: number | undefined) {
     try {
-      const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipe/averagerating/'+recipeId));
+      const response = await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/recipe/averagerating/'+recipeId));
       this.averageRating = response;
       console.log("Average rating: "+this.averageRating)
       console.log("API response: "+response)

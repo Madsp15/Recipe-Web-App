@@ -10,6 +10,7 @@ import {AccountService} from "../../../services/account.service";
 import {RecipeService} from "../../../services/recipe.service";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../services/user.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-recipe-profile',
@@ -55,11 +56,11 @@ export class RecipeProfileComponent implements OnInit {
       const currentUser: User = await firstValueFrom(this.account.getCurrentUser());
 
       if (currentUser.userId === parseInt(<string>idFromRoute)) {
-        this.userService.currentUser = (await firstValueFrom(this.http.get<User>('http://localhost:5280/api/users/' + idFromRoute)));
+        this.userService.currentUser = (await firstValueFrom(this.http.get<User>(environment.baseUrl +'/api/users/' + idFromRoute)));
 
         this.enableMethods();
       } else {
-        this.userService.currentUser = await firstValueFrom(this.http.get<User>('http://localhost:5280/api/users/' + idFromRoute));
+        this.userService.currentUser = await firstValueFrom(this.http.get<User>(environment.baseUrl +'/api/users/' + idFromRoute));
         this.disableMethods();
       }
     } catch (e) {
@@ -117,7 +118,7 @@ export class RecipeProfileComponent implements OnInit {
     const idString = (await firstValueFrom(this.route.paramMap)).get('userid');
     const id = parseInt(<string>idString);
     console.log(id)
-    const data = this.http.get<Recipe[]>("http://localhost:5280/api/recipes/user"+ id)
+    const data = this.http.get<Recipe[]>(environment.baseUrl +"/api/recipes/user"+ id)
     this.recipeService.recipes = await firstValueFrom<Recipe[]>(data);
     console.log("Recipes: "+this.recipeService.recipes);
     this.amountOfRecipes = this.recipeService.recipes.length.toString();

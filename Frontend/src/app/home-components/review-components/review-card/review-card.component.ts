@@ -6,6 +6,7 @@ import {AccountService} from "../../../../services/account.service";
 import {firstValueFrom} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-review-card',
@@ -39,7 +40,7 @@ export class ReviewCardComponent implements OnInit{
   }
   async clickDeleteReview(reviewID: number | undefined) {
     try {
-      const call = this.http.delete('http://localhost:5280/api/reviews/' + reviewID);
+      const call = this.http.delete(environment.baseUrl +'/api/reviews/' + reviewID);
       const response = await firstValueFrom(call);
       location.reload();
       const toast = await this.toastController.create({

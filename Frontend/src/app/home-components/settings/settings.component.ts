@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {TokenService} from "../../../services/token.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-settings',
@@ -56,7 +57,7 @@ export class SettingsComponent {
           handler: async () => {
             try {
               const account: User = await firstValueFrom(this.accountService.getCurrentUser());
-              const call = this.http.delete<boolean>('http://localhost:5280/api/users/' + account.userId);
+              const call = this.http.delete<boolean>(environment.baseUrl +'/api/users/' + account.userId);
               const result = await firstValueFrom<boolean>(call);
               this.token.clearToken();
               await this.router.navigate(['/login'], { replaceUrl: true });
@@ -84,12 +85,12 @@ export class SettingsComponent {
   async clickSaveChanges() {
     let account: User = await firstValueFrom(this.accountService.getCurrentUser());
     if (account.email != this.formGroup.getRawValue().email) {
-      const call = this.http.put<User>('http://localhost:5280/api/account/email/' + account.userId, {email: this.formGroup.getRawValue().email},);
+      const call = this.http.put<User>(environment.baseUrl +'/api/account/email/' + account.userId, {email: this.formGroup.getRawValue().email},);
       const result = await firstValueFrom<User>(call)
       console.log(result);
     }
     if (account.userName != this.formGroup.getRawValue().username) {
-      const call = this.http.put<User>('http://localhost:5280/api/account/Username/' + account.userId, {userName: this.formGroup.getRawValue().username},);
+      const call = this.http.put<User>(environment.baseUrl +'/api/account/Username/' + account.userId, {userName: this.formGroup.getRawValue().username},);
       const result = await firstValueFrom<User>(call)
       console.log(result);
     }

@@ -8,6 +8,7 @@ import {RecipeMenuStepsIngredientsComponent} from "../recipe-menu-steps-ingredie
 import {Ingredients, Recipe, User} from "../../../models";
 import {firstValueFrom} from "rxjs";
 import {AccountService} from "../../../../services/account.service";
+import {environment} from "../../../../environments/environment";
 
 
 
@@ -105,7 +106,7 @@ export class RecipeMenuComponent  implements OnInit {
     try {
       console.log("newTag value: "+newTag)
       const id = this.recipeService.currentRecipe.recipeId;
-      const call = `http://localhost:5280/api/add/tag/${id}`;
+      const call = environment.baseUrl +`/api/add/tag/${id}`;
       const requestBody = JSON.stringify(newTag);
       console.log('Request Body:', requestBody);
       await firstValueFrom(this.http.post<any>(call, requestBody, { headers: { 'Content-Type': 'application/json' } }));    }
@@ -125,7 +126,7 @@ export class RecipeMenuComponent  implements OnInit {
 
     if (this.recipeService.isEdit) {
       try {
-        await firstValueFrom(this.http.delete<any>('http://localhost:5280/api/tag/'+tag+'/recipe/'+this.recipeService.currentRecipe));
+        await firstValueFrom(this.http.delete<any>(environment.baseUrl +'/api/tag/'+tag+'/recipe/'+this.recipeService.currentRecipe));
       } catch (error) {
         console.error('Error deleting tag from the backend:', error);
       }
@@ -166,7 +167,7 @@ export class RecipeMenuComponent  implements OnInit {
   async getTags(){
     try {
       const id = this.recipeService.currentRecipe.recipeId
-      const call = `http://localhost:5280/api/tagnames/${id}`;
+      const call = environment.baseUrl +`/api/tagnames/${id}`;
       console.log("Tags: "+this.selectedTags)
       const results = await firstValueFrom(this.http.get<string[]>(call));
       this.selectedTags = results;

@@ -8,6 +8,7 @@ import {RecipeService} from "../../../../services/recipe.service";
 import {CommonModule} from "@angular/common";
 import {Ingredients} from "../../../models";
 import {UserService} from "../../../../services/user.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-recipe',
@@ -46,7 +47,7 @@ export class RecipeComponent  implements OnInit{
 
     try {
       const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      this.recipeService.currentRecipe = (await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipes/' + id)));
+      this.recipeService.currentRecipe = (await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/recipes/' + id)));
       this.image = <string>this.recipeService.currentRecipe.recipeURL;
     } catch (e) {
       this.router.navigate(['']);
@@ -56,7 +57,7 @@ export class RecipeComponent  implements OnInit{
   async getIngredients() {
     try {
     const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-    const call = `http://localhost:5280/api/recipeingredients/recipe/${id}`;
+    const call = environment.baseUrl +`/api/recipeingredients/recipe/${id}`;
       this.ingredients = await firstValueFrom(this.http.get<any>(call));
       console.log('Recipe Ingredients:', this.ingredients);
     } catch (error) {
@@ -68,7 +69,7 @@ export class RecipeComponent  implements OnInit{
   async getInstructions(): Promise<void> {
     try {
       const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      const call = `http://localhost:5280/api/recipes/${id}`;
+      const call = environment.baseUrl +`/api/recipes/${id}`;
       const response = await firstValueFrom(this.http.get<any>(call));
 
       const parsedResponse = JSON.parse(response.instructions);
@@ -86,7 +87,7 @@ export class RecipeComponent  implements OnInit{
   async getTags(){
     try {
       const id = this.recipeService.currentRecipe.recipeId
-      const call = `http://localhost:5280/api/tagnames/${id}`;
+      const call = environment.baseUrl +`/api/tagnames/${id}`;
       console.log("Tags: "+this.tags)
       const results = await firstValueFrom(this.http.get<string[]>(call));
       this.tags = results;

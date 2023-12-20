@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../services/recipe.service";
 import {FormsModule} from "@angular/forms";
 import {UserRecipeComponent} from "../recipe-components/user-recipe/user-recipe.component";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-recipe-search',
@@ -31,7 +32,7 @@ export class RecipeSearchComponent {
   }
 
   async getRecipes(){
-    const call = this.http.get<Recipe[]>('http://localhost:5280/api/recipes');
+    const call = this.http.get<Recipe[]>(environment.baseUrl +'/api/recipes');
     this.recipeService.recipes = await firstValueFrom<Recipe[]>(call);
   }
 }

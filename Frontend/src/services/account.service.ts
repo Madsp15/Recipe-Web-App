@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Credentials, Registration, User} from "../app/models";
 import {firstValueFrom} from "rxjs";
+import {environment} from "../environments/environment";
 
 
 
@@ -15,19 +16,19 @@ export class AccountService {
     let headers = new HttpHeaders( {
       authorization: 'Bearer '+sessionStorage.getItem('token')!
     })
-    return this.http.get<User>('http://localhost:5280/api/users/whoami', {headers: headers})
+    return this.http.get<User>(environment.baseUrl +'/api/users/whoami', {headers: headers})
   }
 
   login(value: Credentials) {
-    return this.http.post<{ token: string }>('http://localhost:5280/api/users/login', value);
+    return this.http.post<{ token: string }>(environment.baseUrl +'/api/users/login', value);
   }
 
   register(value: Registration) {
-    return this.http.post<any>('http://localhost:5280/api/users', value);
+    return this.http.post<any>(environment.baseUrl +'/api/users', value);
   }
 
   async update(value: User) {
-    return this.http.put<User>('http://localhost:5280/api/users/'+value.userId, value, {
+    return this.http.put<User>(environment.baseUrl +'/api/users/'+value.userId, value, {
     });
   }
   async updateAvatar(value: File) {
@@ -35,7 +36,7 @@ export class AccountService {
 
     const formData = new FormData();
     formData.append('avatar', value);
-    return this.http.put<User>('http://localhost:5280/api/users/' + user.userId + '/avatar', formData, {
+    return this.http.put<User>(environment.baseUrl +'/api/users/' + user.userId + '/avatar', formData, {
     });
   }
 }

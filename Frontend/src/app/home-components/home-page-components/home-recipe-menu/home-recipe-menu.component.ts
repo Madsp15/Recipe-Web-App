@@ -5,6 +5,7 @@ import {Recipe} from "../../../models";
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
 import {CommonModule} from "@angular/common";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-home-recipe-menu',
@@ -25,7 +26,7 @@ export class HomeRecipeMenuComponent {
   randomRecipes: Recipe[] = [];
   async getRandomRecipes() {
     try {
-      const call = this.http.get<Recipe[]>('http://localhost:5280/api/random/recipes');
+      const call = this.http.get<Recipe[]>(environment.baseUrl +'/api/random/recipes');
       this.randomRecipes = await firstValueFrom<Recipe[]>(call);
     } catch (error) {
       console.error('Error fetching random recipes:', error);

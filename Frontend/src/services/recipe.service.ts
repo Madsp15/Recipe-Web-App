@@ -3,6 +3,7 @@ import {Recipe, Review} from "../app/models";
 import {FormGroup} from "@angular/forms";
 import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../environments/environment";
 
 
 @Injectable({
@@ -31,7 +32,7 @@ export class RecipeService {
   }
 
     async getRecipes(){
-        const call = this.http.get<Recipe[]>('http://localhost:5280/api/recipes');
+        const call = this.http.get<Recipe[]>(environment.baseUrl +'/api/recipes');
         this.recipes = await firstValueFrom<Recipe[]>(call);
     }
 

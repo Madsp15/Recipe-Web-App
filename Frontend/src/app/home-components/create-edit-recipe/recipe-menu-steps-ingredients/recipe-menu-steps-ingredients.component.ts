@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
 import {Ingredients, Recipe} from "../../../models";
 import {firstValueFrom} from "rxjs";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-recipe-menu-steps-ingredients',
@@ -41,7 +42,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   async getIngredients() {
     try {
       const id = this.recipeService.currentRecipe.recipeId;
-      const call = `http://localhost:5280/api/recipeingredients/recipe/${id}`;
+      const call = environment.baseUrl +`/api/recipeingredients/recipe/${id}`;
       this.ingredients = await firstValueFrom(this.http.get<Ingredients[]>(call));
       console.log('Recipe Ingredients:', this.ingredients);
     } catch (error) {
@@ -53,7 +54,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   async getInstructions(): Promise<void> {
     try {
       const id = this.recipeService.currentRecipe.recipeId;
-      const call = `http://localhost:5280/api/recipes/${id}`;
+      const call = environment.baseUrl +`/api/recipes/${id}`;
       const response = await firstValueFrom(this.http.get<any>(call));
 
       const parsedResponse = JSON.parse(response.instructions);
@@ -90,7 +91,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     if (this.recipeService.isEdit) {
       try {
         const id = this.recipeService.currentRecipe.recipeId;
-        const call = `http://localhost:5280/api/add/ingredient/recipe/${id}`;
+        const call = environment.baseUrl +`/api/add/ingredient/recipe/${id}`;
         const result = await firstValueFrom(this.http.post<Ingredients[]>(call, newIngredient, { responseType: 'json' }));
         console.log('Recipe Ingredients:', this.ingredients);
       } catch (error) {
@@ -118,7 +119,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
       console.log('Full Form Group Edit: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
       try {
-        const call = this.http.put<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
+        const call = this.http.put<Recipe>(environment.baseUrl +'/api/recipes', recipeFormGroup?.getRawValue());
         const result = await firstValueFrom<Recipe>(call)
         this.recipeService.recipes.push(result);
 
@@ -144,7 +145,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
       console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
       try {
-        const call = this.http.post<Recipe>('http://localhost:5280/api/recipes', recipeFormGroup?.getRawValue());
+        const call = this.http.post<Recipe>(environment.baseUrl +'/api/recipes', recipeFormGroup?.getRawValue());
         const result = await firstValueFrom<Recipe>(call)
         this.recipeService.recipes.push(result);
 
@@ -173,7 +174,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
     if(this.recipeService.isEdit){
       const ingredient = this.ingredients[index].ingredientId;
       const recipeId = this.recipeService.currentRecipe.recipeId;
-      const call = firstValueFrom(this.http.delete<any>('http://localhost:5280/api/recipeingredients/recipe/'+recipeId+'/'+this.ingredients[index].ingredientName));
+      const call = firstValueFrom(this.http.delete<any>(environment.baseUrl +'/api/recipeingredients/recipe/'+recipeId+'/'+this.ingredients[index].ingredientName));
     }
       this.ingredients.splice(index, 1);
 
@@ -183,7 +184,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   uploadPicture(id: number) {
     const formData = new FormData();
     formData.append('picture', this.recipeService.storedIFormFile[0]);
-    return this.http.put<Recipe>('http://localhost:5280/api/recipes/picture/'+id, formData,{
+    return this.http.put<Recipe>(environment.baseUrl +'/api/recipes/picture/'+id, formData,{
     });
   }
 }

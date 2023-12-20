@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-sign-up',
@@ -31,7 +32,7 @@ export class SignUpComponent {
 
   async clickJoin() {
     try {
-      const result = this.http.post('http://localhost:5280/api/users', this.formGroup.getRawValue());
+      const result = this.http.post(environment.baseUrl +'/api/users', this.formGroup.getRawValue());
       const response = await firstValueFrom(result);
       const toast = await this.toastController.create({
         message: 'Successfully created an account'

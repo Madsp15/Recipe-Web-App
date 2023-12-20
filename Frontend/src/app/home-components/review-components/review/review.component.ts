@@ -10,6 +10,7 @@ import {RecipeService} from "../../../../services/recipe.service";
 import {Review, User} from "../../../models";
 import {RatingComponent} from "../rating/rating.component";
 import {AccountService} from "../../../../services/account.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-review',
@@ -84,7 +85,7 @@ export class ReviewComponent{
     try {
       const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
       console.log(id);
-      this.recipeService.reviews = (await firstValueFrom(this.http.get<any>('http://localhost:5280/api/reviews/' + id)));
+      this.recipeService.reviews = (await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/reviews/' + id)));
 
     } catch (e) {
       this.router.navigate(['']);
@@ -95,7 +96,7 @@ export class ReviewComponent{
     try {
       const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
       console.log(id);
-      const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipe/averagerating/' + id));
+      const response = await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/recipe/averagerating/' + id));
 
       this.averageRating = response.toFixed(1);
       console.log("Average rating: "+this.averageRating)
@@ -108,7 +109,7 @@ export class ReviewComponent{
   async getReviews() {
     try {
     const id = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-    const response = await firstValueFrom(this.http.get<Review[]>('http://localhost:5280/api/reviews/' + id));
+    const response = await firstValueFrom(this.http.get<Review[]>(environment.baseUrl +'/api/reviews/' + id));
       console.log('Reviews response:', response);
       this.recipeService.reviews = response;
       console.log(this.recipeService.reviews)
@@ -121,7 +122,7 @@ export class ReviewComponent{
       const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
       const recipeId = Number(recipeIdString);
       var account: User = await firstValueFrom(this.accountService.getCurrentUser());
-      this.doesUserReviewExistBool = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/reviews/' + recipeId + '/' + account.userId));
+      this.doesUserReviewExistBool = await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/reviews/' + recipeId + '/' + account.userId));
     } catch (error) {
       console.error('Error fetching review:', error);
     }
@@ -179,7 +180,7 @@ export class ReviewComponent{
 
         console.log(JSON.stringify(this.formGroup.getRawValue(), null, 2));
 
-        const call = this.http.post<Review>('http://localhost:5280/api/reviews', this.formGroup.getRawValue());
+        const call = this.http.post<Review>(environment.baseUrl +'/api/reviews', this.formGroup.getRawValue());
         const result = await firstValueFrom<Review>(call)
         this.recipeService.reviews.push(result);
         const toast = await this.toastController.create({

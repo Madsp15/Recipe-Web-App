@@ -7,6 +7,7 @@ import {firstValueFrom} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../../../../services/recipe.service";
 import {CommonModule} from "@angular/common";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-home-menu',
@@ -28,7 +29,7 @@ export class HomeMenuComponent {
   }
 
   async getData() {
-    const call = this.http.get<Recipe[]>('http://localhost:5280/api/recipes');
+    const call = this.http.get<Recipe[]>(environment.baseUrl +'/api/recipes');
     const recipes = await firstValueFrom<Recipe[]>(call);
 
     recipes.sort((a, b) => {

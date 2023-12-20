@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {RatingComponent} from "../../review-components/rating/rating.component";
 import {UserService} from "../../../../services/user.service";
 import {AccountService} from "../../../../services/account.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-user-recipe',
@@ -42,7 +43,7 @@ export class UserRecipeComponent implements OnInit{
 
   async getAverageRating(recipeId: number | undefined) {
     try {
-      const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/recipe/averagerating/'+recipeId));
+      const response = await firstValueFrom(this.http.get<any>(environment.baseUrl +'/api/recipe/averagerating/'+recipeId));
       this.averageRating = response;
     } catch (e) {
     }
@@ -85,7 +86,7 @@ export class UserRecipeComponent implements OnInit{
         {
           text: 'Yes',
           handler: async () => {
-            const response =  firstValueFrom(this.http.delete<any>('http://localhost:5280/api/recipes/'+recipe?.recipeId));
+            const response =  firstValueFrom(this.http.delete<any>(environment.baseUrl +'/api/recipes/'+recipe?.recipeId));
             console.log("Delete response: "+response)
             location.reload();
             }
