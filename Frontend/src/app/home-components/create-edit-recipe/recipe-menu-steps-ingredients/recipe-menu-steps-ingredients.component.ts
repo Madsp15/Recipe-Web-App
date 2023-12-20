@@ -101,7 +101,6 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
   }
 
 
-
   clickCancel() {
     const recipeFormGroup = this.recipeService.getFormGroup();
     console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));

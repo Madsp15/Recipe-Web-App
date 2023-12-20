@@ -21,20 +21,10 @@
 
   <ion-list>
     <app-review-card *ngFor="let review of recipeService.reviews" [review]="review"></app-review-card>
-
-
-
     <div class="review-text" *ngIf="recipeService.reviews.length === 0">
       Be the first one to review this recipe!
     </div>
-
-    <ion-buttons slot="end" *ngIf="recipeService.reviews.length > 5">
-      <ion-button (click)="loadPreviousReviews()">Previous</ion-button>
-      <ion-button (click)="loadNextReviews()">Next</ion-button>
-    </ion-buttons>
-
   </ion-list>
-
 
   <ion-card class ="star-card">
     <ion-card-content>

@@ -91,6 +91,7 @@ export class RecipeProfileComponent implements OnInit {
       console.log(user);
       const responst = await this.account.update(user);
       const data = await firstValueFrom(responst);
+      location.reload();
     }
   }
 

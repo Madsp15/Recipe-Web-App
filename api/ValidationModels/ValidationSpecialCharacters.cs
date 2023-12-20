@@ -16,3 +16,5 @@ public class ValidationSpecialCharacters : ValidationAttribute
         return new ValidationResult("Username cannot contain special characters");
     }
 }
+
+

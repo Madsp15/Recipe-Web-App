@@ -16,3 +16,4 @@ public class ValidationPasswordSpecialCharacter : ValidationAttribute
         return new ValidationResult("Password must contain at least one special character. Valid special characters include: ! @ # $ % ^ & * ( ) _ + - = { } [ ] | \\\\ : ; , . ? /");
     }
 }
+

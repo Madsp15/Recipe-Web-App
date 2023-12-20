@@ -44,7 +44,6 @@ export class SideMenuComponent  implements OnInit {
       (await this.toast.create({
         message: 'Successfully logged out',
         duration: 5000,
-        color: 'success',
       })).present()
     }
 

@@ -23,3 +23,5 @@ public abstract class PasswordHashAlgorithm
         return Convert.ToBase64String(value);
     }
 }
+
+

@@ -31,7 +31,9 @@ export class ReviewComponent{
     this.getAverageRating();
     this.getReviews();
     this.doesUserReviewExist();
-    console.log(this.doesUserReviewExistBool)
+    this.isUserReviewValid();
+    console.log("Does user exist: "+this.doesUserReviewExistBool)
+    console.log("Is user valid bool: "+this.isUserReviewValidBool)
     for (let i = 0; i < 5; i++) {
       this.stars.push('/assets/icon/empty-star.png');
     }
@@ -41,6 +43,7 @@ export class ReviewComponent{
   selectedStarsInput = new FormControl(0, Validators.required);
   userIdInput = new FormControl(0, Validators.required);
   doesUserReviewExistBool: boolean = false;
+  isUserReviewValidBool: boolean = false;
 
   formGroup = new FormGroup({
     userId: this.userIdInput,
@@ -50,9 +53,6 @@ export class ReviewComponent{
   });
 
   rating: number = 0;
-  reviews: any[] = []
-  currentPage: number = 1;
-  reviewsPerPage: number = 5;
   stars: string[] = [];
   selectedStars: number = 0;
   averageRating: number | null = null;
@@ -129,22 +129,46 @@ export class ReviewComponent{
     }
   }
 
+  async isUserReviewValid() {
+    try {
+      const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
+      const recipeId = Number(recipeIdString);
 
-  loadPreviousReviews() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+      var account: User = await firstValueFrom(this.accountService.getCurrentUser());
+      const recipe = await this.recipeService.getRecipeByIdFromList(recipeId);
+      console.log(recipe);
+      console.log("Recipe userID: "+recipe?.userId);
+      console.log("Current logged in user ID: "+account.userId);
+
+      if (recipe?.userId === account.userId) {
+        this.isUserReviewValidBool = false;
+      }
+    } catch (error: any) {
+      console.error('Error in isUserReviewValid:', error);
     }
   }
 
-  loadNextReviews() {
-    const maxPage = Math.ceil(this.reviews.length / this.reviewsPerPage);
-    if (this.currentPage < maxPage) {
-      this.currentPage++;
-    }
-  }
 
   async clickSubmitReview() {
-    if(!this.doesUserReviewExistBool) {
+    if(this.doesUserReviewExistBool || this.isUserReviewValidBool) {
+      if (this.doesUserReviewExistBool) {
+        const toast = await this.toastController.create({
+          color: 'danger',
+          duration: 2000,
+          message: "You have already reviewed this recipe!"
+        })
+        toast.present();
+      }
+      if (this.isUserReviewValidBool) {
+        const toast = await this.toastController.create({
+          color: 'danger',
+          duration: 2000,
+          message: "You can't review your own recipe!"
+        })
+        toast.present();
+      }
+    }
+    else{
       try {
         const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
         const recipeId = parseInt(<string>recipeIdString);
@@ -165,17 +189,10 @@ export class ReviewComponent{
           message: "Success"
         })
         toast.present();
+        //location.reload();
       } catch (error: any) {
         console.log(error);
       }
-    }
-    else{
-      const toast = await this.toastController.create({
-        color: 'danger',
-        duration: 2000,
-        message: "You have already reviewed this recipe"
-      })
-      toast.present();
     }
   }
 

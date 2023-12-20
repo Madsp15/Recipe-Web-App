@@ -32,19 +32,26 @@ export class SignUpComponent {
   async clickJoin() {
     try {
       const result = this.http.post('http://localhost:5280/api/users', this.formGroup.getRawValue());
-      const promise = await firstValueFrom(result);
+      const response = await firstValueFrom(result);
+      const toast = await this.toastController.create({
+        message: 'Successfully created an account'
+      });
+      toast.duration = 5000;
+      toast.present();
+      this.router.navigate(['login'], { replaceUrl: true });
+
     } catch (e) {
       if (e instanceof HttpErrorResponse) {
         const errorResponse = e.error;
         const allErrorMessages = Object.values(errorResponse.errors).flat();
         console.log(e.message);
         console.log(allErrorMessages);
+
         const toast = await this.toastController.create({
-          message: allErrorMessages[0]!.toString()
+          message: allErrorMessages[0]?.toString() || 'An error occurred.'
         });
         toast.duration = 5000;
         toast.present();
-        this.router.navigate(['login'] , {replaceUrl: true});
       }
     }
   }
