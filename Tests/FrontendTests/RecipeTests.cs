@@ -114,6 +114,8 @@ public class RecipeTests : PageTest
         await Page.GetByRole(AriaRole.Button, new() { Name = "Add Ingredient" }).ClickAsync();
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Save Recipe" }).ClickAsync();
+        
+        await Page.WaitForURLAsync("**/home");
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "PROFILE" }).ClickAsync();
 
