@@ -28,6 +28,8 @@ public class RecipeTests : PageTest
         await Page.GetByLabel("Password").FillAsync("12345678!");
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Login" }).ClickAsync();
+        
+        await Page.WaitForURLAsync("**/home");
 
         await Page.GetByLabel("menu-icon").ClickAsync();
 
