@@ -1,0 +1,14 @@
+<ion-content>
+  <div class="ion-text-top">
+    <h1>Hungry? Maybe you'd like...</h1>
+  </div>
+
+  <div (click)="clickRefresh()">
+    <img class="refresh-button" src="https://th.bing.com/th/id/R.ae5079c23454a7c56d04215d82075f8c?rik=lEeS3mMwNz5tYg&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_122355.png&ehk=lVaO8mxuY%2bUglU%2fHJxaXcfkqWbVTwKcu51cYNmrwL8A%3d&risl=&pid=ImgRaw&r=0" alt="Refresh Icon">
+  </div>
+
+  <div class="container" *ngFor="let recipe of randomRecipes">
+    <app-user-recipe [recipe]="recipe"></app-user-recipe>
+  </div>
+
+</ion-content>

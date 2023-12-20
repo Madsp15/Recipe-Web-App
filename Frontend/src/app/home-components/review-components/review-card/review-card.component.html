@@ -1,0 +1,30 @@
+<ion-card>
+  <ion-card-header>
+    <ion-avatar slot="start">
+      <img [src]="review?.avatarUrl" alt="User Avatar">
+    </ion-avatar>
+    <ion-card-subtitle>{{ review?.username }}</ion-card-subtitle>
+    <div style="display: flex; align-items: center; margin-left: auto;">
+      <img *ngIf="isCurrentUserReview"
+           src="https://cdn2.iconfinder.com/data/icons/trash-can-5/64/Artboard_2_copy-512.png"
+           alt="Delete"
+           width="24"
+           height="24"
+           style="cursor: pointer"
+           (click)="clickDeleteReview(review?.reviewId)">
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <app-rating [rating]="review?.rating || 0"></app-rating>
+    </ion-item>
+
+    <ion-card-content>
+      {{ review?.comment }}
+    </ion-card-content>
+  </ion-card-content>
+</ion-card>
+
+
+

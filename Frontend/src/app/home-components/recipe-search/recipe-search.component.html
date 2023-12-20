@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="search-bar-container">
+      <ion-searchbar [(ngModel)]="searchQuery" class="search-bar" placeholder="Search"></ion-searchbar>
+      <ion-button (click)="clickSearch()" class="search-button">Search</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container" *ngFor="let recipe of filteredRecipeList">
+    <app-user-recipe [recipe]="recipe"></app-user-recipe>
+  </div>
+
+</ion-content>
+

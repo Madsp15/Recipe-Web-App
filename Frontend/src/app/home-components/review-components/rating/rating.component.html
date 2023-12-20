@@ -1,0 +1,14 @@
+<div class="rating">
+
+  <ng-container *ngFor="let _ of wholeStars; let i = index">
+    <img src="/assets/icon/full-star.png" class="star" alt="Whole Star" />
+  </ng-container>
+
+  <ng-container *ngIf="hasHalfStar">
+    <img src="/assets/icon/half-star.png" class="star" alt="Half Star" />
+  </ng-container>
+
+  <ng-container *ngFor="let _ of emptyStars; let i = index">
+    <img src="/assets/icon/empty-star.png" class="star" alt="Empty Star" />
+  </ng-container>
+</div>

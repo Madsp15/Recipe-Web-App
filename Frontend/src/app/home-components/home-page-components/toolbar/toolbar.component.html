@@ -1,0 +1,20 @@
+<ion-toolbar class="custom-toolbar">
+  <ion-buttons slot="start">
+    <ion-menu-button><img
+      src="https://static.thenounproject.com/png/4572821-200.png"
+      alt="Menu Icon"
+      class="small-image menu-icon"
+      aria-label="menu-icon"
+    /></ion-menu-button>
+    <ion-title>One of the Food websites of all time!</ion-title>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button (click)="clickHome()" [class.active]="isRouteActive('/home')">HOME</ion-button>
+    <ion-button (click)="clickRecipes()" [class.active]="isRouteActive('/home/recipes')">RECIPES</ion-button>
+    <ion-button (click)="clickProfile()" [class.active]="isRouteActive('/home/profile')">PROFILE</ion-button>
+    <ion-button (click)="clickSearch()" [class.active]="isRouteActive('/home/search')">SEARCH</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+
+

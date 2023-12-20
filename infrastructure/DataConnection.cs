@@ -1,5 +1,7 @@
-﻿using Npgsql;
-
+﻿using Azure.Storage.Blobs;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 namespace infrastructure;
 
 public static class DataConnection
@@ -14,6 +16,7 @@ public static class DataConnection
         string envVarKeyName = "pgconn";
 
         rawConnectionString = Environment.GetEnvironmentVariable(envVarKeyName);
+        Console.WriteLine($"Raw Connection String: {rawConnectionString}");
         if (rawConnectionString == null)
         {
             throw new Exception("Looks like you need to add an environment variable to connect to the database!");
@@ -30,7 +33,7 @@ public static class DataConnection
                 Uri.UserInfo.Split(':')[1],
                 Uri.Port > 0 ? Uri.Port : 5432);
             DataSource =
-                new NpgsqlDataSourceBuilder(ProperlyFormattedConnectionString).Build();
+                new NpgsqlDataSourceBuilder(ProperlyFormattedConnectionString).EnableParameterLogging().Build();
             DataSource.OpenConnection().Close();
 
         }
@@ -43,4 +46,5 @@ public static class DataConnection
         }
         
     }
+    
 }

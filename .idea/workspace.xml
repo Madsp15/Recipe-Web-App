@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0800d5f7-a8d4-4242-9911-e55bd2aa807f" name="Changes" comment="even more!">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07-12-2023_11_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07-12-2023_11_26__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/create-edit-recipe/recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/create-edit-recipe/recipe-menu-steps-ingredients/recipe-menu-steps-ingredients.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/create-edit-recipe/recipe-menu/recipe-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/create-edit-recipe/recipe-menu/recipe-menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/side-menu/side-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/side-menu/side-menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/toolbar/toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/toolbar/toolbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/toolbar/toolbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/home-page-components/toolbar/toolbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/home-recipe/home-recipe.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/home-recipe/home-recipe.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/recipe/recipe.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/recipe/recipe.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/recipe/recipe.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/recipe/recipe.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/user-recipe/user-recipe.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-components/user-recipe/user-recipe.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-profile/recipe-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-profile/recipe-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-search/recipe-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/recipe-search/recipe-search.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/rating/rating.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/rating/rating.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review-card/review-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review-card/review-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review-card/review-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review-card/review-card.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review/review.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/review-components/review/review.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/home-components/settings/settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/home-components/settings/settings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/forgot-password/forgot-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/forgot-password/forgot-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/forgot-password/forgot-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/login-page/login-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/login-page/login-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/sign-up/sign-up.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/sign-up/sign-up.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/login-components/sign-up/sign-up.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/login-components/sign-up/sign-up.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/services/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/services/account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Recipe-Web-App.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Recipe-Web-App.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/IngredientsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/IngredientsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/ReviewTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/ReviewTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/TagsTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/TagsTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTests/UserTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTests/UserTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/IngredientsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/IngredientsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/ReviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/ReviewController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/TagsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/TagsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/Repositories/IngredientRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/Repositories/IngredientRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/Repositories/PasswordRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/Repositories/PasswordRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/Repositories/ReviewRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/Repositories/ReviewRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/Repositories/TagsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/Repositories/TagsRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Services/IngredientService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/service/Services/IngredientService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Services/ReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/service/Services/ReviewService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Services/TagsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/service/Services/TagsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/service/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Services/ValidationService.cs" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="followers" />
+      </map>
+    </option>
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "Development",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "ts.external.directory.path": "C:\\Users\\nhi_t\\Documents\\GitHub\\Recipe-Web-App\\Frontend\\node_modules\\typescript\\lib"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="more ui stuff">
+      <option name="closed" value="true" />
+      <created>1702823981791</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702823981792</updated>
+    </task>
+    <task id="LOCAL-00002" summary="more ui stuff">
+      <option name="closed" value="true" />
+      <created>1702829966729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702829966729</updated>
+    </task>
+    <task id="LOCAL-00003" summary="more ui stuff">
+      <option name="closed" value="true" />
+      <created>1702833207680</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702833207680</updated>
+    </task>
+    <task id="LOCAL-00004" summary="more ui stuff">
+      <option name="closed" value="true" />
+      <created>1702834797939</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702834797939</updated>
+    </task>
+    <task id="LOCAL-00005" summary="more ui stuff">
+      <option name="closed" value="true" />
+      <created>1702891050288</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1702891050288</updated>
+    </task>
+    <task id="LOCAL-00006" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1702893835512</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702893835512</updated>
+    </task>
+    <task id="LOCAL-00007" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1702904074571</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1702904074571</updated>
+    </task>
+    <task id="LOCAL-00008" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1702905605921</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702905605921</updated>
+    </task>
+    <task id="LOCAL-00009" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1702908185039</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1702908185039</updated>
+    </task>
+    <task id="LOCAL-00010" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1702994008887</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1702994008887</updated>
+    </task>
+    <task id="LOCAL-00011" summary="even more!">
+      <option name="closed" value="true" />
+      <created>1703000201110</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703000201110</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="minor errors fixed" />
+    <MESSAGE value="more ui stuff" />
+    <MESSAGE value="even more!" />
+    <option name="LAST_COMMIT_MESSAGE" value="even more!" />
+  </component>
+</project>

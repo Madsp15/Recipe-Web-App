@@ -1,0 +1,27 @@
+.user-recipe{
+  width: 70%;
+}
+
+.ion-text-top{
+  font-size: 20px;
+  margin-top: 50px;
+  margin-left: 60px;
+}
+
+.container {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  display: inline-block;
+  margin-bottom: 50px;
+}
+
+.refresh-button {
+  position: absolute;
+  margin-left: 555px;
+  margin-top: -58px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+

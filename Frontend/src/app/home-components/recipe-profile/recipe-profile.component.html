@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-avatar slot="start">
+      <ion-img src="{{userService.currentUser.userAvatarUrl}}" (click)="fileSelector.click()"></ion-img>
+      <input type="file" #fileSelector id="file-selector" style="display:none" (change)="onFileSelected($event)" accept="image/png, image/jpeg"
+             [disabled]="onFileSelectedDisabled"/>
+    </ion-avatar>
+    <ion-title>
+      <h3>
+        {{userService.currentUser.userName}}
+      </h3>
+      <ion-input [placeholder]="'Click here to edit your description!'" *ngIf="isEditMode" [(ngModel)]="editedDescription" (keyup.enter)="saveChanges()"></ion-input>
+      <p *ngIf="!isEditMode" (click)="clickEdit()">{{ userService.currentUser.moreInfo }} </p>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="margin-right: 100px;">
+        <ion-label>Recipes</ion-label>
+        <ion-badge>{{ amountOfRecipes }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" *ngFor="let recipe of recipeService.recipes">
+    <app-user-recipe [recipe]="recipe"></app-user-recipe>
+  </div>
+
+  <div class="profile-text" *ngIf="recipeService.recipes.length === 0 && !onFileSelectedDisabled">
+    Looks empty.. Populate your profile by adding recipes!
+  </div>
+
+
+</ion-content>
+
+

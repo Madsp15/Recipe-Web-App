@@ -1,0 +1,34 @@
+ion-img {
+  width: 500px;
+  max-width: 100%;
+  margin-left: 100px;
+  margin-top: 40px;
+}
+
+ion-content {
+  height: 100%;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.description-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.description {
+  white-space: normal;
+  line-height: 1.5;
+  margin: 0;
+}
+
+ion-button {
+  --background: transparent;
+  --color: black;
+  border: 1px solid black;
+  color: black;
+}
+
+
+

@@ -1,0 +1,65 @@
+ion-card-header{
+  --ion-background-color: #E9EDC9;
+}
+
+
+ion-card {
+  max-width: 400px;
+  border: 5px solid #CCD5AE;
+  border-radius: 8px;
+  color: black;
+  background-color: #E9EDC9;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+ion-card-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+ion-card-content {
+  padding-bottom: 30px;
+}
+
+ion-card-content {
+  text-align: center;
+}
+
+ion-card-header ion-item {
+  flex: 1;
+}
+
+h3{
+  font-size: 20px;
+}
+
+.recipeImg:hover{
+  cursor:pointer;
+}
+
+.description-container {
+  max-height: 60px;
+  overflow: hidden;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card-icons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.card-icons ion-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}

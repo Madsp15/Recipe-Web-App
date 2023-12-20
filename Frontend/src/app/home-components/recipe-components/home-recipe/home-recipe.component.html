@@ -1,0 +1,15 @@
+<ion-card class="recipe-card">
+  <ion-img (click)="clickRecipeImg()" src="{{this.recipeService.currentRecipe.recipeURL}}" alt="Food Image" class="recipe-image"></ion-img>
+
+  <ion-card-content class="recipe-content">
+    <p><app-rating style="text-align: center" [rating]="averageRating || 0"></app-rating></p>
+    <ion-card-title (click)="clickRecipeTitle()" class="recipe-title">{{this.recipeService.currentRecipe.title}}</ion-card-title>
+
+    <div class="subtitle-line">
+      <span style="cursor: pointer" (click)="clickUser(this.recipeService.currentRecipe.userId)">By: {{getUser(this.recipeService.currentRecipe.userId)}}</span>
+    </div>
+
+    <ion-card-subtitle class="description">{{this.recipeService.currentRecipe.description}}.</ion-card-subtitle>
+  </ion-card-content>
+</ion-card>
+
