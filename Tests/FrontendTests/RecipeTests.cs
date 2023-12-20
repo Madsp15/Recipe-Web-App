@@ -50,10 +50,10 @@ public class RecipeTests : PageTest
         await Page.GetByPlaceholder("Enter duration in minutes").ClickAsync();
 
         await Page.GetByPlaceholder("Enter duration in minutes").FillAsync("2");
+        
+        await Page.GetByText("MinutesHoursDuration:").ClickAsync();
 
-        await Page.GetByLabel("Minutes, Duration:").ClickAsync();
-
-        await Page.GetByRole(AriaRole.Radio, new() { Name = "Minutes" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Radio, new() { Name = "Hours" }).ClickAsync();
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "OK" }).ClickAsync();
 
