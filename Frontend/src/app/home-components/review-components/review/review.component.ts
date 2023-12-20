@@ -33,7 +33,7 @@ export class ReviewComponent{
     this.doesUserReviewExist();
     this.isUserReviewValid();
     console.log("Does user exist: "+this.doesUserReviewExistBool)
-    console.log("Is user valid bool: "+this.isUserReviewValidBool)
+    console.log("Is user valid bool: "+this.isUserReviewNotValidBool)
     for (let i = 0; i < 5; i++) {
       this.stars.push('/assets/icon/empty-star.png');
     }
@@ -43,7 +43,7 @@ export class ReviewComponent{
   selectedStarsInput = new FormControl(0, Validators.required);
   userIdInput = new FormControl(0, Validators.required);
   doesUserReviewExistBool: boolean = false;
-  isUserReviewValidBool: boolean = false;
+  isUserReviewNotValidBool: boolean = false;
 
   formGroup = new FormGroup({
     userId: this.userIdInput,
@@ -121,9 +121,7 @@ export class ReviewComponent{
       const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
       const recipeId = Number(recipeIdString);
       var account: User = await firstValueFrom(this.accountService.getCurrentUser());
-      const response = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/reviews/' + recipeId + '/' + account.userId));
-
-      this.doesUserReviewExistBool = response;
+      this.doesUserReviewExistBool = await firstValueFrom(this.http.get<any>('http://localhost:5280/api/reviews/' + recipeId + '/' + account.userId));
     } catch (error) {
       console.error('Error fetching review:', error);
     }
@@ -132,16 +130,16 @@ export class ReviewComponent{
   async isUserReviewValid() {
     try {
       const recipeIdString = (await firstValueFrom(this.route.paramMap)).get('recipeid');
-      const recipeId = Number(recipeIdString);
+      const recipeId = parseInt(<string>recipeIdString);
 
       var account: User = await firstValueFrom(this.accountService.getCurrentUser());
       const recipe = await this.recipeService.getRecipeByIdFromList(recipeId);
-      console.log(recipe);
+      console.log("recipe:" + recipe);
       console.log("Recipe userID: "+recipe?.userId);
       console.log("Current logged in user ID: "+account.userId);
 
-      if (recipe?.userId === account.userId) {
-        this.isUserReviewValidBool = false;
+      if (recipe?.userId == account.userId) {
+        this.isUserReviewNotValidBool = true;
       }
     } catch (error: any) {
       console.error('Error in isUserReviewValid:', error);
@@ -150,18 +148,19 @@ export class ReviewComponent{
 
 
   async clickSubmitReview() {
-    if(this.doesUserReviewExistBool || this.isUserReviewValidBool) {
+    console.log("does user review exist" + this.doesUserReviewExistBool)
+    console.log("is user review vaild?" + this.isUserReviewNotValidBool)
+    console.log("does this user review exist?" + this.doesUserReviewExistBool)
+    if(this.doesUserReviewExistBool || this.isUserReviewNotValidBool) {
       if (this.doesUserReviewExistBool) {
         const toast = await this.toastController.create({
-          color: 'danger',
           duration: 2000,
           message: "You have already reviewed this recipe!"
         })
         toast.present();
       }
-      if (this.isUserReviewValidBool) {
+      if (this.isUserReviewNotValidBool) {
         const toast = await this.toastController.create({
-          color: 'danger',
           duration: 2000,
           message: "You can't review your own recipe!"
         })
@@ -184,7 +183,6 @@ export class ReviewComponent{
         const result = await firstValueFrom<Review>(call)
         this.recipeService.reviews.push(result);
         const toast = await this.toastController.create({
-          color: 'success',
           duration: 2000,
           message: "Success"
         })
