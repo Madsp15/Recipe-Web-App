@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://therecipewebsiteofalltime.azurewebsites.net/'
+  baseUrl: 'https://therecipewebsiteofalltime.azurewebsites.net'
 };
 
 /*
