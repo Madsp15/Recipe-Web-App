@@ -103,7 +103,10 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
 
   clickCancel() {
     const recipeFormGroup = this.recipeService.getFormGroup();
+    console.log("Ingredients: "+this.ingredients)
     console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
+    //this.router.navigate(['/home'], {replaceUrl:true});
+
   }
 
   async clickNext() {
@@ -137,6 +140,7 @@ export class RecipeMenuStepsIngredientsComponent implements OnInit{
       console.log(this.recipeService.getFormGroup()?.value)
       const recipeFormGroup = this.recipeService.getFormGroup();
       recipeFormGroup?.get('instructions')?.setValue(data);
+      recipeFormGroup?.get('ingredients')?.setValue(this.ingredients);
       console.log('Full Form Group Created: ', JSON.stringify(recipeFormGroup?.getRawValue(), null, 2));
 
       try {
